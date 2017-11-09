@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_eventos"
+            android:icon="@drawable/ic_event_black_24dp"
+            android:title="@string/eventos" />
+        <item
+            android:id="@+id/subheader"
+            android:title="@string/ajustes">
+            <menu>
+                <item
+                    android:id="@+id/nav_perfil"
+                    android:icon="@drawable/ic_person_black_24dp"
+                    android:title="@string/perfil_usuario"/>
+                <item
+                    android:id="@+id/nav_cerrar_sesion"
+                    android:icon="@drawable/ic_power_settings_new_black_24dp"
+                    android:title="@string/cerrar_sesion"/>
+            </menu>
+        </item>
+    </group>
+</menu>
