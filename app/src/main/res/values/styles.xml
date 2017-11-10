@@ -8,4 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+
+    <attr name="BotonVerde" parent="textAppearanceSmall">
+
+    </attr>
+
+    <style name="linkColor" parent="AppTheme.NoActionBar">
+        <item name="android:textColor">#0000FF</item>
+    </style>
 </resources>
