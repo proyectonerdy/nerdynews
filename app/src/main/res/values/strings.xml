@@ -14,4 +14,8 @@
     <string name="iniciarsesion">Iniciar Sesión</string>
     <string name="cuenta1">¿No tienes una cuenta?</string>
     <string name="cuenta2">Cree una</string>
+
+    <string name="irLogin">¿Ya tiene una cuenta?</string>
+    <string name="registrarCuenta">Registra tu cuenta</string>
+    <string name="registro">Registro</string>
 </resources>
