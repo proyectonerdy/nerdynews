@@ -1,4 +1,4 @@
-package org.proyecto.nerdynews;
+package org.proyecto.nerdynews.Login;
 
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
+import org.proyecto.nerdynews.R;
 
 /* Clase que contiene la pantalla de registro */
 

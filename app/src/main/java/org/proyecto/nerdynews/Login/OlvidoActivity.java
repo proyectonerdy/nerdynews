@@ -1,4 +1,4 @@
-package org.proyecto.nerdynews;
+package org.proyecto.nerdynews.Login;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.proyecto.nerdynews.R;
 
 public class OlvidoActivity extends AppCompatActivity {
 

@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 import com.google.gson.GsonBuilder;
 
-import org.proyecto.nerdynews.LoginActivity;
+import org.proyecto.nerdynews.Login.LoginActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
 import org.proyecto.nerdynews.models.Evento;
