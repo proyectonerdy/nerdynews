@@ -2,21 +2,34 @@
     <string name="app_name">nerdynews</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+
     <string name="eventos">Eventos</string>
     <string name="navigation_drawer_open">Abrir</string>
     <string name="navigation_drawer_close">Cerrar</string>
     <string name="perfil_usuario">Perfil</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
     <string name="ajustes">Ajustes</string>
+
+    <string name="email">Email</string>
+    <string name="hintemail">Introduzca Email</string>
+    <string name="password">Contraseña</string>
+    <string name="hintpassword">Introduzca Contraseña</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="olvidocontrasena">He olvidado mi contraseña</string>
+    <string name="borrar">Borrar</string>
+    <string name="mostrarcontrasena">Mostrar Contraseña</string>
+    <string name="mantenersesioniniciada">Mantener la sesión iniciada</string>
+    <string name="iniciarsesion">Iniciar Sesión</string>
+    <string name="cuenta1">¿No tienes una cuenta?</string>
+    <string name="cuenta2">Cree una</string>
+
+    <string name="irLogin">¿Ya tiene una cuenta?</string>
+    <string name="registrarCuenta">Registra tu cuenta</string>
+    <string name="registro">Registro</string>
+    <string name="recuerdo">¿Recuerdas tu contraseña?</string>
+    <string name="conectate">Conectate</string>
+    <string name="recuperacontrasena">Restablecer tu contraseña</string>
+    <string name="olvidocontrasenamain">Recuperar cuenta</string>
+    <string name="ejecutadoolvidocontrasena">Sigue los pasos enviados a tu direccion de correo %1$s para recuperar tu contraseña</string>
+    <string name="faltaemail">¡Has de indicar el email de tu cuenta!</string>
 </resources>
