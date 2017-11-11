@@ -24,5 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistroActivity" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".OlvidoActivity" android:windowSoftInputMode="stateHidden"></activity>
     </application>
 </manifest>
