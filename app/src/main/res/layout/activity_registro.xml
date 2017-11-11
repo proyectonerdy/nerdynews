@@ -19,6 +19,8 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical">
 
             <ImageView
@@ -140,6 +142,9 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="5dp"
                     android:text="@string/irLogin"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:onClick="irLogin"
                     android:textAlignment="center"/>
 
         </LinearLayout>

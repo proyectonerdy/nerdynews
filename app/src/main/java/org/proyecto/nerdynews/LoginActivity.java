@@ -1,5 +1,6 @@
 package org.proyecto.nerdynews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -9,12 +10,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 /**
- * A login screen that offers login via email/password.
+ * Pantalla de Login que se pide Usuario y Password
  */
 public class LoginActivity extends AppCompatActivity{
 
 
-
+    /**
+     * Método constructor de la actividad
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +26,10 @@ public class LoginActivity extends AppCompatActivity{
     }
 
 
+    /**
+     * Método que nos permite resetear el campo al que apunte la vista
+     * @param v
+     */
     public void resetField(View v){
         if(v.getId() == R.id.crossemail){
             AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.email);
@@ -34,6 +42,10 @@ public class LoginActivity extends AppCompatActivity{
         //si es otro se ignora
     }
 
+    /**
+     * Método que nos permite mostrar u ocultar la contraseña
+     * @param v
+     */
     public void tooglePassword(View v){
         EditText contraseña = (EditText) findViewById(R.id.password);
         int tipo = contraseña.getInputType();
@@ -50,10 +62,19 @@ public class LoginActivity extends AppCompatActivity{
         }
     }
 
+    /**
+     * Método que nos permite ir a la Actividad para Registrarse
+     * @param v
+     */
     public void irRegistro(View v){
-        //TODO Esto se hara en la rama principal de Login/Registro
+        Intent intent = new Intent(this,RegistroActivity.class);
+        startActivity(intent);
     }
 
+    /**
+     * Método que nos permite ir a la Actividad para el Olvido de la contraseña
+     * @param v
+     */
     public void irOlvido(View v){
         //TODO Esto se hara en la rama principal de Login/Registro
     }

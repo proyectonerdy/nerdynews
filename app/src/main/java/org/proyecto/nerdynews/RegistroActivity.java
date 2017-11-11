@@ -8,6 +8,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+/* Clase que contiene la pantalla de registro */
+
 public class RegistroActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +18,10 @@ public class RegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
     }
 
+    /**
+     * Método que permite borrar el campo que apunta la vista
+     * @param v
+     */
     public void resetField(View v){
         if(v.getId() == R.id.crossemail){
             AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.email);
@@ -28,6 +34,10 @@ public class RegistroActivity extends AppCompatActivity {
         //si es otro se ignora
     }
 
+    /**
+     * Método que permite mostrar u ocultar la contraseña
+     * @param v
+     */
     public void tooglePassword(View v){
         EditText contraseña = (EditText) findViewById(R.id.password);
         int tipo = contraseña.getInputType();
@@ -44,8 +54,13 @@ public class RegistroActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que va a la actividad de Login
+     * @param v
+     */
     public void irLogin(View v){
-        //TODO Esto se hara en la rama principal de Login/Registro
+        //se termina la actividad para evitar un bucle
+        finish();
     }
 
 }
