@@ -1,10 +1,13 @@
 package org.proyecto.nerdynews;
 
+import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,12 +34,12 @@ public class LoginActivity extends AppCompatActivity{
      * @param v
      */
     public void resetField(View v){
-        if(v.getId() == R.id.crossemail){
-            AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.email);
+        if(v.getId() == R.id.crossemaillogin){
+            AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.emaillogin);
             ac.setText("");
         }
-        if(v.getId() == R.id.crosspassword){
-            EditText e = (EditText) this.findViewById(R.id.password);
+        if(v.getId() == R.id.crosspasswordlogin){
+            EditText e = (EditText) this.findViewById(R.id.passwordlogin);
             e.setText("");
         }
         //si es otro se ignora
@@ -47,9 +50,9 @@ public class LoginActivity extends AppCompatActivity{
      * @param v
      */
     public void tooglePassword(View v){
-        EditText contraseña = (EditText) findViewById(R.id.password);
+        EditText contraseña = (EditText) findViewById(R.id.passwordlogin);
         int tipo = contraseña.getInputType();
-        ImageButton ib = (ImageButton) findViewById(R.id.seepassword);
+        ImageButton ib = (ImageButton) findViewById(R.id.seepasswordlogin);
         if (tipo == InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD) {
             contraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
             //hay que cambiar el icono del boton por el icono tachado
@@ -68,7 +71,13 @@ public class LoginActivity extends AppCompatActivity{
      */
     public void irRegistro(View v){
         Intent intent = new Intent(this,RegistroActivity.class);
-        startActivity(intent);
+        View view = this.getCurrentFocus();
+        if(view!=null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+
     }
 
     /**
@@ -76,7 +85,13 @@ public class LoginActivity extends AppCompatActivity{
      * @param v
      */
     public void irOlvido(View v){
-        //TODO Esto se hara en la rama principal de Login/Registro
+        Intent intent = new Intent(this,OlvidoActivity.class);
+        View view = this.getCurrentFocus();
+        if(view!=null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
 }

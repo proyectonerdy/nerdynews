@@ -12,9 +12,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:supportsRtl="true">
         <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name=".LoginActivity"
             android:windowSoftInputMode="stateHidden"
             android:label="@string/app_name">
@@ -23,8 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistroActivity" android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".OlvidoActivity" android:windowSoftInputMode="stateHidden"></activity>
-        <activity android:name=".PostRegistroActivity"></activity>
+        <activity android:name=".RegistroActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".OlvidoActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".PostRegistroActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 </manifest>

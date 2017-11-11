@@ -1,9 +1,13 @@
 package org.proyecto.nerdynews;
 
+import android.app.ActivityOptions;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,12 +27,12 @@ public class RegistroActivity extends AppCompatActivity {
      * @param v
      */
     public void resetField(View v){
-        if(v.getId() == R.id.crossemail){
-            AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.email);
+        if(v.getId() == R.id.crossemailregistro){
+            AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.emailregistro);
             ac.setText("");
         }
-        if(v.getId() == R.id.crosspassword){
-            EditText e = (EditText) this.findViewById(R.id.password);
+        if(v.getId() == R.id.crosspasswordregistro){
+            EditText e = (EditText) this.findViewById(R.id.passwordregistro);
             e.setText("");
         }
         //si es otro se ignora
@@ -39,9 +43,9 @@ public class RegistroActivity extends AppCompatActivity {
      * @param v
      */
     public void tooglePassword(View v){
-        EditText contraseña = (EditText) findViewById(R.id.password);
+        EditText contraseña = (EditText) findViewById(R.id.passwordregistro);
         int tipo = contraseña.getInputType();
-        ImageButton ib = (ImageButton) findViewById(R.id.seepassword);
+        ImageButton ib = (ImageButton) findViewById(R.id.seepasswordregistro);
         if (tipo == InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD) {
             contraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
             //hay que cambiar el icono del boton por el icono tachado
@@ -59,8 +63,13 @@ public class RegistroActivity extends AppCompatActivity {
      * @param v
      */
     public void irLogin(View v){
-        //se termina la actividad para evitar un bucle
+        View view = this.getCurrentFocus();
+        if(view!=null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
         finish();
+
     }
 
 }
