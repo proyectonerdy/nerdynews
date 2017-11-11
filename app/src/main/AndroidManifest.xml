@@ -25,5 +25,6 @@
         </activity>
         <activity android:name=".RegistroActivity" android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".OlvidoActivity" android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".PostRegistroActivity"></activity>
     </application>
 </manifest>
