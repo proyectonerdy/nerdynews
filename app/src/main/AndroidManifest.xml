@@ -30,6 +30,5 @@
         <activity android:name=".Login.PostRegistroActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity android:name=".eventos.ListadoEventosActivity"></activity>
-        <activity android:name=".intereses.ListadoInteresesActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 </manifest>
