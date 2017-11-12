@@ -32,4 +32,10 @@
     <string name="olvidocontrasenamain">Recuperar cuenta</string>
     <string name="ejecutadoolvidocontrasena">Sigue los pasos enviados a tu direccion de correo %1$s para recuperar tu contraseña</string>
     <string name="faltaemail">¡Has de indicar el email de tu cuenta!</string>
+
+    <string name="titintereses">Intereses Disponibles</string>
+    <string name="addinteresfavorito">Interés añadido a favoritos</string>
+    <string name="existsfavorito">El interés ya se encuentra en favoritos</string>
+    <string name="searchinteres">Introduza un texto</string>
+
 </resources>
