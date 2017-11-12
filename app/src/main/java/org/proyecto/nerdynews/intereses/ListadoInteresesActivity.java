@@ -45,7 +45,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.litoolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Intereses Disponibles");
+        getSupportActionBar().setTitle(R.string.titintereses);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,12 +89,12 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
                 ImageView ib = (ImageView) v.findViewById(R.id.cvimageFavorito);
                 if (ListadoInteresesActivity.this.listaInteres[position].getImageFavorito().equals("@drawable/ic_favorite_black_24dp"))
                 {
-                    Toast.makeText(ListadoInteresesActivity.this, "El interés ya se encuentra en favoritos" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListadoInteresesActivity.this, R.string.existsfavorito , Toast.LENGTH_SHORT).show();
                   
                 }
                 else
                 {
-                    Toast.makeText(ListadoInteresesActivity.this, "Interés añadido a favoritos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListadoInteresesActivity.this, R.string.addinteresfavorito, Toast.LENGTH_SHORT).show();
                    ib.setImageResource(R.drawable.ic_favorite_black_24dp);
                 }
             }

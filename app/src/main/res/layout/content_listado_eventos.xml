@@ -12,7 +12,10 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".eventos.ListadoEventosActivity">
-
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="ejemplo buscador"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/reciclerViewListadoEventos"
