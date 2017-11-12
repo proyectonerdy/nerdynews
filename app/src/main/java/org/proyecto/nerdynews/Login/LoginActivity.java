@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import org.proyecto.nerdynews.R;
+import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
 
 /**
  * Pantalla de Login que se pide Usuario y Password
@@ -96,5 +97,18 @@ public class LoginActivity extends AppCompatActivity{
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
 
+    /**
+     * Método que nos permite ir al listado de intereses disponibles
+     * @param v
+     */
+    public void gotoIntereses(View v){
+        Intent intent = new Intent(this,ListadoInteresesActivity.class);
+        View view = this.getCurrentFocus();
+        if(view!=null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
 }
 
