@@ -82,16 +82,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         // Añade un separador entre los elementos de la lista
         recyclerListadoInteres.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
         recyclerListadoInteres.setAdapter(adapterListadoInteres);
-        /*recyclerListadoInteres.addOnItemTouchListener(new RecyclerItemClickListener(ListadoInteresesActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                Intent intent = new Intent(ListadoInteresesActivity.this, ListadoEventosActivity.class);
-                intent.putExtra("numeroLista", position);
-                //startActivity(intent);
-              //  ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(ListadoInteresesActivity.this, new Pair<View, String>(v.findViewById(R.id.imagen), getString(R.string.transition_name_img)));
-               // ActivityCompat.startActivity(ListadoInteresesActivity.this, intent, options.toBundle());
-            }
-        }));*/
+
         recyclerListadoInteres.addOnItemTouchListener(new RecyclerItemClickListener(ListadoInteresesActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -99,7 +90,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
                 if (ListadoInteresesActivity.this.listaInteres[position].getImageFavorito().equals("@drawable/ic_favorite_black_24dp"))
                 {
                     Toast.makeText(ListadoInteresesActivity.this, "El interés ya se encuentra en favoritos" , Toast.LENGTH_SHORT).show();
-                  //  ib.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                  
                 }
                 else
                 {
