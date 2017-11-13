@@ -23,22 +23,30 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/logoolvido"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:src="@drawable/ic_logo"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:id="@+id/cabeceraolvido"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/olvidocontrasenamain"
-                android:textSize="30dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="30dp"
-                android:textAlignment="center"/>
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/logoolvido"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_logo_nerdy" />
+
+                <TextView
+                    android:id="@+id/cabeceraolvido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/olvidocontrasenamain"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="24dp" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -80,12 +88,13 @@
             <Button
                 android:id="@+id/email_forgot_button"
                 style="?android:textAppearanceSmall"
-                android:background="@color/colorAccent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/recuperacontrasena"
+                android:background="@color/colorAccent"
                 android:onClick="olvidocontrasena"
+                android:text="@string/recuperacontrasena"
+                android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
             <RelativeLayout
