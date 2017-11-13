@@ -11,8 +11,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import org.proyecto.nerdynews.R;
+import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
 
 /* Clase que contiene la pantalla de registro */
 
@@ -72,6 +74,43 @@ public class RegistroActivity extends AppCompatActivity {
         }
         finish();
 
+    }
+
+    /**
+     * Método que nos permite ir a la Actividad para mostrar al usuario los intereses disponibles
+     * @param v
+     */
+    public void gotoIntereses(View v){
+        AutoCompleteTextView email = (AutoCompleteTextView) this.findViewById(R.id.emaillogin);
+        EditText password = (EditText) this.findViewById(R.id.passwordlogin);
+
+        if(email==null || email.getText()==null || email.getText().length() < 1 || password==null || password.getText()==null || password.getText().length() < 1 ){
+            Toast.makeText(this,R.string.datosobligatoriosregistro,Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Toast.makeText(this,R.string.cuentacreada,Toast.LENGTH_LONG).show();
+
+        Intent intent = new Intent(this,ListadoInteresesActivity.class);
+        View view = this.getCurrentFocus();
+        if(view!=null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                }
+                catch(Exception e){
+
+                }
+                finish();
+            }
+        });
+        t.start();
     }
 
 }

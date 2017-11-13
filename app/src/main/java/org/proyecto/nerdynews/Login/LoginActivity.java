@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
@@ -102,6 +103,13 @@ public class LoginActivity extends AppCompatActivity{
      * @param v
      */
     public void gotoIntereses(View v){
+        AutoCompleteTextView email = (AutoCompleteTextView) this.findViewById(R.id.emaillogin);
+        EditText password = (EditText) this.findViewById(R.id.passwordlogin);
+
+        if(email==null || email.getText()==null || email.getText().length() < 1 || password==null || password.getText()==null || password.getText().length() < 1 ){
+            Toast.makeText(this,R.string.datosobligatorioslogin,Toast.LENGTH_LONG).show();
+            return;
+        }
         Intent intent = new Intent(this,ListadoInteresesActivity.class);
         View view = this.getCurrentFocus();
         if(view!=null) {
@@ -109,6 +117,19 @@ public class LoginActivity extends AppCompatActivity{
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                }
+                catch(Exception e){
+
+                }
+                finish();
+            }
+        });
+        t.start();
     }
 }
 

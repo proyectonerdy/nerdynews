@@ -1,5 +1,6 @@
 package org.proyecto.nerdynews.intereses;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -128,8 +129,25 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
                 //startActivity(new Intent(this, PerfilActivity.class));
                 break;
             case R.id.nav_cerrar_sesion:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        }
+                        catch(Exception e){
+
+                        }
+                        finish();
+                    }
+                });
+                t.start();
+                return true;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -38,4 +38,8 @@
     <string name="existsfavorito">El interés ya se encuentra en favoritos</string>
     <string name="searchinteres">Introduza un texto</string>
 
+    <string name="datosobligatorioslogin">Debe introducir su email y su contraseña para conectarse</string>
+    <string name="datosobligatoriosregistro">Para registrar su cuenta debe facilitar un email y una contraseña</string>
+    <string name="cuentacreada">Se ha enviado un email a %1$s para validar su cuenta</string>
+
 </resources>

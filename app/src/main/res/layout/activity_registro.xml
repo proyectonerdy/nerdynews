@@ -140,7 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/ripple_effect"
+                android:onClick="gotoIntereses"
                 android:text="@string/registrarCuenta"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
