@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import org.proyecto.nerdynews.Login.LoginActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
+import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
 import org.proyecto.nerdynews.models.Evento;
 
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
@@ -39,7 +40,7 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Eventos");
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -82,33 +83,12 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        NavigationDrawerNavigate.OnBackPressed(this);
     }
 
     // Metodo cuando se hce click en los items del menú
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here
-        switch (item.getItemId()){
-            case R.id.nav_eventos:
-                startActivity(new Intent(this, ListadoEventosActivity.class));
-                break;
-            case R.id.nav_perfil:
-                //startActivity(new Intent(this, PerfilActivity.class));
-                break;
-            case R.id.nav_cerrar_sesion:
-                startActivity(new Intent(this, LoginActivity.class));
-                break;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return NavigationDrawerNavigate.Navigate(item,this);
     }
 }

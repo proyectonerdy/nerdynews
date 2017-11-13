@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 import org.proyecto.nerdynews.Login.LoginActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
+import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
 import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
 import org.proyecto.nerdynews.models.Interes;
 
@@ -108,51 +109,13 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        NavigationDrawerNavigate.OnBackPressed(this);
     }
 
     // Metodo cuando se hce click en los items del menú
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here
-        switch (item.getItemId()){
-            case R.id.nav_eventos:
-                startActivity(new Intent(this, ListadoEventosActivity.class));
-                break;
-            case R.id.nav_perfil:
-                //startActivity(new Intent(this, PerfilActivity.class));
-                break;
-            case R.id.nav_cerrar_sesion:
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
-                drawer.closeDrawer(GravityCompat.START);
-                Intent intent = new Intent(this, LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        }
-                        catch(Exception e){
-
-                        }
-                        finish();
-                    }
-                });
-                t.start();
-                return true;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return NavigationDrawerNavigate.Navigate(item,this);
     }
 }
 
