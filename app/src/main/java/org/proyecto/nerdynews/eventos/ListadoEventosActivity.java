@@ -3,6 +3,9 @@ package org.proyecto.nerdynews.eventos;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +15,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
 
@@ -90,5 +96,22 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         return NavigationDrawerNavigate.Navigate(item,this);
+    }
+
+    public void gotoEvento(View v){
+        Intent intent = new Intent(this,VisualizarEventoActivity.class);
+        TextView titulo = (TextView) v.findViewById(R.id.cvTituloEvento);
+        TextView texto = (TextView) v.findViewById(R.id.cvResumenEvento);
+        TextView fecha = (TextView) v.findViewById(R.id.cvFechaEvento);
+        TextView lugar = (TextView) v.findViewById(R.id.cvLugarEvento);
+        ImageView drawable = (ImageView) v.findViewById(R.id.cvImagenEvento);
+        intent.putExtra("TITULO",titulo.getText());
+        intent.putExtra("TEXTO",texto.getText());
+        intent.putExtra("FECHA",fecha.getText());
+        intent.putExtra("LUGAR",lugar.getText());
+        intent.putExtra("DIBUJO",(String)drawable.getTag());
+        ActivityOptionsCompat options = ActivityOptionsCompat. makeSceneTransitionAnimation(ListadoEventosActivity.this, new Pair<View, String>(v.findViewById(R.id.cvImagenEvento), getString(R.string.transition_name_img)));
+        ActivityCompat.startActivity(ListadoEventosActivity.this, intent, options .toBundle());
+
     }
 }

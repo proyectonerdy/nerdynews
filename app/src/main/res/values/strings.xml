@@ -44,5 +44,6 @@
     <string name="cuentacreada">Se ha enviado un email a %1$s para validar su cuenta</string>
 
     <string name="faltaimplementar">Falta por Implementar</string>
+    <string name="transition_name_img">transition:IMG</string>
 
 </resources>

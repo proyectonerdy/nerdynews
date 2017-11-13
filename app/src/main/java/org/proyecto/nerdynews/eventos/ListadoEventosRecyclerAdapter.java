@@ -51,6 +51,7 @@ public class ListadoEventosRecyclerAdapter extends RecyclerView.Adapter<ListadoE
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.mipmap.ic_launcher_round)
                 .into(holder.imgEvento);
+        holder.imgEvento.setTag(evento.getImageUrl());
     }
 
     @Override

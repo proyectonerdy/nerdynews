@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imagenEvento"
+        android:layout_width="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:transitionName ="@string/transition_name_img"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:id="@+id/visualizar_form"
+        app:layout_constraintBottom_toBottomOf="@+id/imagenEvento"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tituloEventoVisualizar"
+                android:layout_width="match_parent"
+                android:textSize="24dp"
+                android:text="TITULO"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/textoEventoVisualizar"
+                android:layout_width="match_parent"
+                android:text="Resumen del evento Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras placerat, massa vel pretium luctus, mi justo imperdiet est, sed tristique risus orci et quam. Aliquam posuere rhoncus tortor tincidunt volutpat. "
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_event_black_24dp" />
+
+                <TextView
+                    android:id="@+id/cvFechaEvento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00/00/0000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_place_black_24dp" />
+
+                <TextView
+                    android:id="@+id/cvLugarEvento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LugarEvento" />
+                </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
