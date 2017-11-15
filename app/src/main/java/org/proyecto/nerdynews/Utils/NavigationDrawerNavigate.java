@@ -2,7 +2,9 @@ package org.proyecto.nerdynews.Utils;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -41,6 +43,11 @@ public class NavigationDrawerNavigate {
                 Toast.makeText(actividad,R.string.faltaimplementar,Toast.LENGTH_LONG).show();
                 break;
             case R.id.nav_cerrar_sesion:
+                SharedPreferences pref = actividad.getSharedPreferences("nerdy", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putBoolean("sesionIniciada", false);
+                editor.commit();
+
                 drawer.closeDrawer(GravityCompat.START);
                 Intent intent = new Intent(actividad, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

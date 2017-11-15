@@ -3,12 +3,14 @@ package org.proyecto.nerdynews.Login;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sesionIniciada();
     }
 
 
@@ -110,6 +113,7 @@ public class LoginActivity extends AppCompatActivity{
             Toast.makeText(this,R.string.datosobligatorioslogin,Toast.LENGTH_LONG).show();
             return;
         }
+        mantenerSesion();
         Intent intent = new Intent(this,ListadoInteresesActivity.class);
         View view = this.getCurrentFocus();
         if(view!=null) {
@@ -130,6 +134,36 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
         t.start();
+    }
+
+    private void mantenerSesion() {
+        SharedPreferences pref = getSharedPreferences("nerdy", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        CheckBox checkBox = findViewById(R.id.recordarmelogin);
+        editor.putBoolean("sesionIniciada", checkBox.isChecked());
+        editor.commit();
+    }
+
+    private void sesionIniciada(){
+        SharedPreferences pref = getSharedPreferences("nerdy", Context.MODE_PRIVATE);
+        Boolean isActive = pref.getBoolean("sesionIniciada", false);
+        if (isActive){
+            Intent intent = new Intent(this,ListadoInteresesActivity.class);
+            startActivity(intent);
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch(Exception e){
+
+                    }
+                    finish();
+                }
+            });
+            t.start();
+        }
     }
 }
 
