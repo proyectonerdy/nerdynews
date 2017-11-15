@@ -11,13 +11,15 @@ public class Evento {
     private String fecha;
     private String lugar;
     private String imageUrl;
+    private String coordGPS;
 
-    public Evento(String titulo, String resumen, String fecha, String imageUrl, String lugar) {
+    public Evento(String titulo, String resumen, String fecha, String imageUrl, String lugar, String coordGPS) {
         this.titulo = titulo;
         this.resumen = resumen;
         this.fecha = fecha;
         this.lugar = lugar;
         this.imageUrl = imageUrl;
+        this.coordGPS = coordGPS;
     }
 
     public String getTitulo() {
@@ -58,5 +60,13 @@ public class Evento {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getCoordGPS() {
+        return coordGPS;
+    }
+
+    public void setCoordGPS(String coordGPS) {
+        this.coordGPS = coordGPS;
     }
 }

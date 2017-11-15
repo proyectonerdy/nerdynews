@@ -1,21 +1,29 @@
 package org.proyecto.nerdynews.eventos;
 
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 
 import org.proyecto.nerdynews.R;
-import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
 
-public class VisualizarEventoActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class VisualizarEventoActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    GoogleMap map;
+    MapView mapView;
+    String coords;
+    private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,48 +35,98 @@ public class VisualizarEventoActivity extends AppCompatActivity implements Navig
         String texto = getIntent().getStringExtra("TEXTO");
         String fecha = getIntent().getStringExtra("FECHA");
         String lugar = getIntent().getStringExtra("LUGAR");
+        coords = getIntent().getStringExtra("COORDSGPS");
         String url = getIntent().getStringExtra("DIBUJO");
 
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         TextView titulo = (TextView) this.findViewById(R.id.tituloEventoVisualizar);
         titulo.setText(title);
-        TextView textoview = (TextView)this.findViewById(R.id.textoEventoVisualizar);
+        TextView textoview = (TextView) this.findViewById(R.id.textoEventoVisualizar);
         textoview.setText(texto);
-        TextView fechaview = (TextView)this.findViewById(R.id.cvFechaEvento);
+        TextView fechaview = (TextView) this.findViewById(R.id.cvFechaEvento);
         fechaview.setText(fecha);
-        TextView lugarview = (TextView)this.findViewById(R.id.cvLugarEvento);
+        TextView lugarview = (TextView) this.findViewById(R.id.cvLugarEvento);
         lugarview.setText(lugar);
         ImageView imagen = (ImageView) this.findViewById(R.id.imagenEvento);
 
-        if(url!=null && !url.isEmpty()){
+        if (url != null && !url.isEmpty()) {
             Picasso.with(this)
                     .load(url)
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.mipmap.ic_launcher_round)
                     .into(imagen);
         }
+
+
+        mapView = (MapView) findViewById(R.id.mapView);
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
+        }
+        mapView.onCreate(mapViewBundle);
+
+        if (coords != null && !coords.isEmpty()) {
+            mapView.getMapAsync(this);
+        } else {
+            mapView.setVisibility(View.GONE);
+        }
     }
 
     @Override
-    public void onBackPressed() {
-        NavigationDrawerNavigate.OnBackPressed(this);
+    protected void onResume() {
+        super.onResume();
+        if (mapView != null) {
+            mapView.onResume();
+        }
     }
 
-    // Metodo cuando se hce click en los items del menú
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+    protected void onPause() {
+        super.onPause();
+        if (mapView != null)
+            mapView.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mapView != null)
+            mapView.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAPVIEW_BUNDLE_KEY, mapViewBundle);
+        }
+
+        mapView.onSaveInstanceState(mapViewBundle);
+    }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        this.map = googleMap;
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.getUiSettings().setMyLocationButtonEnabled(false);
+        String[] latLong = coords.split(",");
+
+        LatLng lugar = new LatLng(Double.parseDouble(latLong[0]), Double.parseDouble(latLong[1]));
+        map.addMarker(new MarkerOptions().position(lugar));
+        map.moveCamera(CameraUpdateFactory.newLatLng(lugar));
     }
 }

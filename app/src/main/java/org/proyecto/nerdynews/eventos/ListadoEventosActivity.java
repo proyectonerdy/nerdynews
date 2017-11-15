@@ -6,7 +6,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
 
-import org.proyecto.nerdynews.Login.LoginActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
@@ -110,6 +108,7 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
         intent.putExtra("FECHA",fecha.getText());
         intent.putExtra("LUGAR",lugar.getText());
         intent.putExtra("DIBUJO",(String)drawable.getTag());
+        intent.putExtra("COORDSGPS",(String)lugar.getTag());
         ActivityOptionsCompat options = ActivityOptionsCompat. makeSceneTransitionAnimation(ListadoEventosActivity.this, new Pair<View, String>(v.findViewById(R.id.cvImagenEvento), getString(R.string.transition_name_img)));
         ActivityCompat.startActivity(ListadoEventosActivity.this, intent, options .toBundle());
 

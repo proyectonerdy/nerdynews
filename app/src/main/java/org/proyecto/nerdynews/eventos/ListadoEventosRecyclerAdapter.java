@@ -1,21 +1,17 @@
 package org.proyecto.nerdynews.eventos;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.models.Evento;
-
-import java.util.ArrayList;
 
 /**
  * Created by eloy on 7/11/17.
@@ -46,6 +42,7 @@ public class ListadoEventosRecyclerAdapter extends RecyclerView.Adapter<ListadoE
         holder.txtResumen.setText(evento.getResumen());
         holder.txtFecha.setText(evento.getFecha());
         holder.txtLugar.setText(evento.getLugar());
+        holder.txtLugar.setTag(evento.getCoordGPS());
         Picasso.with(mContext)
                 .load(evento.getImageUrl())
                 .placeholder(R.drawable.ic_launcher_background)

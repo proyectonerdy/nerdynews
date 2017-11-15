@@ -45,5 +45,8 @@
 
     <string name="faltaimplementar">Falta por Implementar</string>
     <string name="transition_name_img">transition:IMG</string>
+    <string name="btnAsistir">Asistiré</string>
+    <string name="anadir_calendario">Añadir</string>
+    <string name="compartir">Compartir</string>
 
 </resources>
