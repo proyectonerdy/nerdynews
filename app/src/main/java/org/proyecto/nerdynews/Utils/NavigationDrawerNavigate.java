@@ -74,7 +74,7 @@ public class NavigationDrawerNavigate {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            actividad.getParent().onBackPressed();
+            actividad.onBackPressed();
         }
     }
 }
