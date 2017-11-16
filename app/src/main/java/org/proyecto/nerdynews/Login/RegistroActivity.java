@@ -81,15 +81,15 @@ public class RegistroActivity extends AppCompatActivity {
      * @param v
      */
     public void gotoIntereses(View v){
-        AutoCompleteTextView email = (AutoCompleteTextView) this.findViewById(R.id.emaillogin);
-        EditText password = (EditText) this.findViewById(R.id.passwordlogin);
+        AutoCompleteTextView email = (AutoCompleteTextView) this.findViewById(R.id.emailregistro);
+        EditText password = (EditText) this.findViewById(R.id.passwordregistro);
 
         if(email==null || email.getText()==null || email.getText().length() < 1 || password==null || password.getText()==null || password.getText().length() < 1 ){
             Toast.makeText(this,R.string.datosobligatoriosregistro,Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast.makeText(this,R.string.cuentacreada,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,String.format(getString(R.string.cuentacreada),email.getText()),Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(this,ListadoInteresesActivity.class);
         View view = this.getCurrentFocus();
