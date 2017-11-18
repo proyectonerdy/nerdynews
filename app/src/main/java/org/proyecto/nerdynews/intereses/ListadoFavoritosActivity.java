@@ -12,6 +12,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -27,27 +28,32 @@ import org.proyecto.nerdynews.Login.LoginActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
-import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
-import org.proyecto.nerdynews.models.Interes;
+import org.proyecto.nerdynews.models.Favorito;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
-public class ListadoInteresesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ListadoFavoritosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerListadoInteres;
-    private ListadoInteresesRecyclerAdapter adapterListadoInteres;
-    private Interes[] listaInteres;
+    private RecyclerView recyclerListadoFavoritos;
+    private ListadoFavoritosRecyclerAdapter adapterListadoFavoritos;
+    private Favorito[] listaFavoritos;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager lManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_intereses);
+        setContentView(R.layout.activity_listado_favoritos);
 
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.litoolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.titintereses);
+        getSupportActionBar().setTitle(R.string.titfavoritos);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -57,9 +63,9 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Listado de intereses disponisbles
-        recyclerListadoInteres= (RecyclerView) findViewById(R.id.reciclerViewListadoInteres);
-        recyclerListadoInteres.setLayoutManager(new GridLayoutManager(this, 1));
+        // Listado de intereses favorotios
+        recyclerListadoFavoritos= (RecyclerView) findViewById(R.id.reciclerViewListadoFavoritos);
+        recyclerListadoFavoritos.setLayoutManager(new GridLayoutManager(this, 1));
 
         // Permite recargar los datos de la lista haciendo scroll en lo alto de la lista
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.liswipe_refresh_layout);
@@ -68,7 +74,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
             @Override
             public void onRefresh() {
                 cargarDatosLista();
-           }
+            }
         });
 
         // Cargamos la lista
@@ -76,37 +82,38 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
     }
 
     private void cargarDatosLista(){
+
+
         // Obtenemos los elementos desde el fake .json
-        listaInteres= new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeInteresesDisponibles.json", this), Interes[].class);
+        listaFavoritos= new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeInteresesFavoritos.json", this), Favorito[].class);
 
-        // Pasamos los datos al adaptador para crear la lista
-        adapterListadoInteres = new ListadoInteresesRecyclerAdapter(listaInteres, getApplicationContext());
+        // Pasamos los datos al adaptador para crear la listaFavoritos
+        adapterListadoFavoritos = new ListadoFavoritosRecyclerAdapter(listaFavoritos, getApplicationContext());
         // Añade un separador entre los elementos de la lista
-        recyclerListadoInteres.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
-        recyclerListadoInteres.setAdapter(adapterListadoInteres);
+        recyclerListadoFavoritos.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+        recyclerListadoFavoritos.setAdapter(adapterListadoFavoritos);
 
-        //Marcamos el interes como favorito
-        recyclerListadoInteres.addOnItemTouchListener(new RecyclerItemClickListener(ListadoInteresesActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+        //Desmarcamos el interes como favorito
+        recyclerListadoFavoritos.addOnItemTouchListener(new RecyclerItemClickListener(ListadoFavoritosActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 ImageView ib = (ImageView) v.findViewById(R.id.cvimageFavorito);
+                if (ListadoFavoritosActivity.this.listaFavoritos[position].getImageFavorito().equals("@drawable/ic_favorite_black_24dp"))
+                {
+                    Toast.makeText(ListadoFavoritosActivity.this, R.string.deletefavorito , Toast.LENGTH_SHORT).show();
 
-                if (ListadoInteresesActivity.this.listaInteres[position].getImageFavorito().equals("@drawable/ic_favorite_black_24dp"))
-                {
-                    Toast.makeText(ListadoInteresesActivity.this, R.string.existsfavorito , Toast.LENGTH_SHORT).show();
-                  
+                    // ListadoFavoritosActivity.this.listaFavoritos[position].setEsFavorito(0);
+                    ib.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    ListadoFavoritosActivity.this.listaFavoritos[position].setEsFavorito(0);
+
                 }
-                else
-                {
-                    Toast.makeText(ListadoInteresesActivity.this, R.string.addinteresfavorito, Toast.LENGTH_SHORT).show();
-                   ib.setImageResource(R.drawable.ic_favorite_black_24dp);
-                }
+
             }
         }));
-        adapterListadoInteres.notifyDataSetChanged();
+        adapterListadoFavoritos.notifyDataSetChanged();
 
         // Oculta el circulo de cargar
-       swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -114,7 +121,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         NavigationDrawerNavigate.OnBackPressed(this);
     }
 
-    // Metodo cuando se hace click en los items del menú
+    // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         return NavigationDrawerNavigate.Navigate(item,this);

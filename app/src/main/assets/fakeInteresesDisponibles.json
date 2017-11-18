@@ -3,48 +3,56 @@
     "titulo": "Comic Con",
     "resumen": "Mantentente al día de toda la información de las ferias del comic.",
     "imageUrl":"@drawable/ic_interescomiccon",
-    "imageFavorito":"@drawable/ic_favorite_black_24dp"
+    "imageFavorito":"@drawable/ic_favorite_black_24dp",
+    "esFavorito":"1"
   },
     {
     "titulo": "DC Comics",
     "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la franquicia.",
       "imageUrl":"@drawable/ic_interes_dccomics",
-    "imageFavorito":"@drawable/ic_favorite_black_24dp"
+    "imageFavorito":"@drawable/ic_favorite_black_24dp",
+      "esFavorito":"1"
   },
   {
     "titulo": "Marvel",
     "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la franquicia.",
     "imageUrl":"@drawable/ic_interesmarvel",
-    "imageFavorito":"@drawable/ic_favorite_border_black_24dp"
+    "imageFavorito":"@drawable/ic_favorite_border_black_24dp",
+    "esFavorito":"0"
   },
   {
     "titulo": "Nintendo",
     "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la plataforma de videojuegos",
     "imageUrl":"@drawable/ic_interesnintendo",
-    "imageFavorito":"@drawable/ic_favorite_black_24dp"
+    "imageFavorito":"@drawable/ic_favorite_black_24dp",
+    "esFavorito":"1"
   },
   {
     "titulo": "Star Wars",
     "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la franquicia.",
     "imageUrl":"@drawable/ic_interes_starswars",
-    "imageFavorito":"@drawable/ic_favorite_border_black_24dp"
+    "imageFavorito":"@drawable/ic_favorite_border_black_24dp",
+    "esFavorito":"0"
   },
   {
     "titulo": "PSP4",
     "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la plataforma de videojuegos",
     "imageUrl":"@drawable/ic_interesps4",
-    "imageFavorito":"@drawable/ic_favorite_black_24dp"
+    "imageFavorito":"@drawable/ic_favorite_black_24dp",
+    "esFavorito":"1"
   },
   {
     "titulo": "Todo juegos",
     "resumen": "Estar al día de las noticias, novedades y eventos de los videojuegos más populares.",
     "imageUrl":"@drawable/ic_interesvideojuegos",
-    "imageFavorito":"@drawable/ic_favorite_border_black_24dp"
+    "imageFavorito":"@drawable/ic_favorite_border_black_24dp",
+    "esFavorito":"0"
   },
   {
     "titulo": "Xbox",
     "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la plataforma de videojuegos.",
     "imageUrl":"@drawable/ic_interesxbox",
-    "imageFavorito":"@drawable/ic_favorite_border_black_24dp"
+    "imageFavorito":"@drawable/ic_favorite_border_black_24dp",
+    "esFavorito":"0"
   }
 ]

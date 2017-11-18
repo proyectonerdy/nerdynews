@@ -90,12 +90,14 @@ public class ListadoInteresesRecyclerAdapter extends RecyclerView.Adapter<Listad
         private final TextView txtTitulo, txtResumen;
         private final ImageView imgInteres, imgFavorito;
 
+
         public ListadoInteresesViewHolder(View itemView) {
             super(itemView);
             txtTitulo = (TextView) itemView.findViewById(R.id.cvTituloInteres);
             txtResumen = (TextView) itemView.findViewById(R.id.cvResumenInteres);
             imgInteres = (ImageView) itemView.findViewById(R.id.cvImagenInteres);
             imgFavorito = (ImageView) itemView.findViewById(R.id.cvimageFavorito);
+
 
         }
     }

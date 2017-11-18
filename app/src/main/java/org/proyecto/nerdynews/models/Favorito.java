@@ -5,7 +5,7 @@ package org.proyecto.nerdynews.models;
  * Created by Ana on 1/11/17.
  */
 
-public class Interes {
+public class Favorito {
 
     private String titulo;
     private String resumen;
@@ -13,7 +13,7 @@ public class Interes {
     private String imageFavorito;
     private int esFavorito;
 
-    public Interes(String titulo, String resumen, String imageUrl, String imageFavorito, int esFavorito) {
+    public Favorito(String titulo, String resumen, String imageUrl, String imageFavorito, int esFavorito) {
         this.titulo = titulo;
         this.resumen = resumen;
         this.imageUrl = imageUrl;
