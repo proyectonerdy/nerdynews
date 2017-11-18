@@ -41,7 +41,7 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
 
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerListadoInteres;
-    private ListadoInteresesRecyclerAdapter adapterListadoInteres;
+    private ListadoInteresesRecyclerAdapter adapterListadoFavortios;
     private Interes[] listaInteres;
     private Interes[] listaFavoritos;
     private RecyclerView.Adapter adapter;
@@ -50,7 +50,7 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_intereses);
+        setContentView(R.layout.activity_listado_favoritos);
 
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.litoolbar);
@@ -66,7 +66,7 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
         navigationView.setNavigationItemSelectedListener(this);
 
         // Listado de intereses favorotios
-        recyclerListadoInteres= (RecyclerView) findViewById(R.id.reciclerViewListadoInteres);
+        recyclerListadoInteres= (RecyclerView) findViewById(R.id.reciclerViewListadoFavoritos);
         recyclerListadoInteres.setLayoutManager(new GridLayoutManager(this, 1));
 
         // Permite recargar los datos de la lista haciendo scroll en lo alto de la lista
@@ -90,10 +90,10 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
         listaFavoritos= new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeInteresesFavoritos.json", this), Interes[].class);
 
         // Pasamos los datos al adaptador para crear la listaFavoritos
-        adapterListadoInteres = new ListadoInteresesRecyclerAdapter(listaFavoritos, getApplicationContext());
+        adapterListadoFavortios = new ListadoInteresesRecyclerAdapter(listaFavoritos, getApplicationContext());
         // Añade un separador entre los elementos de la lista
         recyclerListadoInteres.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
-        recyclerListadoInteres.setAdapter(adapterListadoInteres);
+        recyclerListadoInteres.setAdapter(adapterListadoFavortios);
 
         //Marcamos el interes como favorito
         recyclerListadoInteres.addOnItemTouchListener(new RecyclerItemClickListener(ListadoFavoritosActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
@@ -112,7 +112,7 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
 
             }
         }));
-        adapterListadoInteres.notifyDataSetChanged();
+        adapterListadoFavortios.notifyDataSetChanged();
 
         // Oculta el circulo de cargar
         swipeRefreshLayout.setRefreshing(false);
