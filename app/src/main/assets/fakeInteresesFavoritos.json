@@ -1,0 +1,33 @@
+[
+  {
+    "titulo": "Comic Con",
+    "resumen": "Mantentente al día de toda la información de las ferias del comic.",
+    "imageUrl":"@drawable/ic_interescomiccon",
+    "imageFavorito":"@drawable/ic_favorite_black_24dp",
+    "esFavorito":"1"
+  },
+  {
+    "titulo": "DC Comics",
+    "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la franquicia.",
+    "imageUrl":"@drawable/ic_interes_dccomics",
+    "imageFavorito":"@drawable/ic_favorite_black_24dp",
+    "esFavorito":"1"
+  },
+  {
+    "titulo": "Nintendo",
+    "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la plataforma de videojuegos",
+    "imageUrl":"@drawable/ic_interesnintendo",
+    "imageFavorito":"@drawable/ic_favorite_black_24dp",
+    "esFavorito":"1"
+  },
+
+  {
+    "titulo": "PSP4",
+    "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la plataforma de videojuegos",
+    "imageUrl":"@drawable/ic_interesps4",
+    "imageFavorito":"@drawable/ic_favorite_black_24dp",
+    "esFavorito":"1"
+  }
+
+
+]

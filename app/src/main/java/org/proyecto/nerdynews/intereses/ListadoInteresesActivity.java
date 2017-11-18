@@ -90,6 +90,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
             @Override
             public void onItemClick(View v, int position) {
                 ImageView ib = (ImageView) v.findViewById(R.id.cvimageFavorito);
+
                 if (ListadoInteresesActivity.this.listaInteres[position].getImageFavorito().equals("@drawable/ic_favorite_black_24dp"))
                 {
                     Toast.makeText(ListadoInteresesActivity.this, R.string.existsfavorito , Toast.LENGTH_SHORT).show();

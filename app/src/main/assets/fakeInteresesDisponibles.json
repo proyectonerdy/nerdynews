@@ -39,7 +39,7 @@
     "resumen": "Estar al día, de noticias, novedades, eventos y estrenos de la plataforma de videojuegos",
     "imageUrl":"@drawable/ic_interesps4",
     "imageFavorito":"@drawable/ic_favorite_black_24dp",
-    "esFavorito":"0"
+    "esFavorito":"1"
   },
   {
     "titulo": "Todo juegos",
