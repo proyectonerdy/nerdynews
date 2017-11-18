@@ -11,12 +11,14 @@ public class Interes {
     private String resumen;
     private String imageUrl;
     private String imageFavorito;
+    private int esFavorito;
 
-    public Interes(String titulo, String resumen, String imageUrl, String imageFavorito) {
+    public Interes(String titulo, String resumen, String imageUrl, String imageFavorito, int esFavorito) {
         this.titulo = titulo;
         this.resumen = resumen;
         this.imageUrl = imageUrl;
         this.imageFavorito = imageFavorito;
+        this.esFavorito = esFavorito;
     }
 
     public String getTitulo() {
@@ -50,4 +52,15 @@ public class Interes {
     public void setImageFavorito(String imageFavorito) {
         this.imageFavorito = imageFavorito;
     }
+
+    public int getEsFavorito() {
+        return esFavorito;
+    }
+
+    public void setEsFavorito(int esFavorito) {
+        this.esFavorito = esFavorito;
+    }
+
+
+
 }

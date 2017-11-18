@@ -32,7 +32,7 @@ import org.proyecto.nerdynews.models.Interes;
 
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
-public class ListadoInteresesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ListadoFavoritosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerListadoInteres;
@@ -68,7 +68,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
             @Override
             public void onRefresh() {
                 cargarDatosLista();
-           }
+            }
         });
 
         // Cargamos la lista
@@ -86,26 +86,19 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         recyclerListadoInteres.setAdapter(adapterListadoInteres);
 
         //Marcamos el interes como favorito
-        recyclerListadoInteres.addOnItemTouchListener(new RecyclerItemClickListener(ListadoInteresesActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerListadoInteres.addOnItemTouchListener(new RecyclerItemClickListener(ListadoFavoritosActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 ImageView ib = (ImageView) v.findViewById(R.id.cvimageFavorito);
-                if (ListadoInteresesActivity.this.listaInteres[position].getImageFavorito().equals("@drawable/ic_favorite_black_24dp"))
-                {
-                    Toast.makeText(ListadoInteresesActivity.this, R.string.existsfavorito , Toast.LENGTH_SHORT).show();
-                  
-                }
-                else
-                {
-                    Toast.makeText(ListadoInteresesActivity.this, R.string.addinteresfavorito, Toast.LENGTH_SHORT).show();
-                   ib.setImageResource(R.drawable.ic_favorite_black_24dp);
-                }
+                Toast.makeText(ListadoFavoritosActivity.this, R.string.deletefavorito , Toast.LENGTH_SHORT).show();
+                ListadoFavoritosActivity.this.listaInteres[position].setEsFavorito(0);
+
             }
         }));
         adapterListadoInteres.notifyDataSetChanged();
 
         // Oculta el circulo de cargar
-       swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -113,7 +106,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         NavigationDrawerNavigate.OnBackPressed(this);
     }
 
-    // Metodo cuando se hace click en los items del menú
+    // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         return NavigationDrawerNavigate.Navigate(item,this);
