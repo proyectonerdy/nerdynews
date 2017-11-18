@@ -28,8 +28,7 @@ import org.proyecto.nerdynews.Login.LoginActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
-import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
-import org.proyecto.nerdynews.models.Interes;
+import org.proyecto.nerdynews.models.Favorito;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -40,10 +39,9 @@ import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 public class ListadoFavoritosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView recyclerListadoInteres;
-    private ListadoInteresesRecyclerAdapter adapterListadoFavortios;
-    private Interes[] listaInteres;
-    private Interes[] listaFavoritos;
+    private RecyclerView recyclerListadoFavoritos;
+    private ListadoFavoritosRecyclerAdapter adapterListadoFavoritos;
+    private Favorito[] listaFavoritos;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
 
@@ -66,8 +64,8 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
         navigationView.setNavigationItemSelectedListener(this);
 
         // Listado de intereses favorotios
-        recyclerListadoInteres= (RecyclerView) findViewById(R.id.reciclerViewListadoFavoritos);
-        recyclerListadoInteres.setLayoutManager(new GridLayoutManager(this, 1));
+        recyclerListadoFavoritos= (RecyclerView) findViewById(R.id.reciclerViewListadoFavoritos);
+        recyclerListadoFavoritos.setLayoutManager(new GridLayoutManager(this, 1));
 
         // Permite recargar los datos de la lista haciendo scroll en lo alto de la lista
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.liswipe_refresh_layout);
@@ -87,16 +85,16 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
 
 
         // Obtenemos los elementos desde el fake .json
-        listaFavoritos= new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeInteresesFavoritos.json", this), Interes[].class);
+        listaFavoritos= new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeInteresesFavoritos.json", this), Favorito[].class);
 
         // Pasamos los datos al adaptador para crear la listaFavoritos
-        adapterListadoFavortios = new ListadoInteresesRecyclerAdapter(listaFavoritos, getApplicationContext());
+        adapterListadoFavoritos = new ListadoFavoritosRecyclerAdapter(listaFavoritos, getApplicationContext());
         // Añade un separador entre los elementos de la lista
-        recyclerListadoInteres.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
-        recyclerListadoInteres.setAdapter(adapterListadoFavortios);
+        recyclerListadoFavoritos.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
+        recyclerListadoFavoritos.setAdapter(adapterListadoFavoritos);
 
-        //Marcamos el interes como favorito
-        recyclerListadoInteres.addOnItemTouchListener(new RecyclerItemClickListener(ListadoFavoritosActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+        //Desmarcamos el interes como favorito
+        recyclerListadoFavoritos.addOnItemTouchListener(new RecyclerItemClickListener(ListadoFavoritosActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 ImageView ib = (ImageView) v.findViewById(R.id.cvimageFavorito);
@@ -112,7 +110,7 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
 
             }
         }));
-        adapterListadoFavortios.notifyDataSetChanged();
+        adapterListadoFavoritos.notifyDataSetChanged();
 
         // Oculta el circulo de cargar
         swipeRefreshLayout.setRefreshing(false);
