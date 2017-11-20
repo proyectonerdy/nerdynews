@@ -23,6 +23,12 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCde_iY3Wk4YUjXhMaJp_3o90EA_ak-Og8" />
 
+        <service android:name=".Firebase.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".Login.LoginActivity"
             android:label="@string/app_name"
