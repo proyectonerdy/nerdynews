@@ -13,8 +13,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -45,16 +45,26 @@
         <activity
             android:name=".Login.OlvidoActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Login.PostRegistroActivity" />
-        <activity
-            android:name=".eventos.ListadoEventosActivity" />
-        <activity
-            android:name=".intereses.ListadoInteresesActivity"/>
-        <activity
-            android:name=".intereses.ListadoFavoritosActivity"/>
-        <activity
-            android:name=".eventos.VisualizarEventoActivity" />
+        <activity android:name=".Login.PostRegistroActivity" />
+        <activity android:name=".eventos.ListadoEventosActivity" />
+        <activity android:name=".intereses.ListadoInteresesActivity" />
+        <activity android:name=".intereses.ListadoFavoritosActivity" />
+        <activity android:name=".eventos.VisualizarEventoActivity">
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY_1" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="www.nerdynews.org" />
+                <data android:pathPrefix="/evento" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
