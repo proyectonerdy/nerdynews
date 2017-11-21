@@ -55,4 +55,5 @@
     <string name="perfil">Perfil</string>
     <string name="intereses">Intereses (3)</string>
     <string name="gpr_1985">GPR1985</string>
+    <string name="button_undo">Deshacer</string>
 </resources>
