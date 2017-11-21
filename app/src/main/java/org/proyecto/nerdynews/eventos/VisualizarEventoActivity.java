@@ -45,28 +45,30 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
         if (data != null) {
             String temp = "";
             try {
-                temp = URLDecoder.decode(data.toString(),"UTF-8");
+                temp = URLDecoder.decode(data.toString(), "UTF-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
             eventoDesdeNotificacion(temp);
-        }else if(getIntent().getStringExtra("Notificacion").equals("true")) {
-            String temp = "";
-            try {
-                temp = URLDecoder.decode(getIntent().getStringExtra("url"),"UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
+        } else if (!getIntent().getExtras().isEmpty()) {
+            if (getIntent().getExtras().getString("Notificacion", "false").equals("true")) {
+                String temp = "";
+                try {
+                    temp = URLDecoder.decode(getIntent().getStringExtra("url"), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                eventoDesdeNotificacion(temp);
+            } else {
+                //obtener el valor pasado en el Bundle
+                title = getIntent().getStringExtra("TITULO");
+                texto = getIntent().getStringExtra("TEXTO");
+                fecha = getIntent().getStringExtra("FECHA");
+                lugar = getIntent().getStringExtra("LUGAR");
+                coords = getIntent().getStringExtra("COORDSGPS");
+                url = getIntent().getStringExtra("DIBUJO");
+                urlEvento = "http://www.nerdynews.org/evento/" + title.trim().replace(" ", "_");
             }
-            eventoDesdeNotificacion(temp);
-        }else{
-            //obtener el valor pasado en el Bundle
-            title = getIntent().getStringExtra("TITULO");
-            texto = getIntent().getStringExtra("TEXTO");
-            fecha = getIntent().getStringExtra("FECHA");
-            lugar = getIntent().getStringExtra("LUGAR");
-            coords = getIntent().getStringExtra("COORDSGPS");
-            url = getIntent().getStringExtra("DIBUJO");
-            urlEvento = "http://www.nerdynews.org/evento/" + title.trim().replace(" ","_");
         }
 
         // Menu laterar
@@ -98,7 +100,7 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, title + "\n" + texto.substring(0,97) + "...\n" + urlEvento);
+                intent.putExtra(Intent.EXTRA_TEXT, title + "\n" + texto.substring(0, 97) + "...\n" + urlEvento);
                 startActivity(Intent.createChooser(intent, getString(R.string.compartir)));
             }
         });
@@ -126,8 +128,8 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
         }
     }
 
-    public void eventoDesdeNotificacion(String temp){
-        String nombreEvento = temp.substring(temp.lastIndexOf("/") + 1).replace("_"," ");
+    public void eventoDesdeNotificacion(String temp) {
+        String nombreEvento = temp.substring(temp.lastIndexOf("/") + 1).replace("_", " ");
         // Obtenemos los elementos desde el fake .json
         Evento[] listaEventos = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeEventos.json", this), Evento[].class);
 
@@ -139,7 +141,7 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
                 lugar = evento.getLugar();
                 coords = evento.getCoordGPS();
                 url = evento.getImageUrl();
-                urlEvento = "http://www.nerdynews.org/evento/" + title.trim().replace(" ","_");
+                urlEvento = "http://www.nerdynews.org/evento/" + title.trim().replace(" ", "_");
             }
         }
     }
@@ -178,6 +180,7 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
 
         mapView.onSaveInstanceState(mapViewBundle);
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.map = googleMap;
