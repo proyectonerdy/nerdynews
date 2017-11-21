@@ -50,7 +50,15 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
                 e.printStackTrace();
             }
             eventoDesdeNotificacion(temp);
-        }else {
+        }else if(getIntent().getStringExtra("Notificacion").equals("true")) {
+            String temp = "";
+            try {
+                temp = URLDecoder.decode(getIntent().getStringExtra("url"),"UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            eventoDesdeNotificacion(temp);
+        }else{
             //obtener el valor pasado en el Bundle
             title = getIntent().getStringExtra("TITULO");
             texto = getIntent().getStringExtra("TEXTO");
