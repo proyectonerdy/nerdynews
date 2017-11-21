@@ -12,8 +12,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:supportsRtl="true">
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -21,11 +22,25 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCde_iY3Wk4YUjXhMaJp_3o90EA_ak-Og8" />
 
+        <service android:name=".Firebase.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".Firebase.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".Login.LoginActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Login.RegistroActivity"
@@ -37,12 +52,24 @@
         <activity android:name=".eventos.ListadoEventosActivity" />
         <activity android:name=".intereses.ListadoInteresesActivity" />
         <activity android:name=".intereses.ListadoFavoritosActivity" />
-        <activity android:name=".eventos.VisualizarEventoActivity" />
-        <activity android:name=".PerfilAmigoActivity" android:label="@string/gpr_1985"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".eventos.VisualizarEventoActivity">
+            <intent-filter>
+                <action android:name="OPEN_ACTIVITY_1" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="www.nerdynews.org" />
+                <data android:pathPrefix="/evento" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".PerfilAmigoActivity" android:label="@string/gpr_1985"></activity>
     </application>
 
 </manifest>

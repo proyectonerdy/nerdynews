@@ -1,9 +1,12 @@
 package org.proyecto.nerdynews.eventos;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,9 +16,16 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
 import org.proyecto.nerdynews.R;
+import org.proyecto.nerdynews.models.Evento;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
 public class VisualizarEventoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -23,6 +33,7 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
     MapView mapView;
     String coords;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
+    private String title, texto, fecha, lugar, url, urlEvento;
 
 
     @Override
@@ -30,13 +41,35 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizar_evento);
 
-        //obtener el valor pasado en el Bundle
-        String title = getIntent().getStringExtra("TITULO");
-        String texto = getIntent().getStringExtra("TEXTO");
-        String fecha = getIntent().getStringExtra("FECHA");
-        String lugar = getIntent().getStringExtra("LUGAR");
-        coords = getIntent().getStringExtra("COORDSGPS");
-        String url = getIntent().getStringExtra("DIBUJO");
+        Uri data = getIntent().getData();
+        if (data != null) {
+            String temp = "";
+            try {
+                temp = URLDecoder.decode(data.toString(), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            eventoDesdeNotificacion(temp);
+        } else if (!getIntent().getExtras().isEmpty()) {
+            if (getIntent().getExtras().getString("Notificacion", "false").equals("true")) {
+                String temp = "";
+                try {
+                    temp = URLDecoder.decode(getIntent().getStringExtra("url"), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                eventoDesdeNotificacion(temp);
+            } else {
+                //obtener el valor pasado en el Bundle
+                title = getIntent().getStringExtra("TITULO");
+                texto = getIntent().getStringExtra("TEXTO");
+                fecha = getIntent().getStringExtra("FECHA");
+                lugar = getIntent().getStringExtra("LUGAR");
+                coords = getIntent().getStringExtra("COORDSGPS");
+                url = getIntent().getStringExtra("DIBUJO");
+                urlEvento = "http://www.nerdynews.org/evento/" + title.trim().replace(" ", "_");
+            }
+        }
 
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,6 +94,17 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
         lugarview.setText(lugar);
         ImageView imagen = (ImageView) this.findViewById(R.id.imagenEvento);
 
+        Button bCompartir = (Button) findViewById(R.id.bCompartir);
+        bCompartir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, title + "\n" + texto.substring(0, 97) + "...\n" + urlEvento);
+                startActivity(Intent.createChooser(intent, getString(R.string.compartir)));
+            }
+        });
+
         if (url != null && !url.isEmpty()) {
             Picasso.with(this)
                     .load(url)
@@ -81,6 +125,24 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
             mapView.getMapAsync(this);
         } else {
             mapView.setVisibility(View.GONE);
+        }
+    }
+
+    public void eventoDesdeNotificacion(String temp) {
+        String nombreEvento = temp.substring(temp.lastIndexOf("/") + 1).replace("_", " ");
+        // Obtenemos los elementos desde el fake .json
+        Evento[] listaEventos = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeEventos.json", this), Evento[].class);
+
+        for (Evento evento : listaEventos) {
+            if (evento.getTitulo().equals(nombreEvento)) {
+                title = evento.getTitulo();
+                texto = evento.getResumen();
+                fecha = evento.getFecha();
+                lugar = evento.getLugar();
+                coords = evento.getCoordGPS();
+                url = evento.getImageUrl();
+                urlEvento = "http://www.nerdynews.org/evento/" + title.trim().replace(" ", "_");
+            }
         }
     }
 
@@ -118,6 +180,7 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
 
         mapView.onSaveInstanceState(mapViewBundle);
     }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.map = googleMap;
