@@ -2,4 +2,11 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="cabecera_elevacion">4dp</dimen>
+    <dimen name="fab_elevacion">8dp</dimen>
+    <dimen name="card_margen">16dp</dimen>
+    <dimen name="tamano_fab">56dp</dimen>
+    <dimen name="tamano_icono_perfil">36dp</dimen>
+    <dimen name="margen_fab">16dp</dimen>
+    <dimen name="tamano_avatar">40dp</dimen>
 </resources>
