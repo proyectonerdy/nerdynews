@@ -1,30 +1,72 @@
-package org.proyecto.nerdynews.Login;
+package org.proyecto.nerdynews.Perfil;
 
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import org.proyecto.nerdynews.Perfil.PerfilActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
 
-/* Clase que contiene la pantalla de registro */
+/* Clase que contiene la pantalla del perfil */
 
-public class RegistroActivity extends AppCompatActivity {
+public class PerfilActivity extends AppCompatActivity {
+    Button b1,b2;
+    ImageView iv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
+        setContentView(R.layout.activity_perfil);
+        Bundle extras = getIntent().getExtras();
+        String vregistro = extras.getString("registro");
+        String vemail = extras.getString("email");
+        String vpassword = extras.getString("password");
+        if (vregistro.equals("N"))
+        {
+            TextView titbienvenida = (TextView) findViewById(R.id.cabecerabienvenida);
+            titbienvenida.setText("");
+        }
+        else {
+            TextView titulo = (TextView) findViewById(R.id.cabeceraperfil);
+            titulo.setText(getString(R.string.titperfil) + " " + vemail.toString());
+            EditText password = (EditText) findViewById(R.id.passwordperfil);
+            int tipo = password.getInputType();
+            password.setText(vpassword.toString());
+        }
+
+        iv=(ImageView)findViewById(R.id.fotoperfil);
+
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Bitmap bp = (Bitmap) data.getExtras().get("data");
+        iv.setImageBitmap(bp);
     }
 
     /**
@@ -32,10 +74,11 @@ public class RegistroActivity extends AppCompatActivity {
      * @param v
      */
     public void resetField(View v){
-        if(v.getId() == R.id.crossemailregistro){
-            AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.emailregistro);
+
+       /* if(v.getId() == R.id.crossemailperfil){
+            AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.emailperfil);
             ac.setText("");
-        }
+        }*/
         if(v.getId() == R.id.crosspasswordregistro){
             EditText e = (EditText) this.findViewById(R.id.passwordregistro);
             e.setText("");
@@ -48,9 +91,9 @@ public class RegistroActivity extends AppCompatActivity {
      * @param v
      */
     public void tooglePassword(View v){
-        EditText contraseña = (EditText) findViewById(R.id.passwordregistro);
+        EditText contraseña = (EditText) findViewById(R.id.passwordperfil);
         int tipo = contraseña.getInputType();
-        ImageButton ib = (ImageButton) findViewById(R.id.seepasswordregistro);
+        ImageButton ib = (ImageButton) findViewById(R.id.seepasswordperfil);
         if (tipo == InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_VARIATION_PASSWORD) {
             contraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
             //hay que cambiar el icono del boton por el icono tachado
@@ -64,42 +107,19 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que va a la actividad de Login
-     * @param v
-     */
-    public void irLogin(View v){
-        View view = this.getCurrentFocus();
-        if(view!=null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-        finish();
-
-    }
-
-    /**
      * Método que nos permite ir a la Actividad para mostrar al usuario los intereses disponibles
      * @param v
      */
     public void gotoIntereses(View v){
-        AutoCompleteTextView email = (AutoCompleteTextView) this.findViewById(R.id.emailregistro);
-        EditText password = (EditText) this.findViewById(R.id.passwordregistro);
+       /* AutoCompleteTextView email = (AutoCompleteTextView) this.findViewById(R.id.emailperfil);
+        EditText password = (EditText) this.findViewById(R.id.passwordperfil);
 
-        if(email==null || email.getText()==null || email.getText().length() < 1 || password==null || password.getText()==null || password.getText().length() < 1 ){
+        if( password==null || password.getText()==null || password.getText().length() < 1 ){
             Toast.makeText(this,R.string.datosobligatoriosregistro,Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast.makeText(this,String.format(getString(R.string.cuentacreada),email.getText()),Toast.LENGTH_LONG).show();
-
-       // Redireccionamos a la actividad de pefil
-        // Intent intent = new Intent(this,ListadoInteresesActivity.class);
-        Intent intent = new Intent(this, PerfilActivity.class);
-        intent.putExtra("registro", "S");
-        intent.putExtra("email",email.getText().toString());
-        intent.putExtra("password",password.getText().toString());
-
-
+        Intent intent = new Intent(this,ListadoInteresesActivity.class);
         View view = this.getCurrentFocus();
         if(view!=null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -118,7 +138,7 @@ public class RegistroActivity extends AppCompatActivity {
                 finish();
             }
         });
-        t.start();
+        t.start();*/
     }
 
 }

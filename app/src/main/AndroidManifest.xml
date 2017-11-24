@@ -52,6 +52,7 @@
         <activity android:name=".eventos.ListadoEventosActivity" />
         <activity android:name=".intereses.ListadoInteresesActivity" />
         <activity android:name=".intereses.ListadoFavoritosActivity" />
+        <activity android:name=".Perfil.PerfilActivity" />
         <activity android:name=".eventos.VisualizarEventoActivity">
             <intent-filter>
                 <action android:name="OPEN_ACTIVITY_1" />
