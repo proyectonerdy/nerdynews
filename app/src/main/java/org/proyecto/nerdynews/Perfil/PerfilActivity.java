@@ -25,7 +25,7 @@ import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
 /* Clase que contiene la pantalla del perfil */
 
 public class PerfilActivity extends AppCompatActivity {
-    Button b1,b2;
+    Button b1, b2;
     ImageView iv;
 
 
@@ -37,12 +37,22 @@ public class PerfilActivity extends AppCompatActivity {
         String vregistro = extras.getString("registro");
         String vemail = extras.getString("email");
         String vpassword = extras.getString("password");
-        if (vregistro.equals("N"))
-        {
+
+        iv = (ImageView) findViewById(R.id.fotoperfil);
+
+        if (vregistro.equals("N")) {
             LinearLayout linea = (LinearLayout) findViewById(R.id.lcabecerabienvenida);
             linea.removeAllViews();
-        }
-        else {
+            EditText password = (EditText) findViewById(R.id.passwordperfil);
+            password.setText("1111");
+            EditText alias = (EditText) findViewById(R.id.aliasperfil);
+            alias.setText("GPR1985");
+            TextView titulo = (TextView) findViewById(R.id.cabeceraperfil);
+            titulo.setText(getString(R.string.titperfil) + " " + "GPR1985@gmail.com");
+
+            iv.setImageResource(R.drawable.foto_perfil_default);
+
+        } else {
             TextView titulo = (TextView) findViewById(R.id.cabeceraperfil);
             titulo.setText(getString(R.string.titperfil) + " " + vemail.toString());
             EditText password = (EditText) findViewById(R.id.passwordperfil);
@@ -50,7 +60,6 @@ public class PerfilActivity extends AppCompatActivity {
             password.setText(vpassword.toString());
         }
 
-        iv=(ImageView)findViewById(R.id.fotoperfil);
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +71,7 @@ public class PerfilActivity extends AppCompatActivity {
 
 
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
@@ -72,11 +82,12 @@ public class PerfilActivity extends AppCompatActivity {
 
     /**
      * Método que permite borrar el campo que apunta la vista
+     *
      * @param v
      */
-    public void resetField(View v){
+    public void resetField(View v) {
 
-        if(v.getId() == R.id.crosspasswordregistro){
+        if (v.getId() == R.id.crosspasswordregistro) {
             EditText e = (EditText) this.findViewById(R.id.passwordregistro);
             e.setText("");
         }
@@ -85,9 +96,10 @@ public class PerfilActivity extends AppCompatActivity {
 
     /**
      * Método que permite mostrar u ocultar la contraseña
+     *
      * @param v
      */
-    public void tooglePassword(View v){
+    public void tooglePassword(View v) {
         EditText contraseña = (EditText) findViewById(R.id.passwordperfil);
         int tipo = contraseña.getInputType();
         ImageButton ib = (ImageButton) findViewById(R.id.seepasswordperfil);
@@ -95,8 +107,7 @@ public class PerfilActivity extends AppCompatActivity {
             contraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
             //hay que cambiar el icono del boton por el icono tachado
             ib.setImageResource(R.drawable.eye_off);
-        }
-        else {
+        } else {
             contraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             //hay que cambiar el icono del boton por el icono no tachado
             ib.setImageResource(R.drawable.eye);
@@ -105,20 +116,21 @@ public class PerfilActivity extends AppCompatActivity {
 
     /**
      * Método que nos permite ir a la Actividad para mostrar al usuario los intereses disponibles
+     *
      * @param v
      */
-    public void gotoIntereses(View v){
-       EditText password = (EditText) this.findViewById(R.id.passwordperfil);
+    public void gotoIntereses(View v) {
+        EditText password = (EditText) this.findViewById(R.id.passwordperfil);
 
-        if( password==null || password.getText()==null || password.getText().length() < 1 ){
-            Toast.makeText(this,R.string.datosobligatoriosperfil,Toast.LENGTH_LONG).show();
+        if (password == null || password.getText() == null || password.getText().length() < 1) {
+            Toast.makeText(this, R.string.datosobligatoriosperfil, Toast.LENGTH_LONG).show();
             return;
         }
-        Toast.makeText(this,getString(R.string.perfilcreado),Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.perfilcreado), Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this,ListadoInteresesActivity.class);
+        Intent intent = new Intent(this, ListadoInteresesActivity.class);
         View view = this.getCurrentFocus();
-        if(view!=null) {
+        if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
@@ -128,8 +140,7 @@ public class PerfilActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(1000);
-                }
-                catch(Exception e){
+                } catch (Exception e) {
 
                 }
                 finish();

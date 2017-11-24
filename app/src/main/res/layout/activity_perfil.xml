@@ -183,7 +183,6 @@
                 android:textSize="12dp" />
 
 
-
             <TextView
                 android:id="@+id/cabecerapersonal"
                 android:layout_width="match_parent"
@@ -225,7 +224,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -241,7 +240,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -253,12 +252,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"
+                    android:ems="10"
                     android:hint="@string/hintcodigopostal"
                     android:inputType="textPostalAddress"
                     android:maxLines="1"
-                    android:ems="10"
                     android:singleLine="true"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -275,7 +274,7 @@
                     android:lines="5"
                     android:maxLines="5"
                     android:singleLine="false"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
