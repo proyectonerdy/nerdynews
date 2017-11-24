@@ -69,10 +69,11 @@
     <string name="grabarperfil">Guardar perfil</string>
     <string name="fechanacimiento">Fecha de nacimiento</string>
     <string name="titperfilpersonal">Datos Personales (Opcionalmente puedes contarnos más cosas sobre ti)</string>
-    <string name="hintnombre">Nombre y Apellidos (opcional)</string>
-    <string name="hintedad">Edad (opcional)</string>
-    <string name="hintciudad">Ciudad (opcional)</string>
-    <string name="hintcodigopostal">C.P. (opcional)</string>
-    <string name="hintmasdatos">Cuentanos algo más sobre ti. (opcional)</string>
-
+    <string name="hintnombre">Nombre y Apellidos </string>
+    <string name="hintedad">Edad </string>
+    <string name="hintciudad">Ciudad </string>
+    <string name="hintcodigopostal">C.P. </string>
+    <string name="hintmasdatos">Cuentanos algo más sobre ti</string>
+    <string name="datosobligatoriosperfil">Debe introducir un contraseña. </string>
+    <string name="perfilcreado">Perfil guardado </string>
 </resources>

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,8 +39,8 @@ public class PerfilActivity extends AppCompatActivity {
         String vpassword = extras.getString("password");
         if (vregistro.equals("N"))
         {
-            TextView titbienvenida = (TextView) findViewById(R.id.cabecerabienvenida);
-            titbienvenida.setText("");
+            LinearLayout linea = (LinearLayout) findViewById(R.id.lcabecerabienvenida);
+            linea.removeAllViews();
         }
         else {
             TextView titulo = (TextView) findViewById(R.id.cabeceraperfil);
@@ -75,10 +76,6 @@ public class PerfilActivity extends AppCompatActivity {
      */
     public void resetField(View v){
 
-       /* if(v.getId() == R.id.crossemailperfil){
-            AutoCompleteTextView ac = (AutoCompleteTextView) this.findViewById(R.id.emailperfil);
-            ac.setText("");
-        }*/
         if(v.getId() == R.id.crosspasswordregistro){
             EditText e = (EditText) this.findViewById(R.id.passwordregistro);
             e.setText("");
@@ -111,13 +108,13 @@ public class PerfilActivity extends AppCompatActivity {
      * @param v
      */
     public void gotoIntereses(View v){
-       /* AutoCompleteTextView email = (AutoCompleteTextView) this.findViewById(R.id.emailperfil);
-        EditText password = (EditText) this.findViewById(R.id.passwordperfil);
+       EditText password = (EditText) this.findViewById(R.id.passwordperfil);
 
         if( password==null || password.getText()==null || password.getText().length() < 1 ){
-            Toast.makeText(this,R.string.datosobligatoriosregistro,Toast.LENGTH_LONG).show();
+            Toast.makeText(this,R.string.datosobligatoriosperfil,Toast.LENGTH_LONG).show();
             return;
         }
+        Toast.makeText(this,getString(R.string.perfilcreado),Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(this,ListadoInteresesActivity.class);
         View view = this.getCurrentFocus();
@@ -138,7 +135,7 @@ public class PerfilActivity extends AppCompatActivity {
                 finish();
             }
         });
-        t.start();*/
+        t.start();
     }
 
 }

@@ -54,6 +54,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lcabecerabienvenida"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -181,6 +182,8 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12dp" />
 
+
+
             <TextView
                 android:id="@+id/cabecerapersonal"
                 android:layout_width="match_parent"
@@ -192,71 +195,91 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="15dp" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/nombreperfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
-                android:hint="@string/hintnombre"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/nombreperfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/hintnombre"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15dp" />
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/edad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
-                android:hint="@string/hintedad"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/edad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/hintedad"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15dp"/>
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/nombreciudad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
-                android:hint="@string/hintciudad"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/nombreciudad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/hintciudad"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15dp"/>
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <AutoCompleteTextView
-                android:id="@+id/nombrecp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
-                android:hint="@string/hintcodigopostal"
-                android:inputType="text"
-                android:maxLines="1"
-                android:singleLine="true" />
+
+                <AutoCompleteTextView
+                    android:id="@+id/nombrecp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/hintcodigopostal"
+                    android:inputType="textPostalAddress"
+                    android:maxLines="1"
+                    android:ems="10"
+                    android:singleLine="true"
+                    android:textSize="15dp"/>
             </android.support.design.widget.TextInputLayout>
-            <EditText
-                android:id="@+id/masdatos"
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawablePadding="10dp"
-                android:hint="@string/hintmasdatos"
-                android:inputType="text"
-                android:lines="5"
-                android:maxLines="5"
-                android:singleLine="false" />
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/masdatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/hintmasdatos"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:maxLines="5"
+                    android:singleLine="false"
+                    android:textSize="15dp"/>
+            </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/perfil_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
