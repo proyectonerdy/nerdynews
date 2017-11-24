@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.proyecto.nerdynews.Perfil.PerfilActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
 
@@ -91,7 +92,14 @@ public class RegistroActivity extends AppCompatActivity {
 
         Toast.makeText(this,String.format(getString(R.string.cuentacreada),email.getText()),Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this,ListadoInteresesActivity.class);
+       // Redireccionamos a la actividad de pefil
+        // Intent intent = new Intent(this,ListadoInteresesActivity.class);
+        Intent intent = new Intent(this, PerfilActivity.class);
+        intent.putExtra("registro", "S");
+        intent.putExtra("email",email.getText().toString());
+        intent.putExtra("password",password.getText().toString());
+
+
         View view = this.getCurrentFocus();
         if(view!=null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

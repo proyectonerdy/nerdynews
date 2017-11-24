@@ -11,6 +11,11 @@ import android.widget.TextView;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.models.Favorito;
 
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Created by Ana 11/11/2017.
@@ -18,7 +23,7 @@ import org.proyecto.nerdynews.models.Favorito;
 
 public class ListadoFavoritosRecyclerAdapter extends RecyclerView.Adapter<ListadoFavoritosRecyclerAdapter.ListadoFavoritosViewHolder>{
 
-    private final Favorito[] listadoFavoritos;
+    private  Favorito[] listadoFavoritos;
     private Context mContext;
 
     public ListadoFavoritosRecyclerAdapter(Favorito[] listadoIntereses, Context ctx) {

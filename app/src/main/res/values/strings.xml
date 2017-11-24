@@ -56,4 +56,24 @@
     <string name="intereses">Intereses (3)</string>
     <string name="gpr_1985">GPR1985</string>
     <string name="button_undo">Deshacer</string>
+
+    <!-- Perfil -->
+    <string name="titperfil">Perfil de:</string>
+    <string name="titperfilcabecerabienvenida">Bienvenido a la comunidad NerdyNews. Gracias por darte de alta con nosotros. A continuación, puedes configurar tu cuenta.</string>
+    <string name="hintalias">Alias (opcional)</string>
+    <string name="hintpasswordperfil">Cambiar contraseña (opcional)</string>
+    <string name="hintotros">Hablanos de ti (opcional)</string>
+    <string name="datosperfil"> Introduce tu nombre y añade una foto de perfil (opcional).</string>
+    <string name="recibirnotificaciones">Activar notificaciones</string>
+    <string name="compartiremail">Compartir email con amigos</string>
+    <string name="grabarperfil">Guardar perfil</string>
+    <string name="fechanacimiento">Fecha de nacimiento</string>
+    <string name="titperfilpersonal">Datos Personales (Opcionalmente puedes contarnos más cosas sobre ti)</string>
+    <string name="hintnombre">Nombre y Apellidos </string>
+    <string name="hintedad">Edad </string>
+    <string name="hintciudad">Ciudad </string>
+    <string name="hintcodigopostal">C.P. </string>
+    <string name="hintmasdatos">Cuentanos algo más sobre ti</string>
+    <string name="datosobligatoriosperfil">Debe introducir un contraseña. </string>
+    <string name="perfilcreado">Perfil guardado </string>
 </resources>

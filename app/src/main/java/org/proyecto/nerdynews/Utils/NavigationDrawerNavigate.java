@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.content.MimeTypeFilter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
 import org.proyecto.nerdynews.intereses.ListadoFavoritosActivity;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
+import org.proyecto.nerdynews.Perfil.PerfilActivity;
 
 /**
  * Created by jmcastellano on 13/11/2017.
@@ -47,7 +49,11 @@ public class NavigationDrawerNavigate {
             case R.id.nav_perfil:
                 //startActivity(new Intent(this, PerfilActivity.class));
                 drawer.closeDrawer(GravityCompat.START);
-                Toast.makeText(actividad,R.string.faltaimplementar,Toast.LENGTH_LONG).show();
+                if(!actividad.getClass().getSimpleName().equals(ListadoFavoritosActivity.class.getSimpleName())) {
+                    Intent intent = new Intent(actividad, PerfilActivity.class);
+                    intent.putExtra("registro", "N");
+                    actividad.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(actividad).toBundle());
+                }
                 break;
             case R.id.nav_cerrar_sesion:
                 SharedPreferences pref = actividad.getSharedPreferences("nerdy", Context.MODE_PRIVATE);
