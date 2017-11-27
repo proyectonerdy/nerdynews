@@ -1,0 +1,48 @@
+[
+  {
+    "nombre":"Ana",
+    "apellido":"Cespedes",
+    "edad":21,
+    "foto":"https://coo3.tuvotacion.com/imagenes_unicas/quien-es-la-mas-bonita-de-ellas-2-991605.jpg",
+    "sexo":"femenino",
+    "intereses":"DC Comics,Nintendo",
+    "nro_intereses":"2"
+  },
+  {
+    "nombre":"Jose Manuel",
+    "apellido":"Castellano",
+    "edad":40,
+    "foto":"http://f.rpp-noticias.io/2014/11/25/1072219.jpg",
+    "sexo":"masculino"
+  ,
+    "intereses":"Nintendo,Star wars",
+    "nro_intereses":"2"
+  },
+  {
+    "nombre":"Eloy",
+    "apellido":"Llacer",
+    "edad":39,
+    "foto":"http://fondosparacelulares.net/wp-content/uploads/2014/11/fondo-whatsapp-de-enrique-iglesia.jpg",
+    "sexo":"masculino",
+    "intereses":"Marvel",
+    "nro_intereses":"1"
+  },
+  {
+    "nombre":"Julio",
+    "apellido":"Albelda",
+    "edad":38,
+    "foto":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOaTSooyF1-njKGOMmrwtQje1aUQxb-mhIlfEBFaDZolX7jtNCJg",
+    "sexo":"masculino",
+    "intereses":"star wars",
+    "nro_intereses":"1"
+  },
+  {
+    "nombre":"Mario",
+    "apellido":"Delgado",
+    "edad":33,
+    "foto":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ctith_bOCDeXkoWxo5rp82cMByEsQv4IwJTcqkpoUYbn_DAIRw",
+    "sexo":"masculino",
+    "intereses":"Nintendo,Marvel,Game of thrones,The Walking Dead,PS4",
+    "nro_intereses":"5"
+  }
+]

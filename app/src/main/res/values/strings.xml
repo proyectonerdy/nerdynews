@@ -76,4 +76,8 @@
     <string name="hintmasdatos">Cuentanos algo más sobre ti</string>
     <string name="datosobligatoriosperfil">Debe introducir un contraseña. </string>
     <string name="perfilcreado">Perfil guardado </string>
+
+    <!-- Amigos -->
+    <string name="amigos">Amigos</string>
+    <string name="agregar_amigo">Agregado a mis amigos(forever alone)</string>
 </resources>

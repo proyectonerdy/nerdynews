@@ -11,7 +11,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme.NoActionBar"
         android:supportsRtl="true">
 
@@ -69,8 +68,9 @@
                 <data android:pathPrefix="/evento" />
             </intent-filter>
         </activity>
-
         <activity android:name=".PerfilAmigoActivity" android:label="@string/gpr_1985"></activity>
+        <activity android:name=".amigos.BusquedaAmigosActivity" />
+        <activity android:name=".amigos.ListadoAmigosActivity" />
     </application>
 
 </manifest>

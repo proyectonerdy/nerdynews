@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import org.proyecto.nerdynews.Login.LoginActivity;
 import org.proyecto.nerdynews.R;
+import org.proyecto.nerdynews.amigos.ListadoAmigosActivity;
 import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
 import org.proyecto.nerdynews.intereses.ListadoFavoritosActivity;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
@@ -28,6 +29,12 @@ public class NavigationDrawerNavigate {
         // Handle navigation view item clicks here
         DrawerLayout drawer = (DrawerLayout) actividad.findViewById(R.id.lidrawer_layout);
         switch (item.getItemId()){
+            case R.id.nav_amigos:
+                drawer.closeDrawer(GravityCompat.START);
+                if(!actividad.getClass().getSimpleName().equals(ListadoAmigosActivity.class.getSimpleName())) {
+                    actividad.startActivity(new Intent(actividad, ListadoAmigosActivity.class), ActivityOptions.makeSceneTransitionAnimation(actividad).toBundle());
+                }
+                break;
             case R.id.nav_eventos:
                 drawer.closeDrawer(GravityCompat.START);
                 if(!actividad.getClass().getSimpleName().equals(ListadoEventosActivity.class.getSimpleName())) {
