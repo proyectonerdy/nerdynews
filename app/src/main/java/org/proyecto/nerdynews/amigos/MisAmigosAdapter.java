@@ -57,6 +57,7 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
                 .resize(100,100)
                 .centerCrop()
                 .into(holder.imgAmigo);
+        holder.imgAmigo.setTag(amigo.getFoto());
     }
 
     @Override

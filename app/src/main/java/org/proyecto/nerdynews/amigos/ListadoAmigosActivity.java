@@ -11,6 +11,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,8 +24,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
+import org.proyecto.nerdynews.PerfilAmigoActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
@@ -123,4 +131,19 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
         swipeRefreshLayout.setRefreshing(false);
         recyclerView.setFilterTouchesWhenObscured(true);
     }
+
+    public void gotoAmigo(View v){
+        Intent intent = new Intent(this, PerfilAmigoActivity.class);
+        TextView nombre = (TextView) v.findViewById(R.id.txtNombre);
+        TextView edad = (TextView) v.findViewById(R.id.txtEdad);
+        TextView intereses = (TextView) v.findViewById(R.id.txtIntereses);
+        ImageView drawable = (ImageView) v.findViewById(R.id.ivImagenAmigo);
+        intent.putExtra("NOMBRE",nombre.getText());
+        intent.putExtra("EDAD",edad.getText());
+        intent.putExtra("INTERESES",intereses.getText());
+        intent.putExtra("DIBUJO",(String)drawable.getTag());
+        ActivityOptionsCompat options = ActivityOptionsCompat. makeSceneTransitionAnimation(ListadoAmigosActivity.this, new Pair<View, String>(v.findViewById(R.id.ivImagenAmigo), getString(R.string.transition_name_img_amigo)));
+        ActivityCompat.startActivity(ListadoAmigosActivity.this, intent, options .toBundle());
+    }
+
 }

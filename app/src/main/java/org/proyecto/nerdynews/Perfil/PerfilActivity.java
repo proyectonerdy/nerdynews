@@ -6,8 +6,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
@@ -20,11 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.proyecto.nerdynews.R;
+import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
 
 /* Clase que contiene la pantalla del perfil */
 
-public class PerfilActivity extends AppCompatActivity {
+public class PerfilActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Button b1, b2;
     ImageView iv;
 
@@ -32,6 +38,7 @@ public class PerfilActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_perfil);
         Bundle extras = getIntent().getExtras();
         String vregistro = extras.getString("registro");
@@ -40,6 +47,14 @@ public class PerfilActivity extends AppCompatActivity {
 
         iv = (ImageView) findViewById(R.id.fotoperfil);
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         if (vregistro.equals("N")) {
             LinearLayout linea = (LinearLayout) findViewById(R.id.lcabecerabienvenida);
             linea.removeAllViews();
@@ -47,6 +62,12 @@ public class PerfilActivity extends AppCompatActivity {
             password.setText("1111");
             EditText alias = (EditText) findViewById(R.id.aliasperfil);
             alias.setText("GPR1985");
+            EditText nombre = (EditText) findViewById(R.id.nombreperfil);
+            nombre.setText("José Manuel Castellano Domínguez");
+            EditText edad = (EditText) findViewById(R.id.edad);
+            edad.setText("32");
+            EditText masdatos = (EditText) findViewById(R.id.masdatos);
+            masdatos.setText("Programador muy friki");
             TextView titulo = (TextView) findViewById(R.id.cabeceraperfil);
             titulo.setText(getString(R.string.titperfil) + " " + "GPR1985@gmail.com");
 
@@ -147,6 +168,17 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
         t.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        NavigationDrawerNavigate.OnBackPressed(this);
+    }
+
+    // Metodo cuando se hce click en los items del menú
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        return NavigationDrawerNavigate.Navigate(item,this);
     }
 
 }

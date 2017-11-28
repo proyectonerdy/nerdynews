@@ -9,14 +9,22 @@
     "nro_intereses":"2"
   },
   {
-    "nombre":"Jose Manuel",
-    "apellido":"Castellano",
+    "nombre":"Jesús",
+    "apellido":"Tomás Girones",
     "edad":40,
-    "foto":"http://f.rpp-noticias.io/2014/11/25/1072219.jpg",
-    "sexo":"masculino"
-  ,
-    "intereses":"Nintendo,Star wars",
+    "foto":"https://s3.amazonaws.com/tareasplus_videos_app/aula/imgperfil/FD2327A8-B073-41C5-A2E7-B94093B9084B_0_.jpg",
+    "sexo":"masculino",
+    "intereses":"Android, Apple",
     "nro_intereses":"2"
+  },
+  {
+    "nombre":"Ivan",
+    "apellido":"Javaloyas",
+    "edad":30,
+    "foto":"http://f.rpp-noticias.io/2014/11/25/1072219.jpg",
+    "sexo":"masculino",
+    "intereses":"Android",
+    "nro_intereses":"1"
   },
   {
     "nombre":"Eloy",

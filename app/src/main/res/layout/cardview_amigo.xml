@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:clickable="true"
+    android:onClick="gotoAmigo"
+    android:foreground="@drawable/ripple"
     android:layout_height="wrap_content">
 
     <android.support.constraint.ConstraintLayout
@@ -11,6 +14,7 @@
 
         <ImageView
             android:id="@+id/ivImagenAmigo"
+            android:transitionName ="@string/transition_name_img_amigo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"

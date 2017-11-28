@@ -53,6 +53,62 @@
 
                 </android.support.v7.widget.CardView>
 
+                <!-- Card Nombre y Apellidos -->
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/card_margen"
+                    android:layout_marginLeft="@dimen/card_margen"
+                    android:layout_marginRight="@dimen/card_margen">
+
+                    <LinearLayout
+                        style="@style/Widget.CardContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Etiqueta Intereses -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/nombreyapellidos"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        <TextView
+                            android:id="@+id/nombreyapellidos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+                <!-- Card Nombre y Apellidos -->
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/card_margen"
+                    android:layout_marginLeft="@dimen/card_margen"
+                    android:layout_marginRight="@dimen/card_margen">
+
+                    <LinearLayout
+                        style="@style/Widget.CardContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Etiqueta Intereses -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/edad"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        <TextView
+                            android:id="@+id/edad"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
                 <!-- Card Intereses -->
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -78,6 +134,8 @@
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
+
+
 
             </LinearLayout>
 
@@ -116,6 +174,7 @@
 
                 <ImageView
                     android:id="@+id/image_paralax"
+                    android:transitionName ="@string/transition_name_img_amigo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"

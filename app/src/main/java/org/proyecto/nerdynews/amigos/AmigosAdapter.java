@@ -1,8 +1,11 @@
 package org.proyecto.nerdynews.amigos;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +13,10 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.proyecto.nerdynews.PerfilAmigoActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.models.Amigo;
 
@@ -56,14 +59,8 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ListadoAmi
                 .resize(100,100)
                 .centerCrop()
                 .into(holder.imgAmigo);
+        holder.imgAmigo.setTag(amigo.getFoto());
 
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, R.string.agregar_amigo, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override

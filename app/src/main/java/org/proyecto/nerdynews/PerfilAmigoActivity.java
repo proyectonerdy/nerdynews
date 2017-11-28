@@ -12,9 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
 import org.proyecto.nerdynews.intereses.ListadoFavoritosActivity;
@@ -37,6 +39,30 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_amigo);
+
+        //cogemos los extras
+        Bundle extras = getIntent().getExtras();
+        String nombreyapellidos = extras.getString("NOMBRE");
+        String edad = extras.getString("EDAD");
+        String intereses = extras.getString("INTERESES");
+        String url = extras.getString("DIBUJO");
+
+        ImageView imagen = (ImageView) this.findViewById(R.id.image_paralax);
+
+        if (url != null && !url.isEmpty()) {
+            Picasso.with(this)
+                    .load(url)
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.mipmap.ic_launcher_round)
+                    .into(imagen);
+        }
+
+        TextView nombre = (TextView) this.findViewById(R.id.nombreyapellidos);
+        TextView usuario = (TextView) this.findViewById(R.id.nombreusuario);
+        nombre.setText(nombreyapellidos);
+        usuario.setText(nombreyapellidos);
+        TextView edadview = (TextView) this.findViewById(R.id.edad);
+        edadview.setText(edad);
 
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.litoolbar);
@@ -104,11 +130,12 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     }
 
     public void irAtras(View v){
-        Toast.makeText(this,"Este es ir Atras",Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     public void anadirAmigo(View v){
-        Toast.makeText(this,"Este es el boton anadir Amigo",Toast.LENGTH_SHORT).show();
+        TextView usuario = findViewById(R.id.nombreusuario);
+        Toast.makeText(this,"Ahora sigues a " + usuario.getText(),Toast.LENGTH_SHORT).show();
     }
 
     public void enviarMensaje(View v){

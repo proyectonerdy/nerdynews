@@ -47,6 +47,7 @@
 
     <string name="faltaimplementar">Falta por Implementar</string>
     <string name="transition_name_img">transition:IMG</string>
+    <string name="transition_name_img_amigo">transition:IMGAMIGO</string>
     <string name="btnAsistir">Asistiré</string>
     <string name="anadir_calendario">Añadir</string>
     <string name="compartir">Compartir</string>
@@ -79,5 +80,8 @@
 
     <!-- Amigos -->
     <string name="amigos">Amigos</string>
+    <string name="buscaramigos">Buscar Amigos</string>
     <string name="agregar_amigo">Agregado a mis amigos(forever alone)</string>
+    <string name="nombreyapellidos">Nombre y Apellidos</string>
+    <string name="edad">Edad</string>
 </resources>

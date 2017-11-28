@@ -111,6 +111,5 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
         intent.putExtra("COORDSGPS",(String)lugar.getTag());
         ActivityOptionsCompat options = ActivityOptionsCompat. makeSceneTransitionAnimation(ListadoEventosActivity.this, new Pair<View, String>(v.findViewById(R.id.cvImagenEvento), getString(R.string.transition_name_img)));
         ActivityCompat.startActivity(ListadoEventosActivity.this, intent, options .toBundle());
-
     }
 }
