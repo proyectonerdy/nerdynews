@@ -31,8 +31,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.e(TAG, "¡Mensaje recibido!");
-        Bundle extras = null;
-        displayNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody(),extras);
+        Bundle extras = new Bundle();
+        extras.putString("Notificacion",remoteMessage.getData().get("Notificacion"));
+        extras.putString("url",remoteMessage.getData().get("url"));
+        displayNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody(),extras,getApplicationContext());
     }
 
     // Metodo que recoge la notificación cuando la app esta en segundo plano o cerrada
@@ -44,37 +46,37 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         for (String key : extras.keySet()) {
             Log.e("-----------", "KEY: " + key + "  ::: VALUE: " + extras.get(key));
         }
-        displayNotification(intent.getStringExtra("gcm.notification.title"),intent.getStringExtra("gcm.notification.body"),extras);
+        displayNotification(intent.getStringExtra("gcm.notification.title"),intent.getStringExtra("gcm.notification.body"),extras,getApplicationContext());
         Log.e("Notificacion fcm","________________");
     }
 
     // Método que prepara y muestra la notificación
-    private void displayNotification(String titulo, String body, Bundle extra) {
-        Intent intent = new Intent(this, VisualizarEventoActivity.class);
+    public static void displayNotification(String titulo, String body, Bundle extra, Context ctx) {
+        Intent intent = new Intent(ctx, VisualizarEventoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (extra != null)
             intent.putExtras(extra);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+        PendingIntent pendingIntent = PendingIntent.getActivity(ctx, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(ctx)
                 .setSmallIcon(R.drawable.ic_notificacion)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_round))
-                .setColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary))
+                .setLargeIcon(BitmapFactory.decodeResource(ctx.getResources(), R.mipmap.ic_launcher_round))
+                .setColor(ContextCompat.getColor(ctx,R.color.colorPrimary))
                 .setContentTitle(titulo)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(body)
-                        .setSummaryText(getString(R.string.app_name)))
+                        .setSummaryText(ctx.getString(R.string.app_name)))
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
                 .setSound(defaultSoundUri)
-                .setLights(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary), 1000,500);
+                .setLights(ContextCompat.getColor(ctx,R.color.colorPrimary), 1000,500);
 
         NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
     }
