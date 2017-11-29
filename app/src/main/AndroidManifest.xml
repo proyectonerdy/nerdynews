@@ -21,6 +21,12 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCde_iY3Wk4YUjXhMaJp_3o90EA_ak-Og8" />
+        <meta-data
+            android:name="com.google.android.awareness.API_KEY"
+            android:value="AIzaSyBqG5I5eSr6Zl-9EuA5mcRMbdPFrW5xxKY"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBqG5I5eSr6Zl-9EuA5mcRMbdPFrW5xxKY"/>
 
         <service android:name=".Firebase.MyFirebaseMessagingService">
             <intent-filter>

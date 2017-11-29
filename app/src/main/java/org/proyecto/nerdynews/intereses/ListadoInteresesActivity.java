@@ -1,12 +1,16 @@
 package org.proyecto.nerdynews.intereses;
 
-import android.app.ActivityOptions;
+import android.Manifest;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,35 +18,71 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.awareness.Awareness;
+import com.google.android.gms.awareness.fence.AwarenessFence;
+import com.google.android.gms.awareness.fence.FenceState;
+import com.google.android.gms.awareness.fence.FenceUpdateRequest;
+import com.google.android.gms.awareness.fence.LocationFence;
+import com.google.android.gms.awareness.snapshot.LocationResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.gson.GsonBuilder;
-import com.squareup.picasso.Picasso;
 
-import org.proyecto.nerdynews.Login.LoginActivity;
+import org.proyecto.nerdynews.BuildConfig;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
-import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
 import org.proyecto.nerdynews.models.Interes;
 
+import static org.proyecto.nerdynews.Firebase.MyFirebaseMessagingService.displayNotification;
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
 public class ListadoInteresesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    private static final String TAG = ListadoInteresesActivity.class.getSimpleName();
 
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerListadoInteres;
     private ListadoInteresesRecyclerAdapter adapterListadoInteres;
     private Interes[] listaInteres;
+    private static final int MY_PERMISSION_LOCATION = 1;
+    // Declare variables for pending intent and fence receiver.
+    private final String FENCE_RECEIVER_ACTION =
+            BuildConfig.APPLICATION_ID + "FENCE_RECEIVER_ACTION";
+    private GoogleApiClient mGoogleApiClient;
+    private PendingIntent mPendingIntent;
+    private LocationFenceReceiver mLocationFenceReceiver;
+
+    private static final String IN_LOCATION_FENCE_KEY = "IN_LOCATION_FENCE_KEY";
+    private static final String EXITING_LOCATION_FENCE_KEY = "EXITING_LOCATION_FENCE_KEY";
+    private static final String ENTERING_LOCATION_FENCE_KEY = "ENTERING_LOCATION_FENCE_KEY";
+
+    public static final int STATUS_IN = 0;
+    public static final int STATUS_OUT = 1;
+    public static final int STATUS_ENTERING = 2;
+    public static final int STATUS_EXITING = 3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_intereses);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Awareness.API)
+                .build();
+        mGoogleApiClient.connect();
+
+        mLocationFenceReceiver = new LocationFenceReceiver();
+        Intent intent = new Intent(FENCE_RECEIVER_ACTION);
+        mPendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
 
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.litoolbar);
@@ -73,6 +113,13 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
 
         // Cargamos la lista
         cargarDatosLista();
+
+
+        // Solo consulta una vez la posicion
+        getLocationSnapshot();
+
+        // Deberia regirstar un Fences para recibir actualizaciones
+        registerFences();
     }
 
     private void cargarDatosLista(){
@@ -118,6 +165,153 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         return NavigationDrawerNavigate.Navigate(item,this);
+    }
+
+    private void getLocationSnapshot() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.e(TAG,"getLocationSnapshot");
+          Awareness.SnapshotApi.getLocation(mGoogleApiClient)
+                    .setResultCallback(new ResultCallback<LocationResult>() {
+                        @Override
+                        public void onResult(@NonNull LocationResult locationResult) {
+                            if (!locationResult.getStatus().isSuccess()) {
+                                Log.e(TAG, "Could not get location.");
+                                return;
+                            }
+                            Location location = locationResult.getLocation();
+                            Log.e(TAG, "Lat: " + location.getLatitude() + ", Lng: " + location.getLongitude());
+                            Bundle extras = new Bundle();
+                            extras.putString("Notificacion","true");
+                            extras.putString("url","http://www.nerdynews.org/evento/Lanzamiento_Assassins_Creed_Origins");
+                            displayNotification("Evento cercano","Pulsa aquí para ver la información del evento",extras,getApplicationContext());
+
+                        }
+                    });
+             /*Awareness.getSnapshotClient(this).getLocation()
+                    .addOnSuccessListener(new OnSuccessListener<LocationResponse>() {
+                        @Override
+                        public void onSuccess(LocationResponse locationResponse) {
+                            Location location = locationResponse.getLocation();
+                            Log.e(TAG, "Lat: " + location.getLatitude() + ", Lng: " + location.getLongitude());
+
+                            Log.e("LOCATION", "____OK");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e(TAG, "-----Could not get weather: " + e);
+                        }
+                    });*/
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSION_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e(TAG,"PERMISION OK ----");
+                    registerFences();
+                    //getLocationSnapshot();
+                } else {
+                    Log.e(TAG, "Location permission denied.");
+                }
+            }
+        }
+    }
+    private void registerFences() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSION_LOCATION);
+        } else {
+            AwarenessFence inLocationFence = LocationFence.in(50.830951, -0.146978, 200, 1);
+
+            Awareness.FenceApi.updateFences(
+                    mGoogleApiClient,
+                    new FenceUpdateRequest.Builder()
+                            .addFence(IN_LOCATION_FENCE_KEY, inLocationFence, mPendingIntent)
+                            .build())
+                    .setResultCallback(new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(@NonNull Status status) {
+                            if (status.isSuccess()) {
+                                Log.e(TAG,"Fence Registered");
+                            } else {
+                                Log.e(TAG, "Fence Not Registered");
+                            }
+                        }
+                    });
+        }
+    }
+    private void setHeadphoneState(int status) {
+        switch (status) {
+            case STATUS_IN:
+                Log.e(TAG, "satus in");
+                break;
+            case STATUS_OUT:
+                Log.e(TAG, "satus out");
+                break;
+            case STATUS_ENTERING:
+                Log.e(TAG, "satus entering");
+                break;
+            case STATUS_EXITING:
+                Log.e(TAG, "satus exiting");
+                break;
+        }
+    }
+    class LocationFenceReceiver extends BroadcastReceiver {
+
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.e(TAG,"ON RECIVE---");
+            FenceState fenceState = FenceState.extract(intent);
+
+            if (TextUtils.equals(fenceState.getFenceKey(), IN_LOCATION_FENCE_KEY)) {
+                switch (fenceState.getCurrentState()) {
+                    case FenceState.TRUE:
+                        setHeadphoneState(STATUS_IN);
+                        break;
+                    case FenceState.FALSE:
+                        setHeadphoneState(STATUS_OUT);
+                        break;
+                    case FenceState.UNKNOWN:
+                        Log.e(TAG,"Oops, your headphone status is unknown!");
+                        break;
+                }
+            } else if (TextUtils.equals(fenceState.getFenceKey(), EXITING_LOCATION_FENCE_KEY)) {
+                switch (fenceState.getCurrentState()) {
+                    case FenceState.TRUE:
+                        setHeadphoneState(STATUS_EXITING);
+                        break;
+                    case FenceState.FALSE:
+
+                        break;
+                    case FenceState.UNKNOWN:
+                        Log.e(TAG, "Oops, your headphone status is unknown!");
+                        break;
+                }
+            } else if (TextUtils.equals(fenceState.getFenceKey(), ENTERING_LOCATION_FENCE_KEY)) {
+                switch (fenceState.getCurrentState()) {
+                    case FenceState.TRUE:
+                        setHeadphoneState(STATUS_ENTERING);
+                        break;
+                    case FenceState.FALSE:
+
+                        break;
+                    case FenceState.UNKNOWN:
+                        Log.e(TAG, "Oops, your headphone status is unknown!");
+                        break;
+                }
+            }
+        }
     }
 }
 
