@@ -5,8 +5,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -30,9 +30,9 @@ import com.google.android.gms.awareness.fence.AwarenessFence;
 import com.google.android.gms.awareness.fence.FenceState;
 import com.google.android.gms.awareness.fence.FenceUpdateRequest;
 import com.google.android.gms.awareness.fence.LocationFence;
-import com.google.android.gms.awareness.snapshot.LocationResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.ResultCallbacks;
 import com.google.android.gms.common.api.Status;
 import com.google.gson.GsonBuilder;
 
@@ -54,8 +54,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
     private Interes[] listaInteres;
     private static final int MY_PERMISSION_LOCATION = 1;
     // Declare variables for pending intent and fence receiver.
-    private final String FENCE_RECEIVER_ACTION =
-            BuildConfig.APPLICATION_ID + "FENCE_RECEIVER_ACTION";
+
     private GoogleApiClient mGoogleApiClient;
     private PendingIntent mPendingIntent;
     private LocationFenceReceiver mLocationFenceReceiver;
@@ -75,13 +74,14 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_intereses);
 
+        // Inicializamos el api awareness
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Awareness.API)
                 .build();
         mGoogleApiClient.connect();
 
         mLocationFenceReceiver = new LocationFenceReceiver();
-        Intent intent = new Intent(FENCE_RECEIVER_ACTION);
+        Intent intent = new Intent(LocationFenceReceiver.FENCE_RECEIVER_ACTION);
         mPendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
 
         // Menu laterar
@@ -113,13 +113,6 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
 
         // Cargamos la lista
         cargarDatosLista();
-
-
-        // Solo consulta una vez la posicion
-        getLocationSnapshot();
-
-        // Deberia regirstar un Fences para recibir actualizaciones
-        registerFences();
     }
 
     private void cargarDatosLista(){
@@ -167,46 +160,6 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         return NavigationDrawerNavigate.Navigate(item,this);
     }
 
-    private void getLocationSnapshot() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            Log.e(TAG,"getLocationSnapshot");
-          Awareness.SnapshotApi.getLocation(mGoogleApiClient)
-                    .setResultCallback(new ResultCallback<LocationResult>() {
-                        @Override
-                        public void onResult(@NonNull LocationResult locationResult) {
-                            if (!locationResult.getStatus().isSuccess()) {
-                                Log.e(TAG, "Could not get location.");
-                                return;
-                            }
-                            Location location = locationResult.getLocation();
-                            Log.e(TAG, "Lat: " + location.getLatitude() + ", Lng: " + location.getLongitude());
-                            Bundle extras = new Bundle();
-                            extras.putString("Notificacion","true");
-                            extras.putString("url","http://www.nerdynews.org/evento/Lanzamiento_Assassins_Creed_Origins");
-                            displayNotification("Evento cercano","Pulsa aquí para ver la información del evento",extras,getApplicationContext());
-
-                        }
-                    });
-             /*Awareness.getSnapshotClient(this).getLocation()
-                    .addOnSuccessListener(new OnSuccessListener<LocationResponse>() {
-                        @Override
-                        public void onSuccess(LocationResponse locationResponse) {
-                            Location location = locationResponse.getLocation();
-                            Log.e(TAG, "Lat: " + location.getLatitude() + ", Lng: " + location.getLongitude());
-
-                            Log.e("LOCATION", "____OK");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.e(TAG, "-----Could not get weather: " + e);
-                        }
-                    });*/
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
                                            @NonNull int[] grantResults) {
@@ -224,6 +177,26 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
             }
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        registerFences();
+        registerReceiver(mLocationFenceReceiver, new IntentFilter(LocationFenceReceiver.FENCE_RECEIVER_ACTION));
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterFences();
+        unregisterReceiver(mLocationFenceReceiver);
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
     private void registerFences() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -231,7 +204,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSION_LOCATION);
         } else {
-            AwarenessFence inLocationFence = LocationFence.in(50.830951, -0.146978, 200, 1);
+            AwarenessFence inLocationFence = LocationFence.in(40.4642823, -3.6179828, 200, 1);
 
             Awareness.FenceApi.updateFences(
                     mGoogleApiClient,
@@ -250,10 +223,33 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
                     });
         }
     }
+    private void unregisterFences() {
+        Awareness.FenceApi.updateFences(
+                mGoogleApiClient,
+                new FenceUpdateRequest.Builder()
+                        .removeFence(IN_LOCATION_FENCE_KEY)
+                        .build()).setResultCallback(new ResultCallbacks<Status>() {
+            @Override
+            public void onSuccess(@NonNull Status status) {
+                Log.e(TAG,"Fence Removed");
+            }
+
+            @Override
+            public void onFailure(@NonNull Status status) {
+                Log.e(TAG, "Fence Not Removed");
+            }
+        });
+    }
+
     private void setHeadphoneState(int status) {
         switch (status) {
             case STATUS_IN:
                 Log.e(TAG, "satus in");
+                Bundle extras = new Bundle();
+                extras.putString("Notificacion","true");
+                extras.putString("url","http://www.nerdynews.org/evento/Heroes_Comic_Con_Madrid_2017");
+                displayNotification("Evento cercano","Pulsa aquí para ver la información del evento",extras,getApplicationContext());
+
                 break;
             case STATUS_OUT:
                 Log.e(TAG, "satus out");
@@ -267,7 +263,8 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         }
     }
     class LocationFenceReceiver extends BroadcastReceiver {
-
+        private static final String FENCE_RECEIVER_ACTION =
+                BuildConfig.APPLICATION_ID + "FENCE_RECEIVER_ACTION";
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -275,6 +272,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
             FenceState fenceState = FenceState.extract(intent);
 
             if (TextUtils.equals(fenceState.getFenceKey(), IN_LOCATION_FENCE_KEY)) {
+                Log.e(TAG,"IN LOCATION FENCE KEY");
                 switch (fenceState.getCurrentState()) {
                     case FenceState.TRUE:
                         setHeadphoneState(STATUS_IN);
