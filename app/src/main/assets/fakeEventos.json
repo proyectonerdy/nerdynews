@@ -94,5 +94,13 @@
     "lugar":"En la web",
     "coordGPS":"",
     "imageUrl":"http://i0.wp.com/unaracnidounacamiseta.com/wp-content/uploads/2012/07/lorem.jpg"
+  },
+  {
+    "titulo": "Conferencia DC COMICS Barcelona",
+    "resumen": "Ven al evento de DC Comics que se celebra en Barcelona.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu nisi magna. Curabitur sit amet lacus eget magna tempor tristique id nec turpis. Nam in rhoncus elit, in sagittis nisi. Nulla dictum tincidunt nunc id eleifend. Morbi ut nulla feugiat, malesuada velit et, hendrerit dolor. Curabitur lorem ipsum, lacinia ac nulla finibus, pellentesque posuere purus. Suspendisse et justo non nisi consectetur congue ut in velit. Morbi a euismod massa. Sed aliquet ligula est, ut tristique dui ullamcorper id. Cras iaculis diam arcu, eget efficitur mi fringilla et.Nam arcu ipsum, pulvinar ac turpis sed, posuere hendrerit arcu. Aenean orci leo, pellentesque eget metus quis, mollis venenatis nisi. Etiam tristique interdum quam, in vulputate elit pellentesque in. Morbi maximus tortor at turpis rhoncus gravida. Duis et enim ante. Sed velit enim, sodales a luctus nec, mollis dapibus metus. Ut non nisl sed eros rutrum posuere vel quis nibh. Suspendisse fermentum vulputate mi et consequat.",
+    "fecha": "06/12/2017",
+    "lugar":"Estación de Tren",
+    "coordGPS":"41.3946973,2.1826039000000037",
+    "imageUrl":"http://www.heroescomicconmadrid.com/app/uploads/COMIC-560x261.png"
   }
 ]
