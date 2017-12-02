@@ -84,6 +84,7 @@
         <activity android:name=".PerfilAmigoActivity" android:label="@string/gpr_1985"></activity>
         <activity android:name=".amigos.BusquedaAmigosActivity" />
         <activity android:name=".amigos.ListadoAmigosActivity" />
+        <activity android:name=".eventos.BusquedaEventosActivity" />
     </application>
 
 </manifest>

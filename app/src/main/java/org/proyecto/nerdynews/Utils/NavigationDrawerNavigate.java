@@ -17,6 +17,7 @@ import android.widget.Toast;
 import org.proyecto.nerdynews.Login.LoginActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.amigos.ListadoAmigosActivity;
+import org.proyecto.nerdynews.eventos.BusquedaEventosActivity;
 import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
 import org.proyecto.nerdynews.intereses.ListadoFavoritosActivity;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
@@ -57,6 +58,12 @@ public class NavigationDrawerNavigate {
                 drawer.closeDrawer(GravityCompat.START);
                 if(!actividad.getClass().getSimpleName().equals(ListadoFavoritosActivity.class.getSimpleName())) {
                     actividad.startActivity(new Intent(actividad, ListadoFavoritosActivity.class), ActivityOptions.makeSceneTransitionAnimation(actividad).toBundle());
+                }
+                break;
+            case R.id.nav_buscareventos:
+                drawer.closeDrawer(GravityCompat.START);
+                if(!actividad.getClass().getSimpleName().equals(BusquedaEventosActivity.class.getSimpleName())) {
+                    actividad.startActivity(new Intent(actividad, BusquedaEventosActivity.class), ActivityOptions.makeSceneTransitionAnimation(actividad).toBundle());
                 }
                 break;
             case R.id.nav_micalendario:
