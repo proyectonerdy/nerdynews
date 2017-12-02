@@ -26,6 +26,10 @@
                     android:icon="@drawable/ic_person_black_24dp"
                     android:title="@string/perfil_usuario"/>
                 <item
+                    android:id="@+id/nav_micalendario"
+                    android:icon="@drawable/ic_calendar_check_black_24dp"
+                    android:title="@string/micalendario" />
+                <item
                     android:id="@+id/nav_cerrar_sesion"
                     android:icon="@drawable/ic_power_settings_new_black_24dp"
                     android:title="@string/cerrar_sesion"/>
