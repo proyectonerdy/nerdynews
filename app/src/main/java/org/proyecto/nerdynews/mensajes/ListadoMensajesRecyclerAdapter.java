@@ -15,7 +15,7 @@ import org.proyecto.nerdynews.models.Amigo;
 import org.proyecto.nerdynews.models.HistorialMensaje;
 
 /**
- * Created by eloy on 2/12/17.
+ * Created by eloy on 2/12/17. Modify Ana 03/12/2017
  */
 
 public class ListadoMensajesRecyclerAdapter  extends RecyclerView.Adapter<ListadoMensajesRecyclerAdapter.ListadoMensajesViewHolder>{
@@ -50,6 +50,8 @@ public class ListadoMensajesRecyclerAdapter  extends RecyclerView.Adapter<Listad
                         .error(R.mipmap.ic_launcher_round)
                         .into(holder.imgAmigo);
                 holder.imgAmigo.setTag(amigo.getFoto());
+                holder.txtFecha.setText(mensaje.getHistorial().get(mensaje.getHistorial().size()-1).getFecha());
+
             }
        }
     }
@@ -60,7 +62,7 @@ public class ListadoMensajesRecyclerAdapter  extends RecyclerView.Adapter<Listad
     }
 
     public static class ListadoMensajesViewHolder extends RecyclerView.ViewHolder {
-        private final TextView txtTitulo, txtResumen;
+        private final TextView txtTitulo, txtResumen, txtFecha;
         private final RoundedImageView imgAmigo;
 
         public ListadoMensajesViewHolder(View itemView) {
@@ -68,7 +70,10 @@ public class ListadoMensajesRecyclerAdapter  extends RecyclerView.Adapter<Listad
             txtTitulo = (TextView) itemView.findViewById(R.id.cvTituloMensaje);
             txtResumen = (TextView) itemView.findViewById(R.id.cvResumenMensaje);
             imgAmigo = (RoundedImageView) itemView.findViewById(R.id.cvImagenMensaje);
+            txtFecha = (TextView) itemView.findViewById(R.id.cvFechaMensaje);
+
 
         }
     }
+
 }

@@ -9,11 +9,13 @@ public class Mensaje{
     private int id;
     private int autorId;
     private String mensaje;
+    private String fecha;
 
-    public Mensaje(int id, int autorId, String mensaje) {
+    public Mensaje(int id, int autorId, String mensaje, String fecha) {
         this.id = id;
         this.autorId = autorId;
         this.mensaje = mensaje;
+        this.fecha = fecha;
     }
 
     public int getId() {
@@ -38,5 +40,13 @@ public class Mensaje{
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }

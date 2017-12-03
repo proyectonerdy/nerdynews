@@ -6,7 +6,8 @@
       {
         "id": 1,
         "autorId": 4,
-        "mensaje": "Hola Mundo"
+        "mensaje": "Hola Mundo",
+        "fecha":"01/12/2017"
       }
     ]
   },
@@ -17,12 +18,14 @@
       {
         "id": 1,
         "autorId": 3,
-        "mensaje": "El miércoles hay reunión"
+        "mensaje": "El miércoles hay reunión",
+        "fecha":"30/09/2017"
       },
       {
         "id": 2,
         "autorId": 0,
-        "mensaje": "Vale, aviso al grupo"
+        "mensaje": "Vale, aviso al grupo",
+        "fecha":"13/09/2017"
       }
     ]
   },
@@ -33,7 +36,20 @@
       {
         "id": 1,
         "autorId": 1,
-        "mensaje": "¿Cuando nos vemos?"
+        "mensaje": "¿Cuando nos vemos?",
+        "fecha":"30/09/2017"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "amigoId": 1,
+    "historial": [
+      {
+        "id": 1,
+        "autorId": 1,
+        "mensaje": "La reunión es a las 15. Todos han confirmado la asistencia. ¿Irás?",
+        "fecha":"15/09/2017"
       }
     ]
   }

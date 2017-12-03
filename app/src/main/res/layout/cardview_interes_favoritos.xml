@@ -5,7 +5,6 @@
     android:id="@+id/cardInteres"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
     android:clickable="true"
     android:foreground="@drawable/ripple"
     android:paddingBottom="0dp"
