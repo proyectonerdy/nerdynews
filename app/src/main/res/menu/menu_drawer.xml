@@ -26,6 +26,10 @@
                     android:icon="@drawable/ic_person_black_24dp"
                     android:title="@string/perfil_usuario"/>
                 <item
+                    android:id="@+id/nav_mensajes"
+                    android:icon="@drawable/ic_message_black_24dp"
+                    android:title="@string/nav_mensajes"/>
+                <item
                     android:id="@+id/nav_micalendario"
                     android:icon="@drawable/ic_calendar_check_black_24dp"
                     android:title="@string/micalendario" />

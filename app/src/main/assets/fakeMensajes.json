@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "amigoId": 4,
+    "historial": [
+      {
+        "id": 1,
+        "autorId": 4,
+        "mensaje": "Hola Mundo"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "amigoId": 3,
+    "historial": [
+      {
+        "id": 1,
+        "autorId": 3,
+        "mensaje": "El miércoles hay reunión"
+      },
+      {
+        "id": 2,
+        "autorId": 0,
+        "mensaje": "Vale, aviso al grupo"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "amigoId": 1,
+    "historial": [
+      {
+        "id": 1,
+        "autorId": 1,
+        "mensaje": "¿Cuando nos vemos?"
+      }
+    ]
+  }
+]

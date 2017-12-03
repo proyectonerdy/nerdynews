@@ -8,13 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.CalendarContract;
-import android.support.v4.content.MimeTypeFilter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import org.proyecto.nerdynews.Login.LoginActivity;
+import org.proyecto.nerdynews.mensajes.*;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.amigos.ListadoAmigosActivity;
 import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
@@ -78,6 +77,13 @@ public class NavigationDrawerNavigate {
                     intent = new Intent(actividad, PerfilActivity.class);
                     intent.putExtra("registro", "N");
                     actividad.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(actividad).toBundle());
+                }
+                break;
+            case R.id.nav_mensajes:
+                //startActivity(new Intent(this, PerfilActivity.class));
+                drawer.closeDrawer(GravityCompat.START);
+                if(!actividad.getClass().getSimpleName().equals(ListadoMensajesActivity.class.getSimpleName())) {
+                    actividad.startActivity(new Intent(actividad, ListadoMensajesActivity.class), ActivityOptions.makeSceneTransitionAnimation(actividad).toBundle());
                 }
                 break;
             case R.id.nav_cerrar_sesion:

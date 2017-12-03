@@ -34,8 +34,7 @@ public class ListadoInteresesRecyclerAdapter extends RecyclerView.Adapter<Listad
 
     @Override
     public ListadoInteresesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.cardview_interes, parent, false);
+        ViewGroup view = (ViewGroup) LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_interes, parent, false);
         return new ListadoInteresesViewHolder(view);
     }
 
