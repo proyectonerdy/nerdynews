@@ -61,6 +61,7 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ListadoAmi
                 .into(holder.imgAmigo);
         holder.imgAmigo.setTag(amigo.getFoto());
 
+
     }
 
     @Override

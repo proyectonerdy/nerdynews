@@ -13,6 +13,7 @@ public class Amigo {
     public String sexo;
     public String intereses;
     public String nro_intereses;
+    public int id;
 
 
     public String getNro_intereses() {
@@ -23,12 +24,15 @@ public class Amigo {
         this.nro_intereses = nro_intereses;
     }
 
-    public Amigo(String nombre, String apellido, int edad, String foto, String sexo) {
+    public Amigo(String nombre, String apellido, int edad, String foto, String sexo, int id) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.foto = foto;
         this.sexo = sexo;
+        this.id = id;
+
+
     }
 
     public String getNombre() {
@@ -77,5 +81,13 @@ public class Amigo {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id ) {
+        this.id = id;
     }
 }
