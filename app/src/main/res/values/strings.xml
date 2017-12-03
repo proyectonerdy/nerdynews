@@ -102,4 +102,6 @@
         <item>Proximidad</item>
         <item>Fecha</item>
     </string-array>
+    <string name="proximidad">Proximidad</string>
+    <string name="fecha">Fecha</string>
 </resources>
