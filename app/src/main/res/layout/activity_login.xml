@@ -212,29 +212,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/iv_facebook"
+                <Button
+                    android:id="@+id/btn_facebook"
+                    style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_facebook" />
+                    android:background="@mipmap/ic_facebook" />
 
-                <ImageView
-                    android:id="@+id/iv_instagram"
+                <Button
+                    android:id="@+id/btn_instagram"
+                    style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_instagram" />
+                    android:background="@mipmap/ic_instagram" />
 
-                <ImageView
-                    android:id="@+id/iv_tumblr"
+                <Button
+                    android:id="@+id/btn_tumblr"
+                    style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_tumblr" />
+                    android:background="@mipmap/ic_tumblr" />
 
-                <ImageView
-                    android:id="@+id/iv_twitter"
+                <Button
+                    android:id="@+id/btn_twitter"
+                    style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_twitter" />
+                    android:background="@mipmap/ic_twitter" />
 
             </GridLayout>
 
