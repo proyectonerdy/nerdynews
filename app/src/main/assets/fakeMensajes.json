@@ -47,9 +47,14 @@
     "historial": [
       {
         "id": 1,
-        "autorId": 1,
+        "autorId": 2,
         "mensaje": "La reunión es a las 15. Todos han confirmado la asistencia. ¿Irás?",
         "fecha":"15/09/2017"
+      },{
+        "id": 2,
+        "autorId": 0,
+        "mensaje": "Sí, nos vemos allí",
+        "fecha":"30/09/2017"
       }
     ]
   }

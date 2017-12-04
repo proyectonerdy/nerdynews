@@ -1,6 +1,7 @@
 package org.proyecto.nerdynews.mensajes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
@@ -8,10 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.GsonBuilder;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -22,8 +21,6 @@ import org.proyecto.nerdynews.models.HistorialMensaje;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
 /**
  * Created by Ana on 03/12/2017.
@@ -74,7 +71,14 @@ public class ListadoMensajesSwipeRecyclerAdapter extends RecyclerView.Adapter<Li
                         .into(holder.imgAmigo);
                 holder.imgAmigo.setTag(amigo.getFoto());
                 holder.txtFecha.setText(mensaje.getHistorial().get(mensaje.getHistorial().size()-1).getFecha());
-
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, LeerMensajeActivity.class);
+                        intent.putExtra("idChat", mensaje.getId());
+                        mContext.startActivity(intent);
+                    }
+                });
             }
         }
 
