@@ -57,6 +57,7 @@
     <string name="intereses">Intereses (3)</string>
     <string name="gpr_1985">GPR1985</string>
     <string name="button_undo">Deshacer</string>
+    <string name="conectarcon">Conectar con:</string>
 
     <!-- Perfil -->
     <string name="titperfil">Perfil de:</string>

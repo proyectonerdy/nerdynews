@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -146,18 +147,59 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/cuenta1registro"
-                    style="@style/linkColor"
+            <TextView
+                android:id="@+id/cuenta1registro"
+                style="@style/linkColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/irLogin"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:onClick="irLogin"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/conectarcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/conectarcon"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:textAlignment="center"/>
+            <GridLayout
+                android:id="@+id/lay_redes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_facebook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:text="@string/irLogin"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:onClick="irLogin"
-                    android:textAlignment="center"/>
+                    app:srcCompat="@mipmap/ic_facebook" />
+
+                <ImageView
+                    android:id="@+id/iv_instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_instagram" />
+
+                <ImageView
+                    android:id="@+id/iv_tumblr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_tumblr" />
+
+                <ImageView
+                    android:id="@+id/iv_twitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_twitter" />
+
+            </GridLayout>
 
         </LinearLayout>
     </ScrollView>
