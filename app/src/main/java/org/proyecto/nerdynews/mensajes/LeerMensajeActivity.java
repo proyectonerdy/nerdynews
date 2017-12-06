@@ -57,6 +57,10 @@ public class LeerMensajeActivity extends AppCompatActivity implements Navigation
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        SharedPreferences prefs = getSharedPreferences("preferencias",Context.MODE_PRIVATE);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nombre = hView.findViewById(R.id.tv_nombre);
+        nombre.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);*/
 
         // Listado de eventos

@@ -1,5 +1,7 @@
 package org.proyecto.nerdynews.intereses;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -21,6 +23,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
 
@@ -60,6 +63,10 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
+        SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nombre = hView.findViewById(R.id.tv_nombre);
+        nombre.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
 
         // Listado de intereses favorotios
