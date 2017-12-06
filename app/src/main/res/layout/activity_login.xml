@@ -217,6 +217,7 @@
                     style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="gotoInteresesRedSocial"
                     android:background="@mipmap/ic_facebook" />
 
                 <Button
@@ -224,6 +225,7 @@
                     style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="gotoInteresesRedSocial"
                     android:background="@mipmap/ic_instagram" />
 
                 <Button
@@ -231,6 +233,7 @@
                     style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="gotoInteresesRedSocial"
                     android:background="@mipmap/ic_tumblr" />
 
                 <Button
@@ -238,6 +241,7 @@
                     style="@style/Widget.AppCompat.Button.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="gotoInteresesRedSocial"
                     android:background="@mipmap/ic_twitter" />
 
             </GridLayout>

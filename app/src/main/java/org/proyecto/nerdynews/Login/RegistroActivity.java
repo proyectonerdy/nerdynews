@@ -121,4 +121,27 @@ public class RegistroActivity extends AppCompatActivity {
         t.start();
     }
 
+    public void gotoInteresesRedSocial(View v){
+        Intent intent = new Intent(this,ListadoInteresesActivity.class);
+        View view = this.getCurrentFocus();
+        if(view!=null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                }
+                catch(Exception e){
+
+                }
+                finish();
+            }
+        });
+        t.start();
+    }
+
 }
