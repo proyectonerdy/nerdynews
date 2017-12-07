@@ -1,6 +1,8 @@
 package org.proyecto.nerdynews.amigos;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -66,6 +68,10 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView =  findViewById(R.id.nav_view);
+        SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nombre = hView.findViewById(R.id.tv_nombre);
+        nombre.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
 
         recyclerView =  findViewById(R.id.reciclerViewBusquedaAmigos);

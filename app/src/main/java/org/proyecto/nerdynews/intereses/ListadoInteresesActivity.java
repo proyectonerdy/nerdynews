@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.awareness.Awareness;
@@ -95,6 +97,10 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
+        SharedPreferences prefs = getSharedPreferences("preferencias",Context.MODE_PRIVATE);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nombre = hView.findViewById(R.id.tv_nombre);
+        nombre.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
 
         // Listado de intereses disponisbles
@@ -151,6 +157,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
 
     @Override
     public void onBackPressed() {
+
         NavigationDrawerNavigate.OnBackPressed(this);
     }
 

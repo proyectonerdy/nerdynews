@@ -57,6 +57,7 @@
     <string name="intereses">Intereses (3)</string>
     <string name="gpr_1985">GPR1985</string>
     <string name="button_undo">Deshacer</string>
+    <string name="conectarcon">Conectar con:</string>
 
     <!-- Perfil -->
     <string name="titperfil">Perfil de:</string>
@@ -104,4 +105,9 @@
     </string-array>
     <string name="proximidad">Proximidad</string>
     <string name="fecha">Fecha</string>
+
+    <!-- Listado mensajes -->
+    <string name="nav_mensajes">Mis mensajes</string>
+    <string name="mensajes">Historial de mensajes</string>
+
 </resources>

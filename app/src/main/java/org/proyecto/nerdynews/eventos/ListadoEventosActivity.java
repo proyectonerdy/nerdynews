@@ -1,6 +1,8 @@
 package org.proyecto.nerdynews.eventos;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -50,6 +52,10 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nombre = hView.findViewById(R.id.tv_nombre);
+        nombre.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
 
         // Listado de eventos

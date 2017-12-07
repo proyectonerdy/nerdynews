@@ -3,6 +3,7 @@ package org.proyecto.nerdynews.Perfil;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
@@ -53,6 +54,10 @@ public class PerfilActivity extends AppCompatActivity implements NavigationView.
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
+        SharedPreferences prefs = getSharedPreferences("preferencias",Context.MODE_PRIVATE);
+        View hView =  navigationView.getHeaderView(0);
+        TextView user = hView.findViewById(R.id.tv_nombre);
+        user.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
 
         if (vregistro.equals("N")) {
@@ -142,12 +147,18 @@ public class PerfilActivity extends AppCompatActivity implements NavigationView.
      */
     public void gotoIntereses(View v) {
         EditText password = (EditText) this.findViewById(R.id.passwordperfil);
+        EditText usuario = this.findViewById(R.id.aliasperfil);
 
         if (password == null || password.getText() == null || password.getText().length() < 1) {
             Toast.makeText(this, R.string.datosobligatoriosperfil, Toast.LENGTH_LONG).show();
             return;
         }
         Toast.makeText(this, getString(R.string.perfilcreado), Toast.LENGTH_LONG).show();
+
+        SharedPreferences prefs = getSharedPreferences("preferencias",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("nombre", usuario.getText().toString());
+        editor.commit();
 
         Intent intent = new Intent(this, ListadoInteresesActivity.class);
         View view = this.getCurrentFocus();

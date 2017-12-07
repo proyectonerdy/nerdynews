@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".eventos.ListadoEventosActivity">
+        tools:context=".mensajes.LeerMensajeActivity">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/reciclerViewListadoEventos"
+            android:id="@+id/reciclerViewLeerMensajes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"

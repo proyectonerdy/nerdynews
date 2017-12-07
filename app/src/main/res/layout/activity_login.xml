@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,8 +27,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/logologin"
@@ -53,7 +54,7 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -63,12 +64,12 @@
                         android:id="@+id/emaillogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@android:drawable/ic_dialog_email"
+                        android:drawablePadding="10dp"
                         android:hint="@string/hintemail"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:drawableLeft="@android:drawable/ic_dialog_email"
-                        android:drawablePadding="10dp"/>
+                        android:singleLine="true" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -77,20 +78,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/cross"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:onClick="resetField"
-                    android:layout_margin="5dp"
-                    android:text="Button"/>
+                    android:src="@drawable/cross"
+                    android:text="Button" />
 
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -100,12 +101,12 @@
                         android:id="@+id/passwordlogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_password"
+                        android:drawablePadding="10dp"
                         android:hint="@string/hintpassword"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:drawableLeft="@drawable/ic_password"
-                        android:drawablePadding="10dp"/>
+                        android:singleLine="true" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -113,27 +114,27 @@
                     android:id="@+id/seepasswordlogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/crosspasswordlogin"
-                    android:src="@drawable/eye"
                     android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_toLeftOf="@id/crosspasswordlogin"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:onClick="tooglePassword"
-                    android:layout_margin="5dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:text="Button"/>
+                    android:src="@drawable/eye"
+                    android:text="Button" />
 
                 <ImageButton
                     android:id="@+id/crosspasswordlogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/cross"
-                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:onClick="resetField"
-                    android:layout_margin="5dp"
-                    android:text="Button"/>
+                    android:src="@drawable/cross"
+                    android:text="Button" />
 
             </RelativeLayout>
 
@@ -141,10 +142,10 @@
                 android:id="@+id/recordarmelogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="@string/mantenersesioniniciada"
-                android:textSize="12dp"
                 android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="8dp"/>
+                android:textSize="12dp" />
 
             <Button
                 android:id="@+id/email_sign_in_button"
@@ -160,40 +161,91 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/cuenta1login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="@string/cuenta1"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/cuenta2login"
-                    android:clickable="true"
-                    android:layout_marginTop="10dp"
+                    style="@style/linkColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/cuenta1login"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
                     android:onClick="irRegistro"
-                    style="@style/linkColor"
                     android:text="@string/cuenta2" />
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/olvido"
-                android:clickable="true"
-                android:layout_marginTop="10dp"
+                style="@style/linkColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
                 android:onClick="irOlvido"
-                style="@style/linkColor"
                 android:text="@string/olvidocontrasena" />
+
+            <TextView
+                android:id="@+id/conectarcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:text="@string/conectarcon"
+                android:textAlignment="center" />
+
+            <GridLayout
+                android:id="@+id/lay_redes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_facebook"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="gotoInteresesRedSocial"
+                    android:background="@mipmap/ic_facebook" />
+
+                <Button
+                    android:id="@+id/btn_instagram"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="gotoInteresesRedSocial"
+                    android:background="@mipmap/ic_instagram" />
+
+                <Button
+                    android:id="@+id/btn_tumblr"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="gotoInteresesRedSocial"
+                    android:background="@mipmap/ic_tumblr" />
+
+                <Button
+                    android:id="@+id/btn_twitter"
+                    style="@style/Widget.AppCompat.Button.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="gotoInteresesRedSocial"
+                    android:background="@mipmap/ic_twitter" />
+
+            </GridLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
