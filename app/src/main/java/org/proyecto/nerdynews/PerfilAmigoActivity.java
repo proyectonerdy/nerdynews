@@ -1,5 +1,7 @@
 package org.proyecto.nerdynews;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,14 +17,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
+import org.proyecto.nerdynews.amigos.AmigosAdapter;
+import org.proyecto.nerdynews.amigos.ListadoAmigosActivity;
 import org.proyecto.nerdynews.intereses.ListadoFavoritosActivity;
 import org.proyecto.nerdynews.intereses.ListadoFavoritosRecyclerAdapter;
 import org.proyecto.nerdynews.intereses.RecyclerItemClickListener;
+import org.proyecto.nerdynews.models.Amigo;
 import org.proyecto.nerdynews.models.Favorito;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
@@ -35,6 +47,10 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
 
+    private ArrayList<Amigo> listaAmigos;
+
+    private String url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +61,7 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
         String nombreyapellidos = extras.getString("NOMBRE");
         String edad = extras.getString("EDAD");
         String intereses = extras.getString("INTERESES");
-        String url = extras.getString("DIBUJO");
+        url = extras.getString("DIBUJO");
 
         ImageView imagen = (ImageView) this.findViewById(R.id.image_paralax);
 
@@ -75,6 +91,10 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
+        SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        View hView =  navigationView.getHeaderView(0);
+        TextView user = hView.findViewById(R.id.tv_nombre);
+        user.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
 
         // Listado de intereses favorotios
@@ -136,6 +156,27 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     public void anadirAmigo(View v){
         TextView usuario = findViewById(R.id.nombreusuario);
         Toast.makeText(this,"Ahora sigues a " + usuario.getText(),Toast.LENGTH_SHORT).show();
+
+        // Código para añadir un nuevo amigo al JSON fakeMisAmigos.json
+        //Cargamos el Json
+        Type listType = new TypeToken<ArrayList<Amigo>>() { }.getType();
+        String json = "fakeMisAmigos.json";
+        ArrayList<Amigo> misAmigos = new GsonBuilder().create().fromJson(loadJSONFromAsset(json, this), listType);
+
+        // Obtenemos los datos del usuario y creamos el nuevo amigo
+        TextView edadview = (TextView) this.findViewById(R.id.edad);
+        String[] nombreyapellidos = usuario.getText().toString().split(" ");
+        String nombre = nombreyapellidos[0];
+        String apellidos = nombreyapellidos[1];
+        if (nombreyapellidos.length>2){
+            apellidos = apellidos + " " + nombreyapellidos[2];
+        }
+        int edad = Integer.parseInt(edadview.getText().toString().split(":")[1]);
+        Amigo nuevo = new Amigo(nombre,apellidos,edad,url,"masculino",1);
+        // Añadimos el amigo nuevo al array de misAmigos
+        misAmigos.add(nuevo);
+
+        json = new Gson().toJson(misAmigos,listType);
     }
 
     public void enviarMensaje(View v){

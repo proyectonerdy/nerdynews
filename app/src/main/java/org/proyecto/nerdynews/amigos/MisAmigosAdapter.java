@@ -1,6 +1,7 @@
 package org.proyecto.nerdynews.amigos;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.models.Amigo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by MyC on 22-11-2017.
@@ -26,11 +28,21 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
     private ArrayList<Amigo> listaAmigos;
     private ArrayList<Amigo> listaFiltrada;
 
+    private ArrayList<Amigo> listaAmigosRemoval = null;
+    private boolean undoOn;
+
     private Context mContext;
+
+    private Handler handler = new Handler(); // hanlder for running delayed runnables
+    HashMap<Amigo, Runnable> pendingRunnables = new HashMap<>(); // map of items to pending runnables, so we can cancel a removal if need be
+
+    private static final int PENDING_REMOVAL_TIMEOUT = 3000;
 
     public MisAmigosAdapter(ArrayList<Amigo> listaAmigos, Context mContext) {
         this.listaAmigos = listaAmigos;
         this.listaFiltrada = listaAmigos;
+
+        listaAmigosRemoval = new ArrayList<>();
         this.mContext = mContext;
     }
 
@@ -43,9 +55,6 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
 
     @Override
     public void onBindViewHolder(ListadoAmigosViewHolder holder, int position) {
-
-
-
         Amigo amigo = listaFiltrada.get(position);
 
         holder.txtNombre.setText(amigo.getNombre() + " " + amigo.getApellido());
@@ -112,6 +121,48 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
             txtIntereses = (TextView) itemView.findViewById(R.id.txtIntereses);
             imgAmigo = (ImageView) itemView.findViewById(R.id.ivImagenAmigo);
 
+        }
+    }
+
+    public void setUndoOn(boolean undoOn) {
+        this.undoOn = undoOn;
+    }
+
+    public boolean isUndoOn() {
+        return undoOn;
+    }
+
+    public void pendingRemoval(int position) {
+        final Amigo item = listaAmigos.get(position);
+        if (!listaAmigosRemoval.contains(item)) {
+            listaAmigosRemoval.add(item);
+            // this will redraw row in "undo" state
+            notifyItemChanged(position);
+            // let's create, store and post a runnable to remove the item
+            Runnable pendingRemovalRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    remove(listaAmigos.indexOf(item));
+                }
+            };
+            handler.postDelayed(pendingRemovalRunnable, PENDING_REMOVAL_TIMEOUT);
+            pendingRunnables.put(item, pendingRemovalRunnable);
+        }
+    }
+
+    public boolean isPendingRemoval(int position) {
+        Amigo item = listaAmigos.get(position);
+        return listaAmigosRemoval.contains(item);
+    }
+
+    public void remove(int position) {
+        Amigo item = listaAmigos.get(position);
+        if (listaAmigosRemoval.contains(item)) {
+            listaAmigosRemoval.remove(item);
+        }
+        if (listaAmigos.contains(item)) {
+            listaAmigos.remove(item);
+            notifyItemRemoved(position);
         }
     }
 }

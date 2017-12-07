@@ -2,6 +2,7 @@ package org.proyecto.nerdynews.amigos;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -21,6 +22,7 @@ import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.models.Amigo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by MyC on 22-11-2017.
