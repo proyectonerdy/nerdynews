@@ -14,6 +14,10 @@
             android:icon="@drawable/ic_event_black_24dp"
             android:title="@string/eventos" />
         <item
+            android:id="@+id/nav_buscareventos"
+            android:icon="@drawable/ic_magnify_black_24dp"
+            android:title="@string/buscareventos" />
+        <item
             android:id="@+id/nav_amigos"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/amigos" />

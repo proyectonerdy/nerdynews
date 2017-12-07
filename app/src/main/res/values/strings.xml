@@ -97,6 +97,14 @@
     <string name="coordGPS">41.3946973,2.1826039000000037</string>
     <string name="imageUrl">http://www.heroescomicconmadrid.com/app/uploads/COMIC-560x261.png</string>
     <string name="micalendario">Mi calendario</string>
+    <string name="indiquemetodo">Buscar por:</string>
+    <string name="buscareventos">Buscar Eventos</string>
+    <string-array name="opcionesbusqueda">
+        <item>Proximidad</item>
+        <item>Fecha</item>
+    </string-array>
+    <string name="proximidad">Proximidad</string>
+    <string name="fecha">Fecha</string>
 
     <!-- Listado mensajes -->
     <string name="nav_mensajes">Mis mensajes</string>
