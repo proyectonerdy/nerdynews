@@ -18,26 +18,23 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import org.proyecto.nerdynews.PerfilAmigoActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
+import org.proyecto.nerdynews.Utils.GlobalData;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
-import org.proyecto.nerdynews.eventos.ListadoEventosActivity;
-import org.proyecto.nerdynews.eventos.VisualizarEventoActivity;
 import org.proyecto.nerdynews.models.Amigo;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
@@ -105,8 +102,12 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        //NavigationDrawerNavigate.OnBackPressed(this);
+        if(NavigationDrawerNavigate.isOpened(this)){
+            NavigationDrawerNavigate.OnBackPressed(this);
+        }
+        else{
+            this.finish();
+        }
     }
 
     private void cargarDatosLista(){
@@ -143,10 +144,29 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
         TextView edad = (TextView) v.findViewById(R.id.txtEdad);
         TextView intereses = (TextView) v.findViewById(R.id.txtIntereses);
         ImageView drawable = (ImageView) v.findViewById(R.id.ivImagenAmigo);
+        TextView identificador = (TextView) v.findViewById(R.id.txtIdentificador);
         intent.putExtra("NOMBRE",nombre.getText());
         intent.putExtra("EDAD",edad.getText());
         intent.putExtra("INTERESES",intereses.getText());
+        intent.putExtra("IDENTIFICADOR",identificador.getText());
         intent.putExtra("DIBUJO",(String)drawable.getTag());
+        boolean amigo = false;
+        //vamos a comprobar si esta persona esta en el listado de mis amigos
+        String[] nombreyapellidos = nombre.getText().toString().split(" ");
+        String nombrea = nombreyapellidos[0].trim();
+        String apellidos = nombreyapellidos[1].trim();
+        if (nombreyapellidos.length>2){
+            apellidos = apellidos + " " + nombreyapellidos[2].trim();
+        }
+        GlobalData gd = GlobalData.getInstance();
+        List<Amigo> listaAmigos = gd.getMisAmigos();
+        for(Amigo a: listaAmigos){
+            if(a.getNombre().trim().equals(nombrea) && a.getApellido().trim().equals(apellidos)){
+                amigo = true;
+                break;
+            }
+        }
+        intent.putExtra("AMIGO",amigo);
         ActivityOptionsCompat options = ActivityOptionsCompat. makeSceneTransitionAnimation(BusquedaAmigosActivity.this, new Pair<View, String>(v.findViewById(R.id.ivImagenAmigo), getString(R.string.transition_name_img_amigo)));
         ActivityCompat.startActivity(BusquedaAmigosActivity.this, intent, options .toBundle());
     }

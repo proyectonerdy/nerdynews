@@ -54,7 +54,7 @@
 
     <string name="lore_ipsum_2para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium ligula nunc, vel lobortis tortor dignissim congue. Vivamus tincidunt mauris non imperdiet lacinia. Maecenas non mattis nunc. Quisque non semper enim. Mauris neque arcu, efficitur eu sapien id, tincidunt porta massa. </string>
     <string name="perfil">Perfil</string>
-    <string name="intereses">Intereses (3)</string>
+    <string name="intereses">Intereses (%1$d)</string>
     <string name="gpr_1985">GPR1985</string>
     <string name="button_undo">Deshacer</string>
     <string name="conectarcon">Conectar con:</string>

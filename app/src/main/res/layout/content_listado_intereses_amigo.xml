@@ -11,18 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="350dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".PerfilAmigoActivity">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:text="ejemplo buscador"/>
+        tools:context=".amigos.PerfilAmigoActivity">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/reciclerViewListadoInteresesAmigos"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_alignParentLeft="true"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:scrollbars="vertical"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp" />

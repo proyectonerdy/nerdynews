@@ -81,7 +81,7 @@
                 <data android:pathPrefix="/evento" />
             </intent-filter>
         </activity>
-        <activity android:name=".PerfilAmigoActivity" android:label="@string/gpr_1985"></activity>
+        <activity android:name=".amigos.PerfilAmigoActivity" android:label="@string/gpr_1985"></activity>
         <activity android:name=".amigos.BusquedaAmigosActivity" />
         <activity android:name=".amigos.ListadoAmigosActivity" />
         <activity android:name=".mensajes.ListadoMensajesActivity" />

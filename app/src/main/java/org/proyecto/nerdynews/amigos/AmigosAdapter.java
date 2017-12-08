@@ -1,11 +1,6 @@
 package org.proyecto.nerdynews.amigos;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +12,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.proyecto.nerdynews.PerfilAmigoActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.models.Amigo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by MyC on 22-11-2017.
@@ -55,6 +48,7 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ListadoAmi
         holder.txtNombre.setText(amigo.getNombre() + " " + amigo.getApellido());
         holder.txtEdad.setText("Edad:"+String.valueOf(amigo.getEdad()));
         holder.txtIntereses.setText("Intereses: "+amigo.getIntereses());
+        holder.txtIdentificador.setText(String.valueOf(amigo.getId()));
         Picasso.with(mContext).load(amigo.getFoto())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.mipmap.ic_launcher_round)
@@ -108,7 +102,7 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ListadoAmi
 
 
     public static class ListadoAmigosViewHolder extends RecyclerView.ViewHolder {
-        private final TextView txtNombre, txtEdad, txtIntereses;
+        private final TextView txtNombre, txtEdad, txtIntereses, txtIdentificador;
         private final ImageView imgAmigo;
 
         public ListadoAmigosViewHolder(View itemView) {
@@ -117,6 +111,7 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ListadoAmi
             txtEdad = (TextView) itemView.findViewById(R.id.txtEdad);
             txtIntereses = (TextView) itemView.findViewById(R.id.txtIntereses);
             imgAmigo = (ImageView) itemView.findViewById(R.id.ivImagenAmigo);
+            txtIdentificador = (TextView) itemView.findViewById(R.id.txtIdentificador);
 
         }
     }

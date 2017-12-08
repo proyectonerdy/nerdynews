@@ -157,8 +157,12 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
 
     @Override
     public void onBackPressed() {
-
-        NavigationDrawerNavigate.OnBackPressed(this);
+        if(NavigationDrawerNavigate.isOpened(this)){
+            NavigationDrawerNavigate.OnBackPressed(this);
+        }
+        else{
+            this.finish();
+        }
     }
 
     // Metodo cuando se hace click en los items del menú

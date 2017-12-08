@@ -38,9 +38,9 @@ import android.widget.TextView;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import org.proyecto.nerdynews.PerfilAmigoActivity;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
+import org.proyecto.nerdynews.Utils.GlobalData;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
 import org.proyecto.nerdynews.models.Amigo;
 
@@ -59,6 +59,7 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
     private MisAmigosAdapter amigosAdapter;
     private ArrayList<Amigo> listaAmigos;
     private FloatingActionButton button;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
         View hView =  navigationView.getHeaderView(0);
         TextView nombre = hView.findViewById(R.id.tv_nombre);
@@ -119,7 +120,12 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
 
     @Override
     public void onBackPressed() {
-        NavigationDrawerNavigate.OnBackPressed(this);
+        if(NavigationDrawerNavigate.isOpened(this)){
+            NavigationDrawerNavigate.OnBackPressed(this);
+        }
+        else{
+            this.finish();
+        }
     }
 
 
@@ -133,13 +139,16 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
 
     private void cargarDatosLista() {
         // Obtenemos los elementos desde el fake .json
-
+        GlobalData gd = GlobalData.getInstance();
         Type listType = new TypeToken<ArrayList<Amigo>>() {
         }.getType();
-        listaAmigos = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeMisAmigos.json", this), listType);
-
-        Log.d("aers", String.valueOf(listaAmigos.size()));
-        Log.d("aers", "PASANDO");
+        if(gd.getMisAmigos()==null) {
+            listaAmigos = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeMisAmigos.json", this), listType);
+        }
+        else{
+            listaAmigos = gd.getMisAmigos();
+        }
+        gd.setMisAmigos(listaAmigos);
         // Pasamos los datos al adaptador para crear la lista
         amigosAdapter = new MisAmigosAdapter(listaAmigos, getApplicationContext());
         // Añade un separador entre los elementos de la lista
@@ -160,11 +169,14 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
         TextView nombre = (TextView) v.findViewById(R.id.txtNombre);
         TextView edad = (TextView) v.findViewById(R.id.txtEdad);
         TextView intereses = (TextView) v.findViewById(R.id.txtIntereses);
+        TextView identificador = (TextView) v.findViewById(R.id.txtIdentificador);
         ImageView drawable = (ImageView) v.findViewById(R.id.ivImagenAmigo);
         intent.putExtra("NOMBRE",nombre.getText());
         intent.putExtra("EDAD",edad.getText());
         intent.putExtra("INTERESES",intereses.getText());
+        intent.putExtra("IDENTIFICADOR",identificador.getText());
         intent.putExtra("DIBUJO",(String)drawable.getTag());
+        intent.putExtra("AMIGO",true);
         ActivityOptionsCompat options = ActivityOptionsCompat. makeSceneTransitionAnimation(ListadoAmigosActivity.this, new Pair<View, String>(v.findViewById(R.id.ivImagenAmigo), getString(R.string.transition_name_img_amigo)));
         ActivityCompat.startActivity(ListadoAmigosActivity.this, intent, options .toBundle());
     }

@@ -1,4 +1,4 @@
-package org.proyecto.nerdynews;
+package org.proyecto.nerdynews.amigos;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,24 +17,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.proyecto.nerdynews.R;
+import org.proyecto.nerdynews.SimpleDividerItemDecoration;
+import org.proyecto.nerdynews.Utils.GlobalData;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
-import org.proyecto.nerdynews.amigos.AmigosAdapter;
-import org.proyecto.nerdynews.amigos.ListadoAmigosActivity;
-import org.proyecto.nerdynews.intereses.ListadoFavoritosActivity;
-import org.proyecto.nerdynews.intereses.ListadoFavoritosRecyclerAdapter;
-import org.proyecto.nerdynews.intereses.RecyclerItemClickListener;
 import org.proyecto.nerdynews.models.Amigo;
 import org.proyecto.nerdynews.models.Favorito;
+import org.proyecto.nerdynews.models.Interes;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
@@ -46,6 +43,7 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     private Favorito[] listaFavoritos;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
+    private String intereses;
 
     private ArrayList<Amigo> listaAmigos;
 
@@ -60,7 +58,24 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
         Bundle extras = getIntent().getExtras();
         String nombreyapellidos = extras.getString("NOMBRE");
         String edad = extras.getString("EDAD");
-        String intereses = extras.getString("INTERESES");
+        String identificadort = extras.getString("IDENTIFICADOR");
+        boolean esAmigo = extras.getBoolean("AMIGO");
+        intereses = extras.getString("INTERESES");
+        intereses = intereses.substring(intereses.indexOf(":")+1);
+        String[] intarray = intereses.split(",");
+        listaFavoritos = new Favorito[intarray.length];
+        //lo obtenemos del listado de Intereses Disponibles
+        Interes[] listaDisponibles= new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeInteresesDisponibles.json", this), Interes[].class);
+        int i = 0;
+        for(String valor:intarray){
+           for(Interes f: listaDisponibles){
+               if(f.getTitulo().equals(valor.trim())){
+                   listaFavoritos[i] = new Favorito(f.getTitulo(), f.getResumen(), f.getImageUrl(), null,0);
+                   i++;
+                   break;
+               }
+           }
+        }
         url = extras.getString("DIBUJO");
 
         ImageView imagen = (ImageView) this.findViewById(R.id.image_paralax);
@@ -75,6 +90,8 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
 
         TextView nombre = (TextView) this.findViewById(R.id.nombreyapellidos);
         TextView usuario = (TextView) this.findViewById(R.id.nombreusuario);
+        TextView identificador = (TextView) this.findViewById(R.id.identificador);
+        identificador.setText(identificadort);
         nombre.setText(nombreyapellidos);
         usuario.setText(nombreyapellidos);
         TextView edadview = (TextView) this.findViewById(R.id.edad);
@@ -100,16 +117,27 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
         // Listado de intereses favorotios
         recyclerListadoFavoritos= (RecyclerView) findViewById(R.id.reciclerViewListadoInteresesAmigos);
         recyclerListadoFavoritos.setLayoutManager(new GridLayoutManager(this, 1));
-
-        // Permite recargar los datos de la lista haciendo scroll en lo alto de la lista
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                cargarDatosLista();
-            }
-        });
+        TextView numintereses = (TextView) this.findViewById(R.id.interesestextnumber);
+        numintereses.setText(String.format(getString(R.string.intereses),listaFavoritos.length));
+        ImageView imagenadd = (ImageView)this.findViewById(R.id.new_people);
+        if(esAmigo){
+            imagenadd.setImageResource(R.drawable.ic_person_remove);
+            imagenadd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    borrarAmigo(view);
+                }
+            });
+        }
+        else{
+            imagenadd.setImageResource(R.drawable.ic_person_add);
+            imagenadd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    anadirAmigo(view);
+                }
+            });
+        }
 
         // Cargamos la lista
         cargarDatosLista();
@@ -117,36 +145,14 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
 
     private void cargarDatosLista(){
 
-        // Obtenemos los elementos desde el fake .json
-        listaFavoritos= new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeInteresesAmigos.json", this), Favorito[].class);
-
         // Pasamos los datos al adaptador para crear la listaFavoritos
         adapterListadoFavoritos = new ListadoFavoritosAmigosRecyclerAdapter(listaFavoritos, getApplicationContext());
         // Añade un separador entre los elementos de la lista
         recyclerListadoFavoritos.addItemDecoration(new SimpleDividerItemDecoration(getApplicationContext()));
         recyclerListadoFavoritos.setAdapter(adapterListadoFavoritos);
 
-        //Desmarcamos el interes como favorito
-        recyclerListadoFavoritos.addOnItemTouchListener(new RecyclerItemClickListener(PerfilAmigoActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                ImageView ib = (ImageView) v.findViewById(R.id.cvimageFavorito);
-                if (PerfilAmigoActivity.this.listaFavoritos[position].getImageFavorito().equals("@drawable/ic_favorite_black_24dp"))
-                {
-                    Toast.makeText(PerfilAmigoActivity.this, R.string.deletefavorito , Toast.LENGTH_SHORT).show();
-
-                    // ListadoFavoritosActivity.this.listaFavoritos[position].setEsFavorito(0);
-                    ib.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    PerfilAmigoActivity.this.listaFavoritos[position].setEsFavorito(0);
-
-                }
-
-            }
-        }));
         adapterListadoFavoritos.notifyDataSetChanged();
 
-        // Oculta el circulo de cargar
-        swipeRefreshLayout.setRefreshing(false);
     }
 
     public void irAtras(View v){
@@ -155,16 +161,24 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
 
     public void anadirAmigo(View v){
         TextView usuario = findViewById(R.id.nombreusuario);
-        Toast.makeText(this,"Ahora sigues a " + usuario.getText(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Te has hecho amigo de " + usuario.getText(),Toast.LENGTH_SHORT).show();
 
         // Código para añadir un nuevo amigo al JSON fakeMisAmigos.json
-        //Cargamos el Json
+        //Cargamos los amigos del JSON si no estan
+        GlobalData gd = GlobalData.getInstance();
         Type listType = new TypeToken<ArrayList<Amigo>>() { }.getType();
         String json = "fakeMisAmigos.json";
-        ArrayList<Amigo> misAmigos = new GsonBuilder().create().fromJson(loadJSONFromAsset(json, this), listType);
+        ArrayList<Amigo> misAmigos = null;
+        if(gd.getMisAmigos()==null) {
+            misAmigos = new GsonBuilder().create().fromJson(loadJSONFromAsset(json, this), listType);
+        }
+        else{
+            misAmigos = gd.getMisAmigos();
+        }
 
         // Obtenemos los datos del usuario y creamos el nuevo amigo
         TextView edadview = (TextView) this.findViewById(R.id.edad);
+        TextView idview = (TextView) this.findViewById(R.id.identificador);
         String[] nombreyapellidos = usuario.getText().toString().split(" ");
         String nombre = nombreyapellidos[0];
         String apellidos = nombreyapellidos[1];
@@ -172,11 +186,65 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
             apellidos = apellidos + " " + nombreyapellidos[2];
         }
         int edad = Integer.parseInt(edadview.getText().toString().split(":")[1]);
-        Amigo nuevo = new Amigo(nombre,apellidos,edad,url,"masculino",1);
+        int identificador = Integer.parseInt(idview.getText().toString());
+        Random rand = new Random();
+        Amigo nuevo = new Amigo(nombre,apellidos,edad,url,"masculino",identificador );
         // Añadimos el amigo nuevo al array de misAmigos
+        nuevo.setIntereses(intereses);
         misAmigos.add(nuevo);
+        gd.setMisAmigos(misAmigos);
+        ImageView imagenadd = (ImageView)this.findViewById(R.id.new_people);
+        imagenadd.setImageResource(R.drawable.ic_person_remove);
+        imagenadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                borrarAmigo(view);
+            }
+        });
+    }
 
-        json = new Gson().toJson(misAmigos,listType);
+    public void borrarAmigo(View v){
+        TextView usuario = findViewById(R.id.nombreusuario);
+        Toast.makeText(this,"Ya no eres amigo de " + usuario.getText(),Toast.LENGTH_SHORT).show();
+
+        // Código para añadir un nuevo amigo al JSON fakeMisAmigos.json
+        //Cargamos los amigos del JSON si no estan
+        GlobalData gd = GlobalData.getInstance();
+        Type listType = new TypeToken<ArrayList<Amigo>>() { }.getType();
+        String json = "fakeMisAmigos.json";
+        ArrayList<Amigo> misAmigos = null;
+        if(gd.getMisAmigos()==null) {
+            misAmigos = new GsonBuilder().create().fromJson(loadJSONFromAsset(json, this), listType);
+        }
+        else{
+            misAmigos = gd.getMisAmigos();
+        }
+
+        String[] nombreyapellidos = usuario.getText().toString().split(" ");
+        String nombre = nombreyapellidos[0].trim();
+        String apellidos = nombreyapellidos[1].trim();
+        if (nombreyapellidos.length>2){
+            apellidos = apellidos + " " + nombreyapellidos[2].trim();
+        }
+
+        //buscamos al amigo
+        for(Amigo a:misAmigos){
+            if(a.getNombre().trim().equals(nombre) && a.getApellido().trim().equals(apellidos)){
+                //es este amigo
+                misAmigos.remove(a);
+                break;
+            }
+        }
+
+        gd.setMisAmigos(misAmigos);
+        ImageView imagenadd = (ImageView)this.findViewById(R.id.new_people);
+        imagenadd.setImageResource(R.drawable.ic_person_add);
+        imagenadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                anadirAmigo(view);
+            }
+        });
     }
 
     public void enviarMensaje(View v){
@@ -185,7 +253,12 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
 
     @Override
     public void onBackPressed() {
-        NavigationDrawerNavigate.OnBackPressed(this);
+        if(NavigationDrawerNavigate.isOpened(this)){
+            NavigationDrawerNavigate.OnBackPressed(this);
+        }
+        else{
+            this.finish();
+        }
     }
 
     // Metodo cuando se hce click en los items del menú

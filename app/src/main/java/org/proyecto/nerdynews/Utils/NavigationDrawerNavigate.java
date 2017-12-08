@@ -120,12 +120,18 @@ public class NavigationDrawerNavigate {
         return true;
     }
 
+    public static boolean isOpened(Activity actividad){
+        DrawerLayout drawer = (DrawerLayout) actividad.findViewById(R.id.lidrawer_layout);
+        if (drawer!=null && drawer.isDrawerOpen(GravityCompat.START)) {
+            return true;
+        }
+        return false;
+    }
+
     public static void OnBackPressed(Activity actividad){
         DrawerLayout drawer = (DrawerLayout) actividad.findViewById(R.id.lidrawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer!=null && drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            actividad.onBackPressed();
         }
     }
 }

@@ -54,5 +54,19 @@
     "imageUrl":"@drawable/ic_interesxbox",
     "imageFavorito":"@drawable/ic_favorite_border_black_24dp",
     "esFavorito":"0"
+  },
+  {
+    "titulo": "Android",
+    "resumen": "Desarrollo en Dispositivos Android.",
+    "imageUrl":"@drawable/ic_android_logo",
+    "imageFavorito":"@drawable/ic_favorite_border_black_24dp",
+    "esFavorito":"0"
+  },
+  {
+    "titulo": "Apple",
+    "resumen": "Desarrollo en Dispositivos de Apple.",
+    "imageUrl":"@drawable/ic_mekuo",
+    "imageFavorito":"@drawable/ic_favorite_border_black_24dp",
+    "esFavorito":"0"
   }
 ]

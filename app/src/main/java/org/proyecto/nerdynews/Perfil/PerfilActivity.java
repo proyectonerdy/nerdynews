@@ -183,7 +183,12 @@ public class PerfilActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public void onBackPressed() {
-        NavigationDrawerNavigate.OnBackPressed(this);
+        if(NavigationDrawerNavigate.isOpened(this)){
+            NavigationDrawerNavigate.OnBackPressed(this);
+        }
+        else{
+            this.finish();
+        }
     }
 
     // Metodo cuando se hce click en los items del menú

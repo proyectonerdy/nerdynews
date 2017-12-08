@@ -39,10 +39,14 @@
                         android:layout_height="wrap_content">
                         <!--Etiqueta Perfil -->
                         <TextView
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/perfil"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title">
+                        <requestFocus />
+                        </TextView>
                         <!--Texto de ejemplo-->
                         <TextView
                             android:layout_width="match_parent"
@@ -76,6 +80,12 @@
                             android:id="@+id/nombreyapellidos"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="" />
+                        <TextView
+                            android:id="@+id/identificador"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
                             android:text="" />
 
                     </LinearLayout>
@@ -124,6 +134,7 @@
 
                         <!-- Etiqueta Intereses -->
                         <TextView
+                            android:id="@+id/interesestextnumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/intereses"
@@ -214,15 +225,15 @@
             app:layout_anchorGravity="bottom|right|end" />
 
         <ImageView
+            android:id="@+id/new_people"
             android:layout_width="@dimen/tamano_icono_perfil"
             android:layout_height="@dimen/tamano_icono_perfil"
             android:layout_marginRight="@dimen/margen_fab"
             android:layout_marginTop="@dimen/margen_fab"
             android:clickable="true"
-            android:onClick="anadirAmigo"
             android:background="@null"
             android:layout_gravity="end"
-            android:src="@mipmap/ic_person_add" />
+            android:src="@drawable/ic_person_add" />
 
         <ImageView
             android:layout_width="@dimen/tamano_icono_perfil"

@@ -110,7 +110,12 @@ public class LeerMensajeActivity extends AppCompatActivity implements Navigation
 
     @Override
     public void onBackPressed() {
-        NavigationDrawerNavigate.OnBackPressed(this);
+        if(NavigationDrawerNavigate.isOpened(this)){
+            NavigationDrawerNavigate.OnBackPressed(this);
+        }
+        else{
+            this.finish();
+        }
     }
 
     // Metodo cuando se hce click en los items del menú

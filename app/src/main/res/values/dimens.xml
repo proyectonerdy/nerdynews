@@ -6,7 +6,7 @@
     <dimen name="fab_elevacion">8dp</dimen>
     <dimen name="card_margen">16dp</dimen>
     <dimen name="tamano_fab">56dp</dimen>
-    <dimen name="tamano_icono_perfil">36dp</dimen>
+    <dimen name="tamano_icono_perfil">32dp</dimen>
     <dimen name="margen_fab">16dp</dimen>
     <dimen name="tamano_avatar">40dp</dimen>
     <dimen name="ic_clear_margin">16dp</dimen>

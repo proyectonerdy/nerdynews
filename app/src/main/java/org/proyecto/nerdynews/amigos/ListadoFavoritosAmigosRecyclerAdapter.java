@@ -1,4 +1,4 @@
-package org.proyecto.nerdynews;
+package org.proyecto.nerdynews.amigos;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.models.Favorito;
 
 

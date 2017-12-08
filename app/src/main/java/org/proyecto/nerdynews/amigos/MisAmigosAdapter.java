@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.proyecto.nerdynews.R;
+import org.proyecto.nerdynews.Utils.GlobalData;
 import org.proyecto.nerdynews.models.Amigo;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
         holder.txtNombre.setText(amigo.getNombre() + " " + amigo.getApellido());
         holder.txtEdad.setText("Edad:"+String.valueOf(amigo.getEdad()));
         holder.txtIntereses.setText("Intereses: "+amigo.getIntereses());
+        holder.txtIdentificador.setText(String.valueOf(amigo.getId()));
         Picasso.with(mContext).load(amigo.getFoto())
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.mipmap.ic_launcher_round)
@@ -111,7 +113,7 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
 
 
     public static class ListadoAmigosViewHolder extends RecyclerView.ViewHolder {
-        private final TextView txtNombre, txtEdad, txtIntereses;
+        private final TextView txtNombre, txtEdad, txtIntereses, txtIdentificador;
         private final ImageView imgAmigo;
 
         public ListadoAmigosViewHolder(View itemView) {
@@ -119,6 +121,7 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
             txtNombre = (TextView) itemView.findViewById(R.id.txtNombre);
             txtEdad = (TextView) itemView.findViewById(R.id.txtEdad);
             txtIntereses = (TextView) itemView.findViewById(R.id.txtIntereses);
+            txtIdentificador = (TextView) itemView.findViewById(R.id.txtIdentificador);
             imgAmigo = (ImageView) itemView.findViewById(R.id.ivImagenAmigo);
 
         }
@@ -163,6 +166,8 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
         if (listaAmigos.contains(item)) {
             listaAmigos.remove(item);
             notifyItemRemoved(position);
+            //buscamos en Gd y actualizamos
+            GlobalData.getInstance().setMisAmigos(listaAmigos);
         }
     }
 }
