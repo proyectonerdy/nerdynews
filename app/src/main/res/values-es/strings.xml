@@ -82,11 +82,13 @@
     <!-- Amigos -->
     <string name="amigos">Amigos</string>
     <string name="misamigos">Mis amigos</string>
-    <string name="buscaramigos">Buscar Amigos</string>
+    <string name="buscaramigos">Buscar amigos</string>
+    <string name="titbuscaramigos">Búsqueda Amigos</string>
     <string name="agregar_amigo">Agregado a mis amigos(forever alone)</string>
     <string name="nombreyapellidos">Nombre y Apellidos</string>
     <string name="edad">Edad</string>
-
+    <string name="anyadiramigo">Te has hecho amigo de</string>
+    <string name="borraramigo">Ya no eres amigo de</string>
 
     <!--widget -->
     <string name="proximoevento">PRÓXIMO EVENTO</string>

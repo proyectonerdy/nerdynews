@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Notícias Nerdy</string>
+    <string name="app_name">Nerdy News</string>
 
     <!-- Strings related to login -->
 
@@ -83,11 +83,12 @@
     <string name="amigos">Amigos</string>
     <string name="misamigos">Meus amigos</string>
     <string name="buscaramigos">Procurar amigos</string>
+    <string name="titbuscaramigos">Procurar Amigos</string>
     <string name="agregar_amigo">Adicionado aos meus amigos (sempre sozinho)</string>
     <string name="nombreyapellidos">Nomes e sobrenomes</string>
     <string name="edad">Idade</string>
-
-
+    <string name="anyadiramigo">Você fez amizade com</string>
+    <string name="borraramigo">Você não é mais amigo de</string>
     <!--widget -->
     <string name="proximoevento">PRÓXIMO EVENTO</string>
     <string name="conferenciaDC">DC Conferência COMICS</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nerdy Nouvelles</string>
+    <string name="app_name">Nerdy News</string>
 
     <!-- Strings related to login -->
 
@@ -84,10 +84,12 @@
     <string name="amigos">Amis</string>
     <string name="misamigos">Mes amis</string>
     <string name="buscaramigos">Retrouver des amis</string>
+    <string name="titbuscaramigos">Retrouver des Amis</string>
     <string name="agregar_amigo">Ajouté à mes amis (jamais seul)</string>
     <string name="nombreyapellidos">Prénom et Nom de famille</string>
     <string name="edad">Âge</string>
-
+    <string name="anyadiramigo">Tu t\'es fait des amis avec</string>
+    <string name="borraramigo">Vous n\'êtes plus un ami de</string>
 
     <!--widget -->
     <string name="proximoevento">ÉVÉNEMENT À VENIR</string>
