@@ -109,5 +109,6 @@
     <!-- Listado mensajes -->
     <string name="nav_mensajes">Mis mensajes</string>
     <string name="mensajes">Historial de mensajes</string>
+    <string name="introduzcamensaje">Introduzca el mensaje</string>
 
 </resources>

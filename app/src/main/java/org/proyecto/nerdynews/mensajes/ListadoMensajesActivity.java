@@ -23,9 +23,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
+import org.proyecto.nerdynews.Utils.GlobalData;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
 import org.proyecto.nerdynews.mensajes.ListadoMensajesSwipeRecyclerAdapter;
 import org.proyecto.nerdynews.mensajes.ListadoMensajesRecyclerAdapter;
@@ -33,6 +35,7 @@ import org.proyecto.nerdynews.models.Amigo;
 import org.proyecto.nerdynews.models.HistorialMensaje;
 import  org.proyecto.nerdynews.models.Mensaje;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +47,7 @@ public class ListadoMensajesActivity extends AppCompatActivity implements Naviga
     SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerListadoMensajes;
     private ListadoMensajesSwipeRecyclerAdapter adapterListadoMensajes;
-    private HistorialMensaje[] listaMensajes;
+    private ArrayList<HistorialMensaje> listaMensajes;
 
     private Amigo[] amigos;
 
@@ -90,11 +93,22 @@ public class ListadoMensajesActivity extends AppCompatActivity implements Naviga
 
     private void cargarDatosLista() {
         // Obtenemos los elementos desde el fake .json
-        listaMensajes = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeMensajes.json", this), HistorialMensaje[].class);
+        GlobalData gd = GlobalData.getInstance();
+        Type listType = new TypeToken<ArrayList<HistorialMensaje>>() {
+        }.getType();
+        if(gd.getListahistoriasmensaje()==null){
+            listaMensajes = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeMensajes.json", this), listType);
+        }
+        else{
+            listaMensajes = gd.getListahistoriasmensaje();
+        }
+
+        gd.setListahistoriasmensaje(listaMensajes);
+
         List<HistorialMensaje> mensajes = new ArrayList<HistorialMensaje>();
         // Pasamos los datos al adaptador para crear la listaFavoritos
-        for(int i= 0; i < listaMensajes.length; i++ ){
-            mensajes.add(listaMensajes[i]);
+        for(int i= 0; i < listaMensajes.size(); i++ ){
+            mensajes.add(listaMensajes.get(i));
         }
         amigos = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeAmigos.json", this), Amigo[].class);
 

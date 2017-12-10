@@ -13,14 +13,58 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".mensajes.LeerMensajeActivity">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/reciclerViewLeerMensajes"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/reciclerViewLeerMensajes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_above="@+id/footer_section"
+                android:layout_weight="2"
+                android:scrollbars="vertical"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="8dp" />
+
+        <LinearLayout
+            android:id="@+id/footer_section"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_weight="2"
-            android:scrollbars="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:minHeight="48dp">
+
+            <ImageView
+                android:id="@+id/emoticons_button"
+                android:layout_height="match_parent"
+                android:src="@drawable/emoticon"
+                android:background="@drawable/ripple"
+                android:clickable="true"
+                android:onClick="emoticono"
+                android:layout_width="48dp"
+                />
+
+            <EditText
+                android:id="@+id/mensajetexto"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:inputType="textMultiLine"
+                android:minLines="1"
+                android:maxLines="4"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
+                android:clickable="true"
+                android:onClick="enviarmensajetexto"
+                android:layout_margin="@dimen/margen_fab"
+                app:borderWidth="0dp"
+                android:background="@drawable/ripple"
+                android:src="@drawable/sendicon" />
+
+
+        </LinearLayout>
     </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

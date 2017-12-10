@@ -1,6 +1,7 @@
 package org.proyecto.nerdynews.amigos;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -25,8 +26,10 @@ import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
 import org.proyecto.nerdynews.Utils.GlobalData;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
+import org.proyecto.nerdynews.mensajes.LeerMensajeActivity;
 import org.proyecto.nerdynews.models.Amigo;
 import org.proyecto.nerdynews.models.Favorito;
+import org.proyecto.nerdynews.models.HistorialMensaje;
 import org.proyecto.nerdynews.models.Interes;
 
 import java.lang.reflect.Type;
@@ -248,7 +251,59 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     }
 
     public void enviarMensaje(View v){
-        Toast.makeText(this,"Este es el boton enviarmensaje",Toast.LENGTH_SHORT).show();
+        GlobalData gd = GlobalData.getInstance();
+        ArrayList<HistorialMensaje> hm = null;
+        Type listType = new TypeToken<ArrayList<HistorialMensaje>>() {
+        }.getType();
+        if(gd.getListahistoriasmensaje()!=null){
+            hm = gd.getListahistoriasmensaje();
+        }
+        else{
+            hm = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeMensajes.json", this), listType);
+        }
+
+        //tenemos que ver si este amigo esta en el listado de mensajes
+        int idchat = -1;
+        int idamigo= -1;
+        Type listType2 = new TypeToken<ArrayList<Amigo>>(){}.getType();
+        ArrayList<Amigo> listatodosAmigos = new GsonBuilder().create().fromJson(loadJSONFromAsset("fakeAmigos.json", this),listType2);
+
+        //buscamos el amigo que estamos buscando
+        TextView usuario = findViewById(R.id.nombreusuario);
+        String[] nombreyapellidos = usuario.getText().toString().split(" ");
+        String nombre = nombreyapellidos[0].trim();
+        String apellidos = nombreyapellidos[1].trim();
+        int amigo = -1;
+        if (nombreyapellidos.length>2){
+            apellidos = apellidos + " " + nombreyapellidos[2].trim();
+        }
+
+        //buscamos al amigo
+        for(Amigo a:listatodosAmigos){
+            if(a.getNombre().trim().equals(nombre) && a.getApellido().trim().equals(apellidos)){
+               amigo = a.getId();
+            }
+        }
+
+
+        for(HistorialMensaje h:hm){
+            if(h.getAmigoId()==amigo){
+                idchat = h.getId();
+                idamigo = h.getAmigoId();
+                break;
+            }
+        }
+
+        if(idchat==-1 || idamigo==-1){
+            idamigo = amigo;
+            //generamos un nuevo id para el chat
+            idchat =hm.size() + 1;
+        }
+
+        Intent intent = new Intent(this, LeerMensajeActivity.class);
+        intent.putExtra("idChat", idchat);
+        intent.putExtra("amigoid",idamigo);
+        this.startActivity(intent);
     }
 
     @Override

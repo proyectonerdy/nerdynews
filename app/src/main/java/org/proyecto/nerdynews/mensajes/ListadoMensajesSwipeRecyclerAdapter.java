@@ -60,7 +60,7 @@ public class ListadoMensajesSwipeRecyclerAdapter extends RecyclerView.Adapter<Li
 
       //  holder.txtTitulo.setText(mensaje.getHistorial().getTitulo());
        // holder.txtTitulo.setText(mensaje.getAmigoId().getNombre());
-        for (Amigo amigo : amigos) {
+        for (final Amigo amigo : amigos) {
             if (amigo.getId() == mensaje.getAmigoId()) {
                 holder.txtTitulo.setText(amigo.getNombre());
                 holder.txtResumen.setText(mensaje.getHistorial().get(mensaje.getHistorial().size() - 1).getMensaje());
@@ -76,6 +76,8 @@ public class ListadoMensajesSwipeRecyclerAdapter extends RecyclerView.Adapter<Li
                     public void onClick(View v) {
                         Intent intent = new Intent(mContext, LeerMensajeActivity.class);
                         intent.putExtra("idChat", mensaje.getId());
+                        intent.putExtra("amigoid",mensaje.getAmigoId());
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
                     }
                 });
