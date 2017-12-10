@@ -44,7 +44,7 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Eventos");
+        getSupportActionBar().setTitle(R.string.eventos);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.lidrawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Nerdy Nouvelles</string>
+
+    <!-- Strings related to login -->
+
+    <string name="eventos">Événements</string>
+    <string name="interes">Intérêt</string>
+    <string name="navigation_drawer_open">Ouvert</string>
+    <string name="navigation_drawer_close">Fermer</string>
+    <string name="perfil_usuario">Profil</string>
+    <string name="cerrar_sesion">Se déconnecter</string>
+    <string name="ajustes">Réglages</string>
+
+    <string name="email">e-mail</string>
+    <string name="hintemail">Entrez E-mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="hintpassword">Introduire la mot de passe</string>
+    <string name="login">Commencer la session</string>
+    <string name="olvidocontrasena">J\'ai oublié mon mot de passe</string>
+
+    <string name="borrar">Effacer</string>
+    <string name="mostrarcontrasena">Afficher le mot de passe</string>
+    <string name="mantenersesioniniciada">Rester connecté</string>
+    <string name="iniciarsesion">Commencer la session</string>
+    <string name="cuenta1">Vous ne possédez pas de compte?</string>
+    <string name="cuenta2">Créer un</string>
+
+    <string name="irLogin">Déjà vous avez un compte?</string>
+    <string name="registrarCuenta">Enregistrez votre compte</string>
+    <string name="registro">Registre</string>
+    <string name="recuerdo">Vous rappelez-vous votre mot de passe?</string>
+    <string name="conectate">Connectez-vous</string>
+    <string name="recuperacontrasena">Votre mot de passe</string>
+    <string name="olvidocontrasenamain">Récupérer compte</string>
+    <string name="ejecutadoolvidocontrasena">Suivez les étapes envoyées à votre adresse email %1$s pour récupérer votre mot de passe</string>
+    <string name="faltaemail">Vous devez indiquer l\'e-mail sur votre compte!</string>
+
+    <string name="titintereses">Intérêts disponibles</string>
+    <string name="addinteresfavorito">Intérêts ajoutés aux favoris</string>
+    <string name="existsfavorito">L\'intérêt est déjà dans les favoris</string>
+    <string name="deletefavorito">Intérêt éliminé favoris</string>
+    <string name="searchinteres">Et saisissez un texte</string>
+    <string name="titfavoritos">Intérêts favoris</string>
+
+    <string name="datosobligatorioslogin">Vous devez entrer votre e-mail et votre mot de passe pour se connecter</string>
+    <string name="datosobligatoriosregistro">Pour enregistrer votre compte doit fournir un e-mail et mot de passe</string>
+    <string name="cuentacreada">Il a envoyé un courriel à %1$s pour valider votre compte</string>
+
+    <string name="faltaimplementar">Le défaut de mise en œuvre</string>
+    <string name="transition_name_img">Transition: IMG</string>
+    <string name="transition_name_img_amigo">Transition: IMGAMIGO</string>
+    <string name="btnAsistir">Assister</string>
+    <string name="anadir_calendario">Ajouter</string>
+    <string name="compartir">Partager</string>
+
+    <string name="lore_ipsum_2para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula pretium nunc, lobortis vel dignissim tortor congue. Vivamus lacinia imperdiet tincidunt non Mauris. Mécène Mattis nunc non. Quisque non sempre ENIM. Mauris neque arcu, id sapien eu efficitur, tincidunt massa porta. </string>
+    <string name="perfil">Profil</string>
+    <string name="intereses">Intérêts (3)</string>
+    <string name="gpr_1985">GPR1985</string>
+    <string name="button_undo">Défaire</string>
+    <string name="conectarcon">Se connecter avec:</string>
+
+    <!-- Perfil -->
+    <string name="titperfil">Profil:</string>
+    <string name="titperfilcabecerabienvenida">Bienvenue dans la communauté NerdyNews. Merci de votre inscription avec nous. Ensuite, vous pouvez configurer votre compte.</string>
+    <string name="hintalias">Alias ​​(facultatif)</string>
+    <string name="hintpasswordperfil">Modifier le mot de passe (en option)</string>
+    <string name="hintotros">Parlez-nous de vous (facultatif)</string>
+    <string name="datosperfil"> Entrez votre nom et ajoute une photo de profil (en option).</string>
+    <string name="recibirnotificaciones">Activer les notifications</string>
+    <string name="compartiremail">Partager email avec des amis</string>
+    <string name="grabarperfil">Enregistrer le profil</string>
+    <string name="fechanacimiento">Date de naissance</string>
+    <string name="titperfilpersonal">Données personnelles (En option, vous pouvez nous en dire plus sur vous)</string>
+    <string name="hintnombre">Prénom et Nom de famille </string>
+    <string name="hintedad">Âge </string>
+    <string name="hintciudad">Ville </string>
+    <string name="hintcodigopostal">C.P. </string>
+    <string name="hintmasdatos">Dites-nous quelque chose de plus sur vous</string>
+    <string name="datosobligatoriosperfil">Vous devez entrer un mot de passe. </string>
+    <string name="perfilcreado">Profil enregistré </string>
+
+    <!-- Amigos -->
+    <string name="amigos">Amis</string>
+    <string name="misamigos">Mes amis</string>
+    <string name="buscaramigos">Retrouver des amis</string>
+    <string name="agregar_amigo">Ajouté à mes amis (jamais seul)</string>
+    <string name="nombreyapellidos">Prénom et Nom de famille</string>
+    <string name="edad">Âge</string>
+
+
+    <!--widget -->
+    <string name="proximoevento">ÉVÉNEMENT À VENIR</string>
+    <string name="conferenciaDC">Conférence DC COMICS</string>
+    <string name="fechawidget">06/12/2017</string>
+    <string name="titulowidget">DC COMICS Conférence de Barcelone</string>
+    <string name="resumenwidget">Venez à l\'événement DC Comics a eu lieu à Barcelone. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu nisi magna. Curabitur sit amet magna eget nec lacus tempor id turpis de tristique. Nam dans rhoncus Elit, en sagittis nisi. Nulla tincidunt dictum nunc id eleifend. Morbi feugiat nulla ut, et Malesuada velit, douleur hendrerit. Curabitur lorem ipsum, lacinia nulla finibus ac, pellentesque posuere elit. Suspendisse et non seulement nisi ut consectetur congue dans velit. Morbi euismod massa à. Sed is aliquet de ligula, ut ullamcorper id dui tristique. Cras iaculis diam arcu, eget arcu et.Nam efficitur mon fringilla ipsum, turpis ac pulvinar sed, posuere hendrerit arcu. Aenean leo Orci, eget pellentesque metus quis, mollis venenatis nisi. Etiam tristique interdum quam, pellentesque Elit à vulputate dans. Maximus Morbi rhoncus tortor primigeste à turpis. Duis et enim ante. Enim velit Sed, nec sodales à luctus, metus dapibus Mollis. Eros NISL sed Ut non posuere rutrum quis vel nibh. consequat Suspendisse vulputate fermentum et mi.</string>
+    <string name="lugawidget">Gare</string>
+    <string name="coordGPS">41.3946973,2.1826039000000037</string>
+    <string name="imageUrl">http://www.heroescomicconmadrid.com/app/uploads/COMIC-560x261.png</string>
+    <string name="micalendario">Mon calendrier</string>
+    <string name="indiquemetodo">Recherche par:</string>
+    <string name="buscareventos">Rechercher des Événements</string>
+    <string-array name="opcionesbusqueda">
+        <item>Proximité</item>
+        <item>Data</item>
+    </string-array>
+    <string name="proximidad">Proximité</string>
+    <string name="fecha">Date</string>
+    <!-- Listado mensajes -->
+    <string name="nav_mensajes">Mes messages</string>
+    <string name="mensajes">Historique des messages</string>
+    <string name="favoritos">Favoris</string>
+
+</resources>
