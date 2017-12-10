@@ -1,14 +1,24 @@
 package org.proyecto.nerdynews.eventos;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +34,13 @@ import org.proyecto.nerdynews.models.Evento;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Random;
 
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
@@ -34,7 +51,7 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
     String coords;
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
     private String title, texto, fecha, lugar, url, urlEvento;
-
+    private static final int MY_PERMISSION_CALENDAR = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +110,19 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
         TextView lugarview = (TextView) this.findViewById(R.id.cvLugarEvento);
         lugarview.setText(lugar);
         ImageView imagen = (ImageView) this.findViewById(R.id.imagenEvento);
+
+        Button bCalendario = (Button) this.findViewById(R.id.bCalendario);
+        bCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                try {
+                    agregarEventoCalendario();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         Button bCompartir = (Button) findViewById(R.id.bCompartir);
         bCompartir.setOnClickListener(new View.OnClickListener() {
@@ -191,5 +221,58 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
         LatLng lugar = new LatLng(Double.parseDouble(latLong[0]), Double.parseDouble(latLong[1]));
         map.addMarker(new MarkerOptions().position(lugar));
         map.moveCamera(CameraUpdateFactory.newLatLng(lugar));
+    }
+
+    public void agregarEventoCalendario() throws ParseException {
+
+        long calID = 1;
+        long startMillis = 0;
+        long endMillis = 0;
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", new Locale("es_ES"));
+        Date date = format.parse(fecha);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        Calendar beginTime = Calendar.getInstance();
+        Calendar endTime = Calendar.getInstance();
+        beginTime.set(cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DATE),
+                20, 00, 00);
+
+        endTime.set(cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DATE),
+                22, 00, 00);
+
+
+        startMillis = beginTime.getTimeInMillis();
+        endMillis = endTime.getTimeInMillis();
+        ContentResolver cr = getApplicationContext().getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.DTSTART, startMillis);
+        values.put(CalendarContract.Events.DTEND, endMillis);
+        values.put(CalendarContract.Events.TITLE, title);
+        values.put(CalendarContract.Events.DESCRIPTION, texto);
+        values.put(CalendarContract.Events.CALENDAR_ID, calID);
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, Time.getCurrentTimezone());
+
+
+        if ( Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CALENDAR}, MY_PERMISSION_CALENDAR);
+            return;
+        }
+        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+
+        long eventID = Long.parseLong(uri.getLastPathSegment());
+
+
+        String textoExito = "Evento '"+ title + "' agregado para el día " + cal.get(Calendar.DATE) +
+                            " de " +cal.get(Calendar.MONTH) +
+                            " de " + cal.get(Calendar.YEAR);
+
+
+        Toast.makeText(getApplicationContext(),textoExito,Toast.LENGTH_LONG).show();
+
     }
 }
