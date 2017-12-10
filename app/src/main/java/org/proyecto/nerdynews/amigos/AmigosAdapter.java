@@ -47,7 +47,7 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ListadoAmi
 
         holder.txtNombre.setText(amigo.getNombre() + " " + amigo.getApellido());
         holder.txtEdad.setText(mContext.getResources().getString((R.string.edad))+":"+String.valueOf(amigo.getEdad()));
-        holder.txtEdad.setText(mContext.getResources().getString((R.string.interes))+":"+String.valueOf(amigo.getIntereses()));
+        holder.txtIntereses.setText(mContext.getResources().getString((R.string.interes))+":"+String.valueOf(amigo.getIntereses()));
 
         holder.txtIdentificador.setText(String.valueOf(amigo.getId()));
         Picasso.with(mContext).load(amigo.getFoto())
