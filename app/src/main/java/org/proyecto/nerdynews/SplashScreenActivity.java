@@ -8,6 +8,7 @@ import com.viksaa.sssplash.lib.cnst.Flags;
 import com.viksaa.sssplash.lib.model.ConfigSplash;
 
 import org.proyecto.nerdynews.Login.LoginActivity;
+import org.proyecto.nerdynews.Utils.AdMob;
 
 /**
  * Created by MyC on 10-12-2017.
@@ -21,6 +22,8 @@ public class SplashScreenActivity extends AwesomeSplash {
 
     @Override
     public void initSplash(ConfigSplash configSplash) {
+        // Inicializamos AdMob
+        AdMob.initialize(this);
 
 			/* you don't have to override every property */
 

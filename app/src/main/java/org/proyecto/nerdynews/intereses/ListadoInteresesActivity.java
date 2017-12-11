@@ -41,6 +41,7 @@ import com.google.gson.GsonBuilder;
 import org.proyecto.nerdynews.BuildConfig;
 import org.proyecto.nerdynews.R;
 import org.proyecto.nerdynews.SimpleDividerItemDecoration;
+import org.proyecto.nerdynews.Utils.AdMob;
 import org.proyecto.nerdynews.Utils.NavigationDrawerNavigate;
 import org.proyecto.nerdynews.models.Interes;
 
@@ -75,6 +76,9 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_intereses);
+
+        // Mostramos el banner
+        AdMob.mostrarBanner(findViewById(R.id.adView));
 
         // Inicializamos el api awareness
         mGoogleApiClient = new GoogleApiClient.Builder(this)
