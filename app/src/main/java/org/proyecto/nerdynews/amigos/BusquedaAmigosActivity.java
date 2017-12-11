@@ -57,7 +57,7 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
         // Menu laterar
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Busqueda Amigos");
+        getSupportActionBar().setTitle(R.string.titbuscaramigos);
 
         DrawerLayout drawer =  findViewById(R.id.lidrawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -93,7 +93,7 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(this);
         searchView.setSubmitButtonEnabled(true);
-        searchView.setQueryHint("Buscar amigos");
+        searchView.setQueryHint(getString(R.string.buscaramigos));
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

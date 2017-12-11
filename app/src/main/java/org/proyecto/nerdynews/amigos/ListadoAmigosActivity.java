@@ -68,7 +68,7 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Mis Amigos");
+        getSupportActionBar().setTitle( R.string.misamigos);
 
         DrawerLayout drawer = findViewById(R.id.lidrawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

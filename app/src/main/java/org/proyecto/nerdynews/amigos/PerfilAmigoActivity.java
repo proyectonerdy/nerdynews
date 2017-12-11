@@ -121,7 +121,7 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
         recyclerListadoFavoritos= (RecyclerView) findViewById(R.id.reciclerViewListadoInteresesAmigos);
         recyclerListadoFavoritos.setLayoutManager(new GridLayoutManager(this, 1));
         TextView numintereses = (TextView) this.findViewById(R.id.interesestextnumber);
-        numintereses.setText(String.format(getString(R.string.intereses),listaFavoritos.length));
+        numintereses.setText(R.string.intereses);
         ImageView imagenadd = (ImageView)this.findViewById(R.id.new_people);
         if(esAmigo){
             imagenadd.setImageResource(R.drawable.ic_person_remove);
@@ -164,7 +164,7 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
 
     public void anadirAmigo(View v){
         TextView usuario = findViewById(R.id.nombreusuario);
-        Toast.makeText(this,"Te has hecho amigo de " + usuario.getText(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,this.getString(R.string.anyadiramigo)+" " + usuario.getText(),Toast.LENGTH_SHORT).show();
 
         // Código para añadir un nuevo amigo al JSON fakeMisAmigos.json
         //Cargamos los amigos del JSON si no estan
@@ -208,7 +208,7 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
 
     public void borrarAmigo(View v){
         TextView usuario = findViewById(R.id.nombreusuario);
-        Toast.makeText(this,"Ya no eres amigo de " + usuario.getText(),Toast.LENGTH_SHORT).show();
+         Toast.makeText(this,this.getString(R.string.borraramigo)+" " + usuario.getText(),Toast.LENGTH_SHORT).show();
 
         // Código para añadir un nuevo amigo al JSON fakeMisAmigos.json
         //Cargamos los amigos del JSON si no estan

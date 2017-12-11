@@ -3,112 +3,114 @@
 
     <!-- Strings related to login -->
 
-    <string name="eventos">Eventos</string>
-    <string name="interes">Intereses</string>
-    <string name="navigation_drawer_open">Abrir</string>
-    <string name="navigation_drawer_close">Cerrar</string>
-    <string name="perfil_usuario">Perfil</string>
-    <string name="cerrar_sesion">Cerrar sesión</string>
-    <string name="ajustes">Ajustes</string>
+    <string name="eventos">Events</string>
+    <string name="interes">Interests</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="perfil_usuario">Profile</string>
+    <string name="cerrar_sesion">Logout</string>
+    <string name="ajustes">Settings</string>
 
-    <string name="email">Email</string>
-    <string name="hintemail">Introduzca Email</string>
-    <string name="password">Contraseña</string>
-    <string name="hintpassword">Introduzca Contraseña</string>
-    <string name="login">Iniciar Sesión</string>
-    <string name="olvidocontrasena">He olvidado mi contraseña</string>
-    <string name="borrar">Borrar</string>
-    <string name="mostrarcontrasena">Mostrar Contraseña</string>
-    <string name="mantenersesioniniciada">Mantener la sesión iniciada</string>
-    <string name="iniciarsesion">Iniciar Sesión</string>
-    <string name="cuenta1">¿No tienes una cuenta?</string>
-    <string name="cuenta2">Cree una</string>
+    <string name="email">E-mail</string>
+    <string name="hintemail">Enter Email</string>
+    <string name="password">Password</string>
+    <string name="hintpassword">Enter Password</string>
+    <string name="login">Log in</string>
+    <string name="olvidocontrasena">I forgot my password</string>
+    <string name="borrar">Delete</string>
+    <string name="mostrarcontrasena">Show password</string>
+    <string name="mantenersesioniniciada">Keep me signed in</string>
+    <string name="iniciarsesion">Log in</string>
+    <string name="cuenta1">You do not have an account?</string>
+    <string name="cuenta2">Create a</string>
 
-    <string name="irLogin">¿Ya tiene una cuenta?</string>
-    <string name="registrarCuenta">Registra tu cuenta</string>
-    <string name="registro">Registro</string>
-    <string name="recuerdo">¿Recuerdas tu contraseña?</string>
-    <string name="conectate">Conectate</string>
-    <string name="recuperacontrasena">Restablecer tu contraseña</string>
-    <string name="olvidocontrasenamain">Recuperar cuenta</string>
-    <string name="ejecutadoolvidocontrasena">Sigue los pasos enviados a tu direccion de correo %1$s para recuperar tu contraseña</string>
-    <string name="faltaemail">¡Has de indicar el email de tu cuenta!</string>
+    <string name="irLogin">Already have an account?</string>
+    <string name="registrarCuenta">Register your account</string>
+    <string name="registro">Registry</string>
+    <string name="recuerdo">Do you remember your password?</string>
+    <string name="conectate">Connect</string>
+    <string name="recuperacontrasena">Reset your password</string>
+    <string name="olvidocontrasenamain">Recover account</string>
+    <string name="ejecutadoolvidocontrasena">Follow the steps sent to your %1$s email address to retrieve your password</string>
+    <string name="faltaemail">You must indicate the email address of your account!</string>
 
-    <string name="titintereses">Intereses Disponibles</string>
-    <string name="addinteresfavorito">Interés añadido a favoritos</string>
-    <string name="existsfavorito">El interés ya se encuentra en favoritos</string>
-    <string name="deletefavorito">Interés eliminado de favoritos</string>
-    <string name="searchinteres">Introduza un texto</string>
-    <string name="titfavoritos">Intereses Favoritos</string>
+    <string name="titintereses">Interests Available</string>
+    <string name="addinteresfavorito">Interest added to favorites</string>
+    <string name="existsfavorito">The interest is already in favorites</string>
+    <string name="deletefavorito">Interest removed from favorites</string>
+    <string name="searchinteres">Enter a text</string>
+    <string name="titfavoritos">Favorite interests</string>
 
-    <string name="datosobligatorioslogin">Debe introducir su email y su contraseña para conectarse</string>
-    <string name="datosobligatoriosregistro">Para registrar su cuenta debe facilitar un email y una contraseña</string>
-    <string name="cuentacreada">Se ha enviado un email a %1$s para validar su cuenta</string>
+    <string name="datosobligatorioslogin">You must enter your email and password to log in</string>
+    <string name="datosobligatoriosregistro">To register your account you must provide an email and a password</string>
+    <string name="cuentacreada">An email has been sent to %1$s to validate your account</string>
 
-    <string name="faltaimplementar">Falta por Implementar</string>
-    <string name="transition_name_img">transition:IMG</string>
-    <string name="transition_name_img_amigo">transition:IMGAMIGO</string>
-    <string name="btnAsistir">Asistiré</string>
-    <string name="anadir_calendario">Añadir</string>
-    <string name="compartir">Compartir</string>
+    <string name="faltaimplementar">Missing Implement</string>
+    <string name="transition_name_img">transition: IMG</string>
+    <string name="transition_name_img_amigo">transition: IMGAMIGO</string>
+    <string name="btnAsistir">I will attend</string>
+    <string name="anadir_calendario">Add</string>
+    <string name="compartir">Share</string>
 
     <string name="lore_ipsum_2para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pretium ligula nunc, vel lobortis tortor dignissim congue. Vivamus tincidunt mauris non imperdiet lacinia. Maecenas non mattis nunc. Quisque non semper enim. Mauris neque arcu, efficitur eu sapien id, tincidunt porta massa. </string>
-    <string name="perfil">Perfil</string>
-    <string name="intereses">Intereses (%1$d)</string>
+    <string name="perfil">Profile</string>
+    <string name="intereses">Interests (3)</string>
     <string name="gpr_1985">GPR1985</string>
-    <string name="button_undo">Deshacer</string>
-    <string name="conectarcon">Conectar con:</string>
+    <string name="button_undo">Undo</string>
+    <string name="conectarcon">Connect with:</string>
 
     <!-- Perfil -->
-    <string name="titperfil">Perfil de:</string>
-    <string name="titperfilcabecerabienvenida">Bienvenido a la comunidad NerdyNews. Gracias por darte de alta con nosotros. A continuación, puedes configurar tu cuenta.</string>
-    <string name="hintalias">Alias (opcional)</string>
-    <string name="hintpasswordperfil">Cambiar contraseña (opcional)</string>
-    <string name="hintotros">Hablanos de ti (opcional)</string>
-    <string name="datosperfil"> Introduce tu nombre y añade una foto de perfil (opcional).</string>
-    <string name="recibirnotificaciones">Activar notificaciones</string>
-    <string name="compartiremail">Compartir email con amigos</string>
-    <string name="grabarperfil">Guardar perfil</string>
-    <string name="fechanacimiento">Fecha de nacimiento</string>
-    <string name="titperfilpersonal">Datos Personales (Opcionalmente puedes contarnos más cosas sobre ti)</string>
-    <string name="hintnombre">Nombre y Apellidos </string>
-    <string name="hintedad">Edad </string>
-    <string name="hintciudad">Ciudad </string>
-    <string name="hintcodigopostal">C.P. </string>
-    <string name="hintmasdatos">Cuentanos algo más sobre ti</string>
-    <string name="datosobligatoriosperfil">Debe introducir un contraseña. </string>
-    <string name="perfilcreado">Perfil guardado </string>
+    <string name="titperfil">Profile of:</string>
+    <string name="titperfilcabecerabienvenida">Welcome to the NerdyNews community. Thanks for signing up with us. Next, you can set up your account.</string>
+    <string name="hintalias">Alias ​​(optional)</string>
+    <string name="hintpasswordperfil">Change password (optional)</string>
+    <string name="hintotros">Tell us about you (optional)</string>
+    <string name="datosperfil"> Enter your name and add a profile photo (optional).</string>
+    <string name="recibirnotificaciones">Enable notifications</string>
+    <string name="compartiremail">Share email with friends</string>
+    <string name="grabarperfil">Save profile</string>
+    <string name="fechanacimiento">Date of Birth</string>
+    <string name="titperfilpersonal">Personal Information (Optionally you can tell us more about yourself)</string>
+    <string name="hintnombre">Name and surname </string>
+    <string name="hintedad">Age </string>
+    <string name="hintciudad">City </string>
+    <string name="hintcodigopostal">Postcode </string>
+    <string name="hintmasdatos">Tell us more about yourself</string>
+    <string name="datosobligatoriosperfil">You must enter a password. </string>
+    <string name="perfilcreado">Saved profile </string>
 
     <!-- Amigos -->
-    <string name="amigos">Amigos</string>
-    <string name="buscaramigos">Buscar Amigos</string>
-    <string name="agregar_amigo">Agregado a mis amigos(forever alone)</string>
-    <string name="nombreyapellidos">Nombre y Apellidos</string>
-    <string name="edad">Edad</string>
+    <string name="amigos">Friends</string>
+    <string name="misamigos">My friends</string>
+    <string name="buscaramigos">Search friends</string>
+    <string name="titbuscaramigos">Search Friends</string>
+    <string name="agregar_amigo">Added to my friends (forever alone)</string>
+    <string name="nombreyapellidos">Name and surname</string>
+    <string name="edad">Age</string>
+    <string name="anyadiramigo">You made friends with</string>
+    <string name="borraramigo">You\'re no longer a friend of</string>
 
 
     <!--widget -->
-    <string name="proximoevento">PRÓXIMO EVENTO</string>
-    <string name="conferenciaDC">Conferencia DC COMICS</string>
+    <string name="proximoevento">NEXT EVENT</string>
+    <string name="conferenciaDC">DC COMICS Conference</string>
     <string name="fechawidget">06/12/2017</string>
-    <string name="titulowidget">Conferencia DC COMICS Barcelona</string>
-    <string name="resumenwidget">Ven al evento de DC Comics que se celebra en Barcelona.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu nisi magna. Curabitur sit amet lacus eget magna tempor tristique id nec turpis. Nam in rhoncus elit, in sagittis nisi. Nulla dictum tincidunt nunc id eleifend. Morbi ut nulla feugiat, malesuada velit et, hendrerit dolor. Curabitur lorem ipsum, lacinia ac nulla finibus, pellentesque posuere purus. Suspendisse et justo non nisi consectetur congue ut in velit. Morbi a euismod massa. Sed aliquet ligula est, ut tristique dui ullamcorper id. Cras iaculis diam arcu, eget efficitur mi fringilla et.Nam arcu ipsum, pulvinar ac turpis sed, posuere hendrerit arcu. Aenean orci leo, pellentesque eget metus quis, mollis venenatis nisi. Etiam tristique interdum quam, in vulputate elit pellentesque in. Morbi maximus tortor at turpis rhoncus gravida. Duis et enim ante. Sed velit enim, sodales a luctus nec, mollis dapibus metus. Ut non nisl sed eros rutrum posuere vel quis nibh. Suspendisse fermentum vulputate mi et consequat.</string>
-    <string name="lugawidget">Estación de Tren</string>
+    <string name="titulowidget">DC COMICS Conference Barcelona</string>
+    <string name="resumenwidget">Come to the DC Comics event that takes place in Barcelona. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu nisi magna. Curabitur sit amet lacus eget magna tempor tristique id nec turpis. Nam in rhoncus elit, in sagittis nisi. Nulla dictum tincidunt nunc id eleifend. Morbi ut nulla feugiat, ill velit et, hendrerit pain. Curabitur lorem ipsum, lacinia ac nulla finibus, pellentesque posuere purus. Suspendisse et just non nisi consectetur congue ut in velit. Morbi to euismod massa. Sed aliquet ligula est, ut tristique dui ullamcorper id. Cras iaculis diam arcu, eget efficienur mi fringilla et.Nam arcu ipsum, pulvinar ac turpis sed, posuere hendrerit arcu. Aenean orci leo, pellentesque eget metus quis, mollis venenatis nisi. Etiam tristique interdum quam, in vulputate elit pellentesque in. Morbi maximus tortor at turpis rhoncus gravida. Duis et enim ante. Thirst velit enim, sodales to luctus nec, mollis dapibus metus. Ut non nisl sed eros rutrum posuere vel quis nibh. Suspendisse fermentum vulputate mi et consequat.</string>
+    <string name="lugawidget">Train station</string>
     <string name="coordGPS">41.3946973,2.1826039000000037</string>
     <string name="imageUrl">http://www.heroescomicconmadrid.com/app/uploads/COMIC-560x261.png</string>
-    <string name="micalendario">Mi calendario</string>
-    <string name="indiquemetodo">Buscar por:</string>
-    <string name="buscareventos">Buscar Eventos</string>
+    <string name="micalendario">My calendar</string>
+    <string name="indiquemetodo">Search by:</string>
+    <string name="buscareventos">Find Events</string>
     <string-array name="opcionesbusqueda">
-        <item>Proximidad</item>
-        <item>Fecha</item>
+        <item>Proximity</item>
+        <item>Date</item>
     </string-array>
-    <string name="proximidad">Proximidad</string>
-    <string name="fecha">Fecha</string>
-
+    <string name="proximidad">Proximity</string>
+    <string name="fecha">Date</string>
     <!-- Listado mensajes -->
-    <string name="nav_mensajes">Mis mensajes</string>
-    <string name="mensajes">Historial de mensajes</string>
-    <string name="introduzcamensaje">Introduzca el mensaje</string>
-
+    <string name="nav_mensajes">My messages</string>
+    <string name="mensajes">Message history</string>
+    <string name="favoritos">Favorites</string>
 </resources>

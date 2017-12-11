@@ -59,8 +59,8 @@ public class MisAmigosAdapter extends RecyclerView.Adapter<MisAmigosAdapter.List
         Amigo amigo = listaFiltrada.get(position);
 
         holder.txtNombre.setText(amigo.getNombre() + " " + amigo.getApellido());
-        holder.txtEdad.setText("Edad:"+String.valueOf(amigo.getEdad()));
-        holder.txtIntereses.setText("Intereses: "+amigo.getIntereses());
+        holder.txtEdad.setText(mContext.getResources().getString((R.string.edad))+":"+String.valueOf(amigo.getEdad()));
+        holder.txtIntereses.setText(mContext.getResources().getString((R.string.interes))+":"+String.valueOf(amigo.getIntereses()));
         holder.txtIdentificador.setText(String.valueOf(amigo.getId()));
         Picasso.with(mContext).load(amigo.getFoto())
                 .placeholder(R.drawable.ic_launcher_background)
