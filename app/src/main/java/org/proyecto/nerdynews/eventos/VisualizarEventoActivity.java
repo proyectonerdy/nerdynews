@@ -1,8 +1,6 @@
 package org.proyecto.nerdynews.eventos;
 
 import android.Manifest;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -12,13 +10,10 @@ import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,7 +35,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 import static org.proyecto.nerdynews.LeerArchivoDatosFake.loadJSONFromAsset;
 
@@ -225,9 +219,12 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
 
     public void agregarEventoCalendario() throws ParseException {
 
-        long calID = 1;
-        long startMillis = 0;
-        long endMillis = 0;
+        if ( Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CALENDAR}, MY_PERMISSION_CALENDAR);
+            return;
+        }
+
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy", new Locale("es_ES"));
         Date date = format.parse(fecha);
         Calendar cal = Calendar.getInstance();
@@ -244,35 +241,13 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
                 cal.get(Calendar.DATE),
                 22, 00, 00);
 
-
-        startMillis = beginTime.getTimeInMillis();
-        endMillis = endTime.getTimeInMillis();
-        ContentResolver cr = getApplicationContext().getContentResolver();
-        ContentValues values = new ContentValues();
-        values.put(CalendarContract.Events.DTSTART, startMillis);
-        values.put(CalendarContract.Events.DTEND, endMillis);
-        values.put(CalendarContract.Events.TITLE, title);
-        values.put(CalendarContract.Events.DESCRIPTION, texto);
-        values.put(CalendarContract.Events.CALENDAR_ID, calID);
-        values.put(CalendarContract.Events.EVENT_TIMEZONE, Time.getCurrentTimezone());
-
-
-        if ( Build.VERSION.SDK_INT >= 23 && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_CALENDAR}, MY_PERMISSION_CALENDAR);
-            return;
-        }
-        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
-
-        long eventID = Long.parseLong(uri.getLastPathSegment());
-
-
-        String textoExito = "Evento '"+ title + "' agregado para el día " + cal.get(Calendar.DATE) +
-                            " de " +cal.get(Calendar.MONTH) +
-                            " de " + cal.get(Calendar.YEAR);
-
-
-        Toast.makeText(getApplicationContext(),textoExito,Toast.LENGTH_LONG).show();
-
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                .putExtra(CalendarContract.Events.TITLE, title)
+                .putExtra(CalendarContract.Events.DESCRIPTION, texto)
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, lugar);
+        startActivity(intent);
     }
 }
