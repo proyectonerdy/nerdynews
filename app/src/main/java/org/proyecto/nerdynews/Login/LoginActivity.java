@@ -4,7 +4,6 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -29,7 +28,6 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import org.proyecto.nerdynews.BuildConfig;
 import org.proyecto.nerdynews.R;
-import org.proyecto.nerdynews.SplashScreenActivity;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
 
 /**
@@ -75,8 +73,10 @@ public class LoginActivity extends AppCompatActivity{
                         String cambio_color = remoteConfig.getString("cambio_color");
                         if (cambio_color.equals("azul")){
                             findViewById(R.id.logologin).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
+                            ((ImageView)findViewById(R.id.logologin)).setImageResource(R.drawable.ic_logo_nerdy_blue);
                             findViewById(R.id.email_sign_in_button).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
                             findViewById(R.id.group_login).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
+                            findViewById(R.id.cabeceralogin).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
                             analytics.setUserProperty( "experimento_colores_log", "azul" );
                         } else {
                             analytics.setUserProperty( "experimento_colores_log", "verde" );
