@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity{
                             findViewById(R.id.email_sign_in_button).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
                             findViewById(R.id.group_login).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
                             findViewById(R.id.cabeceralogin).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
+                            getWindow().setStatusBarColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
                             analytics.setUserProperty( "experimento_colores_log", "azul" );
                         } else {
                             analytics.setUserProperty( "experimento_colores_log", "verde" );
