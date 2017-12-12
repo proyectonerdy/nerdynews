@@ -44,7 +44,6 @@ public class SplashScreenActivity extends AwesomeSplash {
         configSplash.setTitleTextSize(24f); //float value
         configSplash.setAnimTitleDuration(800);
         configSplash.setAnimTitleTechnique(Techniques.FlipInX);
-
     }
 
     @Override
