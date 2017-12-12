@@ -74,8 +74,7 @@ public class LoginActivity extends AppCompatActivity{
                         }
                         String cambio_color = remoteConfig.getString("cambio_color");
                         if (cambio_color.equals("azul")){
-                            findViewById(R.id.logologin).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
-                            findViewById(R.id.email_sign_in_button).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
+                            setTheme(R.style.AppTheme_Azul);
                             analytics.setUserProperty( "experimento_colores_log", "azul" );
                         } else {
                             analytics.setUserProperty( "experimento_colores_log", "verde" );
