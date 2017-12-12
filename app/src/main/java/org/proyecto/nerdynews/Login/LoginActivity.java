@@ -4,7 +4,10 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
@@ -14,11 +17,19 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
+import org.proyecto.nerdynews.BuildConfig;
 import org.proyecto.nerdynews.R;
+import org.proyecto.nerdynews.SplashScreenActivity;
 import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
 
 /**
@@ -26,6 +37,9 @@ import org.proyecto.nerdynews.intereses.ListadoInteresesActivity;
  */
 public class LoginActivity extends AppCompatActivity{
 
+    private FirebaseAnalytics analytics;
+    private FirebaseRemoteConfig remoteConfig;
+    private static final int CACHE_TIME_SECONDS = 30;
 
     /**
      * Método constructor de la actividad
@@ -37,6 +51,37 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
 
         Log.e("LOGIN", "--------FCM Token Refresh: " + FirebaseInstanceId.getInstance().getToken());
+
+        analytics = FirebaseAnalytics.getInstance(this);
+
+        //Test A/B: Cambio de color de icono
+        remoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings config = new FirebaseRemoteConfigSettings
+                .Builder().setDeveloperModeEnabled(BuildConfig.DEBUG).build();
+        remoteConfig.setConfigSettings(config);
+        remoteConfig.setDefaults(R.xml.remote_config);
+        remoteConfig.fetch(CACHE_TIME_SECONDS)
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "Fetch OK",
+                                    Toast.LENGTH_SHORT).show();
+                            remoteConfig.activateFetched();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Fetch ha fallado",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        String cambio_color = remoteConfig.getString("cambio_color");
+                        if (cambio_color.equals("azul")){
+                            findViewById(R.id.logologin).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
+                            findViewById(R.id.email_sign_in_button).setBackgroundColor(ContextCompat.getColor(LoginActivity.this, R.color.primaryColor));
+                            analytics.setUserProperty( "experimento_colores_log", "azul" );
+                        } else {
+                            analytics.setUserProperty( "experimento_colores_log", "verde" );
+                        }
+                    }
+                });
         sesionIniciada();
     }
 
