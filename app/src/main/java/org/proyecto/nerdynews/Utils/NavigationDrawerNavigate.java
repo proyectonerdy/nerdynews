@@ -86,6 +86,14 @@ public class NavigationDrawerNavigate {
                     actividad.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(actividad).toBundle());
                 }
                 break;
+            case R.id.nav_compartir:
+                String texto = "Lista de eventos , intereses y amigos al alcance de tu mano. \nCompartido https://goo.gl/Ug7eXC";
+                drawer.closeDrawer(GravityCompat.START);
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, texto);
+                actividad.startActivity(Intent.createChooser(i, "Selecciona aplicación"));
+                break;
             case R.id.nav_mensajes:
                 //startActivity(new Intent(this, PerfilActivity.class));
                 drawer.closeDrawer(GravityCompat.START);
