@@ -117,7 +117,7 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
         user.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Listado de intereses favorotios
+        // Listado de intereses favoritos
         recyclerListadoFavoritos= (RecyclerView) findViewById(R.id.reciclerViewListadoInteresesAmigos);
         recyclerListadoFavoritos.setLayoutManager(new GridLayoutManager(this, 1));
         TextView numintereses = (TextView) this.findViewById(R.id.interesestextnumber);
