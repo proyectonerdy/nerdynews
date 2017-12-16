@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.proyecto.nerdynews">
+    package="org.aficiones.noticias.nerdynews">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar"
         android:supportsRtl="true">
-        <receiver android:name=".Widget.WidgetProvider">
+        <receiver android:name="org.aficiones.noticias.nerdynews.Widget.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
             </intent-filter>
@@ -32,40 +32,40 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDOj6p_Egzr6zXQrgVznGp_gvl8cal_-x8"/>
 
-        <service android:name=".Firebase.MyFirebaseMessagingService">
+        <service android:name="org.aficiones.noticias.nerdynews.Firebase.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".Firebase.MyFirebaseInstanceIdService">
+        <service android:name="org.aficiones.noticias.nerdynews.Firebase.MyFirebaseInstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <activity android:name=".SplashScreenActivity" android:noHistory="true">
+        <activity android:name="org.aficiones.noticias.nerdynews.SplashScreenActivity" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login.LoginActivity"
+            android:name="org.aficiones.noticias.nerdynews.Login.LoginActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
 
         </activity>
         <activity
-            android:name=".Login.RegistroActivity"
+            android:name="org.aficiones.noticias.nerdynews.Login.RegistroActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".Login.OlvidoActivity"
+            android:name="org.aficiones.noticias.nerdynews.Login.OlvidoActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Login.PostRegistroActivity" />
-        <activity android:name=".eventos.ListadoEventosActivity" />
-        <activity android:name=".intereses.ListadoInteresesActivity" />
-        <activity android:name=".intereses.ListadoFavoritosActivity" />
-        <activity android:name=".Perfil.PerfilActivity" />
-        <activity android:name=".eventos.VisualizarEventoActivity">
+        <activity android:name="org.aficiones.noticias.nerdynews.Login.PostRegistroActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.eventos.ListadoEventosActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.intereses.ListadoInteresesActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.intereses.ListadoFavoritosActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.Perfil.PerfilActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.eventos.VisualizarEventoActivity">
             <intent-filter>
                 <action android:name="OPEN_ACTIVITY_1" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -81,12 +81,12 @@
                 <data android:pathPrefix="/evento" />
             </intent-filter>
         </activity>
-        <activity android:name=".amigos.PerfilAmigoActivity" android:label="@string/gpr_1985"></activity>
-        <activity android:name=".amigos.BusquedaAmigosActivity" />
-        <activity android:name=".amigos.ListadoAmigosActivity" />
-        <activity android:name=".mensajes.ListadoMensajesActivity" />
-        <activity android:name=".mensajes.LeerMensajeActivity" />
-        <activity android:name=".eventos.BusquedaEventosActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.amigos.PerfilAmigoActivity" android:label="@string/gpr_1985"></activity>
+        <activity android:name="org.aficiones.noticias.nerdynews.amigos.BusquedaAmigosActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.amigos.ListadoAmigosActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.mensajes.ListadoMensajesActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.mensajes.LeerMensajeActivity" />
+        <activity android:name="org.aficiones.noticias.nerdynews.eventos.BusquedaEventosActivity" />
     </application>
 
 </manifest>

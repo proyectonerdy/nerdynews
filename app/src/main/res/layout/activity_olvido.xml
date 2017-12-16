@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="org.proyecto.nerdynews.Login.OlvidoActivity">
+    tools:context="org.aficiones.noticias.nerdynews.Login.OlvidoActivity">
 
     <ScrollView
         android:id="@+id/olvido_form"

@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "12320838510",
-    "firebase_url": "https://nerdynews-186112.firebaseio.com",
-    "project_id": "nerdynews-186112",
-    "storage_bucket": "nerdynews-186112.appspot.com"
+    "project_number": "632908499826",
+    "firebase_url": "https://nerdynews-optimizado.firebaseio.com",
+    "project_id": "nerdynews-optimizado",
+    "storage_bucket": "nerdynews-optimizado.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:12320838510:android:d79b461e19efb9b8",
+        "mobilesdk_app_id": "1:632908499826:android:2e1dac825845755e",
         "android_client_info": {
-          "package_name": "org.proyecto.nerdynews"
+          "package_name": "org.aficiones.noticias.nerdynews"
         }
       },
       "oauth_client": [
         {
-          "client_id": "12320838510-sji5npmi86slbv1sih221c1goem1bhf0.apps.googleusercontent.com",
+          "client_id": "632908499826-euvlo6c8ut8t7dhsdvck9v3oo56fmi1f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBqG5I5eSr6Zl-9EuA5mcRMbdPFrW5xxKY"
+          "current_key": "AIzaSyDpGZA8sLwta-Zu-V5lEB2XfG6bc_NeiVE"
         }
       ],
       "services": {
