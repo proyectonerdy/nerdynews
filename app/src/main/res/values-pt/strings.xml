@@ -111,5 +111,9 @@
     <string name="nav_mensajes">Minhas mensagens</string>
     <string name="mensajes">Histórico de mensagens</string>
     <string name="favoritos">Favoritos</string>
-
+    <string name="please_take_a_second_for_rate">Por favor, tome um segundo para taxa</string>
+    <string name="_1_love_masterlistas_please_rate_5_star_in_play_store">1. Love Nerdy News, avalie 5 estrelas na Play Store</string>
+    <string name="_2_have_problems_please_contact_author_to_report_issue">2. Tenha problemas, entre em contato com o autor para relatar o problema</string>
+    <string name="contact_author">CONTATO AUTOR</string>
+    <string name="rate_5_star">TAXA 5 ESTRELAS</string>
 </resources>

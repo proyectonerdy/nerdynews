@@ -113,4 +113,9 @@
     <string name="nav_mensajes">My messages</string>
     <string name="mensajes">Message history</string>
     <string name="favoritos">Favorites</string>
+    <string name="please_take_a_second_for_rate">Please take a second for rate</string>
+    <string name="_1_love_masterlistas_please_rate_5_star_in_play_store">1. Love Nerdy News, please rate 5 star in Play Store</string>
+    <string name="_2_have_problems_please_contact_author_to_report_issue">2. Have problems, please contact author to report issue</string>
+    <string name="contact_author">CONTACT AUTHOR</string>
+    <string name="rate_5_star">RATE 5 STAR</string>
 </resources>

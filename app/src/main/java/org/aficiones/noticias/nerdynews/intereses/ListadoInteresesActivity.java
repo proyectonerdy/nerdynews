@@ -40,6 +40,7 @@ import com.google.gson.GsonBuilder;
 
 import org.aficiones.noticias.nerdynews.BuildConfig;
 import org.aficiones.noticias.nerdynews.R;
+import org.aficiones.noticias.nerdynews.RateMyApp;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
 import org.aficiones.noticias.nerdynews.Utils.AdMob;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
@@ -123,6 +124,8 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
 
         // Cargamos la lista
         cargarDatosLista();
+
+        new RateMyApp(this).app_launched();
     }
 
     private void cargarDatosLista(){
