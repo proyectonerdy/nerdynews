@@ -1,4 +1,4 @@
-package org.proyecto.nerdynews;
+package org.aficiones.noticias.nerdynews;
 
 import android.content.Context;
 
