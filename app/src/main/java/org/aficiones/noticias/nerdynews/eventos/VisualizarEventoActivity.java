@@ -1,6 +1,9 @@
 package org.aficiones.noticias.nerdynews.eventos;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -214,30 +218,38 @@ public class VisualizarEventoActivity extends AppCompatActivity implements OnMap
     }
 
     public void agregarEventoCalendario() throws ParseException {
+        SharedPreferences pref = getSharedPreferences("nerdy", Context.MODE_PRIVATE);
+        if(pref.getBoolean("premium",false)) {
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy", new Locale("es_ES"));
+            Date date = format.parse(fecha);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            Calendar beginTime = Calendar.getInstance();
+            Calendar endTime = Calendar.getInstance();
+            beginTime.set(cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DATE),
+                    20, 00, 00);
 
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy", new Locale("es_ES"));
-        Date date = format.parse(fecha);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        Calendar beginTime = Calendar.getInstance();
-        Calendar endTime = Calendar.getInstance();
-        beginTime.set(cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DATE),
-                20, 00, 00);
+            endTime.set(cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DATE),
+                    22, 00, 00);
 
-        endTime.set(cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DATE),
-                22, 00, 00);
+            Intent intent = new Intent(Intent.ACTION_INSERT)
+                    .setData(CalendarContract.Events.CONTENT_URI)
+                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                    .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                    .putExtra(CalendarContract.Events.TITLE, title)
+                    .putExtra(CalendarContract.Events.DESCRIPTION, texto)
+                    .putExtra(CalendarContract.Events.EVENT_LOCATION, lugar);
+            startActivity(intent);
+        }
+        else{
+            //no es premium
+            Toast.makeText(this,getString(R.string.debespremium),Toast.LENGTH_LONG).show();
+        }
 
-        Intent intent = new Intent(Intent.ACTION_INSERT)
-                .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                .putExtra(CalendarContract.Events.TITLE, title)
-                .putExtra(CalendarContract.Events.DESCRIPTION, texto)
-                .putExtra(CalendarContract.Events.EVENT_LOCATION, lugar);
-        startActivity(intent);
     }
+
 }

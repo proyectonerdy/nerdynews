@@ -24,6 +24,7 @@ import com.google.gson.GsonBuilder;
 
 import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.models.Evento;
 
@@ -35,12 +36,14 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
     private RecyclerView recyclerListadoEventos;
     private ListadoEventosRecyclerAdapter adapterListadoEventos;
     private Evento[] listaEventos;
+    private InApp inApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_eventos);
-
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,7 +60,9 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
         TextView nombre = hView.findViewById(R.id.tv_nombre);
         nombre.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
-
+        if(inApp.checkPurchasedInAppProducts(this)) {
+            NavigationDrawerNavigate.hideItem(navigationView);
+        }
         // Listado de eventos
         recyclerListadoEventos = (RecyclerView) findViewById(R.id.reciclerViewListadoEventos);
         recyclerListadoEventos.setLayoutManager(new GridLayoutManager(this, 1));
@@ -104,7 +109,7 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
     // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
     }
 
     public void gotoEvento(View v){
@@ -122,5 +127,11 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
         intent.putExtra("COORDSGPS",(String)lugar.getTag());
         ActivityOptionsCompat options = ActivityOptionsCompat. makeSceneTransitionAnimation(ListadoEventosActivity.this, new Pair<View, String>(v.findViewById(R.id.cvImagenEvento), getString(R.string.transition_name_img)));
         ActivityCompat.startActivity(ListadoEventosActivity.this, intent, options .toBundle());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 }

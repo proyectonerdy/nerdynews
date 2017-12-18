@@ -1,5 +1,6 @@
 package org.aficiones.noticias.nerdynews.mensajes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,6 +20,7 @@ import com.google.gson.reflect.TypeToken;
 import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
 import org.aficiones.noticias.nerdynews.Utils.GlobalData;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.models.Amigo;
 import org.aficiones.noticias.nerdynews.models.HistorialMensaje;
@@ -42,12 +44,14 @@ public class LeerMensajeActivity extends AppCompatActivity implements Navigation
     private int idChat;
     private int idAmigo;
     private FloatingActionButton fabResponder;
+    private InApp inApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leer_mensaje);
-
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
         Bundle extras = getIntent().getExtras();
         idChat = extras.getInt("idChat");
         idAmigo = extras.getInt("amigoid");
@@ -137,7 +141,7 @@ public class LeerMensajeActivity extends AppCompatActivity implements Navigation
     // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
     }
 
     public void emoticono(View v){
@@ -178,5 +182,11 @@ public class LeerMensajeActivity extends AppCompatActivity implements Navigation
         gd.setListahistoriasmensaje(listaMensajes);
         //refrescamos lista
         cargarDatosLista();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 }

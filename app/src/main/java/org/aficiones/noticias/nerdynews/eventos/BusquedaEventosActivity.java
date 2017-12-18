@@ -36,6 +36,7 @@ import com.google.gson.GsonBuilder;
 
 import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.models.Evento;
 
@@ -56,12 +57,14 @@ public class BusquedaEventosActivity extends AppCompatActivity implements Naviga
     private Double longitud;
     private static final int MY_PERMISSION_LOCATION = 1;
     private FusedLocationProviderClient mFusedLocationClient;
+    private InApp inApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_eventos);
-
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
         final Spinner spinner = (Spinner) findViewById(R.id.spinneropciones);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.opcionesbusqueda, android.R.layout.simple_spinner_item);
@@ -111,7 +114,9 @@ public class BusquedaEventosActivity extends AppCompatActivity implements Naviga
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        if(inApp.checkPurchasedInAppProducts(this)) {
+            NavigationDrawerNavigate.hideItem(navigationView);
+        }
         // Listado de eventos
         recyclerListadoEventos = (RecyclerView) findViewById(R.id.reciclerViewListadoEventos);
         recyclerListadoEventos.setLayoutManager(new GridLayoutManager(this, 1));
@@ -312,7 +317,7 @@ public class BusquedaEventosActivity extends AppCompatActivity implements Naviga
     // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
     }
 
     public void gotoEvento(View v){
@@ -340,6 +345,12 @@ public class BusquedaEventosActivity extends AppCompatActivity implements Naviga
 
     public void onNothingSelected(AdapterView<?> parent) {
         //esta funcion nunca se llamara
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 
     public static double distance(double lat1, double lat2, double lon1,

@@ -29,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
 import org.aficiones.noticias.nerdynews.Utils.GlobalData;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.models.Amigo;
 
@@ -49,11 +50,13 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
     private AmigosAdapter amigosAdapter;
     private ArrayList<Amigo> listaAmigos;
     private SearchView searchView;
+    private InApp inApp;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_busqueda_amigos);
-
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
         // Menu laterar
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,6 +68,10 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView =  findViewById(R.id.nav_view);
+        if(inApp.checkPurchasedInAppProducts(this)) {
+          NavigationDrawerNavigate.hideItem(navigationView);
+        }
+
         SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
         View hView =  navigationView.getHeaderView(0);
         TextView nombre = hView.findViewById(R.id.tv_nombre);
@@ -97,7 +104,7 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
     }
 
     @Override
@@ -169,5 +176,11 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
         intent.putExtra("AMIGO",amigo);
         ActivityOptionsCompat options = ActivityOptionsCompat. makeSceneTransitionAnimation(BusquedaAmigosActivity.this, new Pair<View, String>(v.findViewById(R.id.ivImagenAmigo), getString(R.string.transition_name_img_amigo)));
         ActivityCompat.startActivity(BusquedaAmigosActivity.this, intent, options .toBundle());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 }

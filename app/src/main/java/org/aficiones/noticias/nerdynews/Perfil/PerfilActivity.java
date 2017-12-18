@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.aficiones.noticias.nerdynews.R;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.intereses.ListadoInteresesActivity;
 
@@ -31,13 +32,15 @@ import org.aficiones.noticias.nerdynews.intereses.ListadoInteresesActivity;
 public class PerfilActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Button b1, b2;
     ImageView iv;
-
+    private InApp inApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_perfil);
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
         Bundle extras = getIntent().getExtras();
         String vregistro = extras.getString("registro");
         String vemail = extras.getString("email");
@@ -56,7 +59,9 @@ public class PerfilActivity extends AppCompatActivity implements NavigationView.
         TextView user = hView.findViewById(R.id.tv_nombre);
         user.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
-
+        if(inApp.checkPurchasedInAppProducts(this)) {
+            NavigationDrawerNavigate.hideItem(navigationView);
+        }
         if (vregistro.equals("N")) {
             LinearLayout linea = (LinearLayout) findViewById(R.id.lcabecerabienvenida);
             linea.removeAllViews();
@@ -98,7 +103,7 @@ public class PerfilActivity extends AppCompatActivity implements NavigationView.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
         Bitmap bp = (Bitmap) data.getExtras().get("data");
         iv.setImageBitmap(bp);
     }
@@ -191,7 +196,7 @@ public class PerfilActivity extends AppCompatActivity implements NavigationView.
     // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
     }
 
 }

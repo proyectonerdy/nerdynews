@@ -24,7 +24,7 @@ public class AdMob {
 
     public static void initialize(Context context) {
         ctx = context;
-        adRequest = new AdRequest.Builder().addTestDevice("EF7FB31EE1E155863F06CF1D12FB1B68").build();
+        adRequest = new AdRequest.Builder().addTestDevice("EF7FB31EE1E155863F06CF1D12FB1B68").addTestDevice("BBB9E876CAF2010F7CF565B54645A5C7").build();
         MobileAds.initialize(ctx, ctx.getString(R.string.adMobIdApp));
         cargaIntersticial();
     }

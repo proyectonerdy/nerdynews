@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
 import org.aficiones.noticias.nerdynews.Utils.GlobalData;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.mensajes.LeerMensajeActivity;
 import org.aficiones.noticias.nerdynews.models.Amigo;
@@ -49,14 +50,15 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     private String intereses;
 
     private ArrayList<Amigo> listaAmigos;
-
+    private InApp inApp;
     private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_amigo);
-
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
         //cogemos los extras
         Bundle extras = getIntent().getExtras();
         String nombreyapellidos = extras.getString("NOMBRE");
@@ -111,6 +113,9 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
+        if(inApp.checkPurchasedInAppProducts(this)) {
+            NavigationDrawerNavigate.hideItem(navigationView);
+        }
         SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
         View hView =  navigationView.getHeaderView(0);
         TextView user = hView.findViewById(R.id.tv_nombre);
@@ -319,6 +324,12 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 }

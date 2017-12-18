@@ -116,4 +116,7 @@
     <string name="_2_have_problems_please_contact_author_to_report_issue">2. Tenha problemas, entre em contato com o autor para relatar o problema</string>
     <string name="contact_author">CONTATO AUTOR</string>
     <string name="rate_5_star">TAXA 5 ESTRELAS</string>
+    <string name="payLoad">Premium NerdyNews. Remover publicidade e usar o calendário</string>
+    <string name="compracompletada">Compra concluída. Agora você é premium</string>
+    <string name="debespremium">Você deve ser premium para usar essa opção</string>
 </resources>

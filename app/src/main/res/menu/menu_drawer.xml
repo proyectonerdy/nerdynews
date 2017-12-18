@@ -42,6 +42,10 @@
                     android:icon="@drawable/ic_share_black_24dp"
                     android:title="@string/compartir" />
                 <item
+                    android:id="@+id/nav_premium"
+                    android:icon="@drawable/account_star"
+                    android:title="Premium" />
+                <item
                     android:id="@+id/nav_cerrar_sesion"
                     android:icon="@drawable/ic_power_settings_new_black_24dp"
                     android:title="@string/cerrar_sesion"/>

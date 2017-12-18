@@ -118,4 +118,8 @@
     <string name="_2_have_problems_please_contact_author_to_report_issue">2. Vous avez des problèmes, veuillez contacter l\'auteur pour signaler un problème</string>
     <string name="contact_author">CONTACTER L\'AUTEUR</string>
     <string name="rate_5_star">TARIF 5 ÉTOILES</string>
+    <string name="payLoad">Premium NerdyNews. Supprimer la publicité et utiliser le calendrier</string>
+    <string name="compracompletada">Achat terminé Maintenant vous êtes premium</string>
+    <string name="debespremium">Vous devez être premium pour utiliser cette option</string>
+
 </resources>

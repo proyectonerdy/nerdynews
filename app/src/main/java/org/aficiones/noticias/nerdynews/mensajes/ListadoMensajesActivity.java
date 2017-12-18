@@ -1,6 +1,7 @@
 package org.aficiones.noticias.nerdynews.mensajes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
 import org.aficiones.noticias.nerdynews.Utils.GlobalData;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.models.Amigo;
 import org.aficiones.noticias.nerdynews.models.HistorialMensaje;
@@ -44,14 +46,15 @@ public class ListadoMensajesActivity extends AppCompatActivity implements Naviga
     private RecyclerView recyclerListadoMensajes;
     private ListadoMensajesSwipeRecyclerAdapter adapterListadoMensajes;
     private ArrayList<HistorialMensaje> listaMensajes;
-
+    private InApp inApp;
     private Amigo[] amigos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_mensajes);
-
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,6 +66,9 @@ public class ListadoMensajesActivity extends AppCompatActivity implements Naviga
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if(inApp.checkPurchasedInAppProducts(this)) {
+            NavigationDrawerNavigate.hideItem(navigationView);
+        }
         SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
         View hView =  navigationView.getHeaderView(0);
         TextView nombre = hView.findViewById(R.id.tv_nombre);
@@ -136,7 +142,7 @@ public class ListadoMensajesActivity extends AppCompatActivity implements Naviga
     // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
     }
     /**
      * This is the standard support library way of implementing "swipe to delete" feature. You can do custom drawing in onChildDraw method
@@ -310,5 +316,10 @@ public class ListadoMensajesActivity extends AppCompatActivity implements Naviga
             }
 
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 }

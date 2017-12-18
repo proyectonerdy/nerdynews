@@ -1,14 +1,18 @@
 package org.aficiones.noticias.nerdynews.intereses;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -27,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.vending.billing.IInAppBillingService;
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.awareness.fence.AwarenessFence;
 import com.google.android.gms.awareness.fence.FenceState;
@@ -43,6 +48,7 @@ import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.RateMyApp;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
 import org.aficiones.noticias.nerdynews.Utils.AdMob;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.models.Interes;
 
@@ -62,6 +68,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
     private GoogleApiClient mGoogleApiClient;
     private PendingIntent mPendingIntent;
     private LocationFenceReceiver mLocationFenceReceiver;
+    private InApp inApp;
 
     private static final String IN_LOCATION_FENCE_KEY = "IN_LOCATION_FENCE_KEY";
     private static final String EXITING_LOCATION_FENCE_KEY = "EXITING_LOCATION_FENCE_KEY";
@@ -77,9 +84,9 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_intereses);
-
-        // Mostramos el banner
-        AdMob.mostrarBanner(findViewById(R.id.adView));
+        //preparamos el InApp
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
 
         // Inicializamos el api awareness
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -102,6 +109,14 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
+        // Mostramos el banner
+        //si es falso, entonces no es premium y se tiene que mostrar la publicidad
+        if(!inApp.checkPurchasedInAppProducts(this)) {
+            AdMob.mostrarBanner(findViewById(R.id.adView));
+        }
+        else{
+            NavigationDrawerNavigate.hideItem(navigationView);
+        }
         SharedPreferences prefs = getSharedPreferences("preferencias",Context.MODE_PRIVATE);
         View hView =  navigationView.getHeaderView(0);
         TextView nombre = hView.findViewById(R.id.tv_nombre);
@@ -175,7 +190,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
     // Metodo cuando se hace click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
     }
 
     @Override
@@ -328,6 +343,12 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
                 }
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 }
 

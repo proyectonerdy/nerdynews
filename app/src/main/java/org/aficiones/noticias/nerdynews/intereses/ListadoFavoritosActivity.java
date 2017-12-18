@@ -1,6 +1,7 @@
 package org.aficiones.noticias.nerdynews.intereses;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import com.google.gson.GsonBuilder;
 import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
 import org.aficiones.noticias.nerdynews.Utils.AdMob;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.models.Favorito;
 
@@ -43,14 +45,15 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
     private Favorito[] listaFavoritos;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
+    private InApp inApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_favoritos);
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
 
-        // Muestra IntersticialAd
-        AdMob.mostrarIntersticial();
 
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.litoolbar);
@@ -63,6 +66,14 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.linav_view);
+        // Muestra IntersticialAd
+        //si es falso, entonces no es premium y se tiene que mostrar la publicidad
+        if(!inApp.checkPurchasedInAppProducts(this)) {
+            AdMob.mostrarIntersticial();
+        }
+        else{
+            NavigationDrawerNavigate.hideItem(navigationView);
+        }
         SharedPreferences prefs = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
         View hView =  navigationView.getHeaderView(0);
         TextView nombre = hView.findViewById(R.id.tv_nombre);
@@ -123,7 +134,7 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
     // Metodo cuando se hce click en los items del menú
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item,this);
+        return NavigationDrawerNavigate.Navigate(item,this,inApp);
     }
 
     /**
@@ -298,6 +309,12 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
             }
 
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 }
 

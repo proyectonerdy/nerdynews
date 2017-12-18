@@ -40,6 +40,7 @@ import com.google.gson.reflect.TypeToken;
 import org.aficiones.noticias.nerdynews.R;
 import org.aficiones.noticias.nerdynews.SimpleDividerItemDecoration;
 import org.aficiones.noticias.nerdynews.Utils.GlobalData;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 import org.aficiones.noticias.nerdynews.Utils.NavigationDrawerNavigate;
 import org.aficiones.noticias.nerdynews.models.Amigo;
 
@@ -59,12 +60,14 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
     private ArrayList<Amigo> listaAmigos;
     private FloatingActionButton button;
     private NavigationView navigationView;
+    private InApp inApp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_amigos);
-
+        inApp = new InApp();
+        inApp.serviceConectInAppBilling(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle( R.string.misamigos);
@@ -80,7 +83,9 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
         TextView nombre = hView.findViewById(R.id.tv_nombre);
         nombre.setText(prefs.getString("nombre", "Nerdy News"));
         navigationView.setNavigationItemSelectedListener(this);
-
+        if(inApp.checkPurchasedInAppProducts(this)) {
+            NavigationDrawerNavigate.hideItem(navigationView);
+        }
         recyclerView =  findViewById(R.id.reciclerViewBusquedaAmigos);
         button = findViewById(R.id.fab_agregar_amigo);
 
@@ -114,7 +119,7 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return NavigationDrawerNavigate.Navigate(item, this);
+        return NavigationDrawerNavigate.Navigate(item, this,inApp);
     }
 
     @Override
@@ -358,5 +363,11 @@ public class ListadoAmigosActivity extends AppCompatActivity implements Navigati
             }
 
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        inApp.comprobarCompra(requestCode,resultCode,data,this);
     }
 }
