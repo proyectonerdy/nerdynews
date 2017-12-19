@@ -101,11 +101,15 @@ public class PerfilActivity extends AppCompatActivity implements NavigationView.
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        super.onActivityResult(requestCode, resultCode, data);
-        inApp.comprobarCompra(requestCode,resultCode,data,this);
-        Bitmap bp = (Bitmap) data.getExtras().get("data");
-        iv.setImageBitmap(bp);
+        try{
+            // TODO Auto-generated method stub
+            super.onActivityResult(requestCode, resultCode, data);
+            inApp.comprobarCompra(requestCode, resultCode, data, this);
+            Bitmap bp = (Bitmap) data.getExtras().get("data");
+            iv.setImageBitmap(bp);
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     /**
