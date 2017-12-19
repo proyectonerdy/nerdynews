@@ -1,6 +1,7 @@
 package org.aficiones.noticias.nerdynews.intereses;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
