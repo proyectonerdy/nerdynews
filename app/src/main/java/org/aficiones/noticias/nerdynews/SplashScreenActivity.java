@@ -1,6 +1,7 @@
 package org.aficiones.noticias.nerdynews;
 
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
@@ -44,6 +45,8 @@ public class SplashScreenActivity extends AwesomeSplash {
         configSplash.setTitleTextSize(24f); //float value
         configSplash.setAnimTitleDuration(800);
         configSplash.setAnimTitleTechnique(Techniques.FlipInX);
+
+        Toast.makeText(this,"Esta aplicación ha sido desarrollada como parte de un proyecto docente",Toast.LENGTH_LONG).show();
     }
 
     @Override
