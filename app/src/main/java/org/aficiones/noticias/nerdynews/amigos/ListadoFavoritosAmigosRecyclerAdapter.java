@@ -36,17 +36,23 @@ public class ListadoFavoritosAmigosRecyclerAdapter extends RecyclerView.Adapter<
     @Override
     public void onBindViewHolder(ListadoFavoritosViewHolder holder, int position) {
         final Favorito favorito = listadoFavoritos[position];
-
-        holder.txtTitulo.setText(favorito.getTitulo());
-
-        String nombrei=favorito.getImageUrl();; //nombre fichero sin extensión
-        int res_imageni = this.mContext.getResources().getIdentifier(nombrei, "drawable",this.mContext.getPackageName());
-        holder.imgInteres.setImageResource(res_imageni);
-
-        String nombre=favorito.getImageFavorito();; //nombre fichero sin extensión
-        String recurso="drawable";
+        try {
 
 
+            holder.txtTitulo.setText(favorito.getTitulo());
+
+            String nombrei = favorito.getImageUrl();
+            ; //nombre fichero sin extensión
+            int res_imageni = this.mContext.getResources().getIdentifier(nombrei, "drawable", this.mContext.getPackageName());
+            holder.imgInteres.setImageResource(res_imageni);
+
+            String nombre = favorito.getImageFavorito();
+            ; //nombre fichero sin extensión
+            String recurso = "drawable";
+
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
