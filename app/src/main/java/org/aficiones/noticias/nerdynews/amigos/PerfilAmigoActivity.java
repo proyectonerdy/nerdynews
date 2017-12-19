@@ -57,7 +57,7 @@ public class PerfilAmigoActivity extends AppCompatActivity implements Navigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_amigo);
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
         //cogemos los extras
         Bundle extras = getIntent().getExtras();

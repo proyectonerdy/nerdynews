@@ -51,7 +51,7 @@ public class ListadoFavoritosActivity extends AppCompatActivity implements Navig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_favoritos);
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
 
 

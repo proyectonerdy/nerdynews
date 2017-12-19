@@ -42,7 +42,7 @@ public class ListadoEventosActivity extends AppCompatActivity implements Navigat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_eventos);
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

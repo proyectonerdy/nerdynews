@@ -63,7 +63,7 @@ public class BusquedaEventosActivity extends AppCompatActivity implements Naviga
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busqueda_eventos);
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
         final Spinner spinner = (Spinner) findViewById(R.id.spinneropciones);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

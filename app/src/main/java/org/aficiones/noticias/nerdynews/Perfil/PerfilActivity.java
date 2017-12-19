@@ -39,7 +39,7 @@ public class PerfilActivity extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_perfil);
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
         Bundle extras = getIntent().getExtras();
         String vregistro = extras.getString("registro");

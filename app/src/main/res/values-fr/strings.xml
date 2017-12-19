@@ -121,5 +121,7 @@
     <string name="payLoad">Premium NerdyNews. Supprimer la publicité et utiliser le calendrier</string>
     <string name="compracompletada">Achat terminé Maintenant vous êtes premium</string>
     <string name="debespremium">Vous devez être premium pour utiliser cette option</string>
+    <string name="permisomessage">Cette application vous permet d\'utiliser votre position pour vous apporter les événements les plus proches de votre lieu. Pour cela, nous devons utiliser votre GPS. Ensuite, le permis GPS sera demandé.</string>
+    <string name="permisotitle">Demande de permis</string>
 
 </resources>

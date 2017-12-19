@@ -50,7 +50,7 @@ public class LeerMensajeActivity extends AppCompatActivity implements Navigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leer_mensaje);
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
         Bundle extras = getIntent().getExtras();
         idChat = extras.getInt("idChat");

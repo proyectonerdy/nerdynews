@@ -53,7 +53,7 @@ public class ListadoMensajesActivity extends AppCompatActivity implements Naviga
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_mensajes);
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
         // Menu laterar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

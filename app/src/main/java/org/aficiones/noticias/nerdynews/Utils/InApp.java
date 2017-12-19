@@ -32,8 +32,19 @@ public class InApp {
     private final String ID_ARTICULO = "org.aficiones.noticias.nerdynews.premium";
     private final int INAPP_BILLING = 1;
     private String developerPayLoad = null;
+    private Intent serviceIntent=null;
 
-    public void serviceConectInAppBilling(Activity actividad) {
+    public static InApp instance;
+
+    public static InApp getInstance(){
+        if(instance==null){
+            instance = new InApp();
+            instance.initService();
+        }
+        return instance;
+    }
+
+    public void initService(){
         serviceConnection = new ServiceConnection() {
             @Override
             public void onServiceDisconnected(ComponentName name) {
@@ -44,8 +55,11 @@ public class InApp {
                 serviceBilling= IInAppBillingService.Stub.asInterface(service);
             }
         };
-        Intent serviceIntent = new Intent( "com.android.vending.billing.InAppBillingService.BIND");
+        serviceIntent = new Intent( "com.android.vending.billing.InAppBillingService.BIND");
         serviceIntent.setPackage("com.android.vending");
+    }
+
+    public void serviceConectInAppBilling(Activity actividad) {
         actividad.bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
 

@@ -121,4 +121,6 @@
     <string name="payLoad">Premium NerdyNews. Remove ads and use the calendar</string>
     <string name="compracompletada">Buy complete. You are now premium</string>
     <string name="debespremium">You have to be premium to use this option</string>
+    <string name="permisomessage">This APP can use your GPS to show you the nearest events. For that we need yo use your GPS. We\'re going to ask GPS\'s permission.</string>
+    <string name="permisotitle">Permission\'s needed</string>
 </resources>

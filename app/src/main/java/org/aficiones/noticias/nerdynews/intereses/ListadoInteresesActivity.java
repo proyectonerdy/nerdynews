@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -19,6 +20,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -85,7 +87,7 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_intereses);
         //preparamos el InApp
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
 
         // Inicializamos el api awareness
@@ -116,6 +118,11 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
         }
         else{
             NavigationDrawerNavigate.hideItem(navigationView);
+            //buscamos el adMob y nos lo cepillamos
+            com.google.android.gms.ads.AdView adView = (com.google.android.gms.ads.AdView) findViewById(R.id.adView);
+            if(adView!=null){
+                adView.setVisibility(View.GONE);
+            }
         }
         SharedPreferences prefs = getSharedPreferences("preferencias",Context.MODE_PRIVATE);
         View hView =  navigationView.getHeaderView(0);
@@ -233,9 +240,19 @@ public class ListadoInteresesActivity extends AppCompatActivity implements Navig
     private void registerFences() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSION_LOCATION);
+            //se debe mostrar un dialog indicando que se van a solicitar permisos
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            final Activity _this = this;
+            builder.setMessage(R.string.permisomessage).setTitle(R.string.permisotitle).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    ActivityCompat.requestPermissions(_this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            MY_PERMISSION_LOCATION);
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
         } else {
             AwarenessFence inLocationFence = LocationFence.in(40.4642823, -3.6179828, 200, 1);
 

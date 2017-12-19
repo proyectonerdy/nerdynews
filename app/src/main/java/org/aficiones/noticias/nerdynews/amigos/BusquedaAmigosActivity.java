@@ -55,7 +55,7 @@ public class BusquedaAmigosActivity extends AppCompatActivity implements Navigat
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_busqueda_amigos);
-        inApp = new InApp();
+        inApp = InApp.getInstance();
         inApp.serviceConectInAppBilling(this);
         // Menu laterar
         Toolbar toolbar =  findViewById(R.id.toolbar);
