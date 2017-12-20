@@ -10,6 +10,7 @@ import com.viksaa.sssplash.lib.model.ConfigSplash;
 
 import org.aficiones.noticias.nerdynews.Login.LoginActivity;
 import org.aficiones.noticias.nerdynews.Utils.AdMob;
+import org.aficiones.noticias.nerdynews.Utils.InApp;
 
 /**
  * Created by MyC on 10-12-2017.
@@ -25,7 +26,9 @@ public class SplashScreenActivity extends AwesomeSplash {
     public void initSplash(ConfigSplash configSplash) {
         // Inicializamos AdMob
         AdMob.initialize(this);
-
+        //inicializamos el InApp para que el servicio este ya disponible cuando se acceda a él
+        InApp inApp = InApp.getInstance();
+        inApp.serviceConectInAppBilling(this);
 			/* you don't have to override every property */
 
         //Customize Circular Reveal
